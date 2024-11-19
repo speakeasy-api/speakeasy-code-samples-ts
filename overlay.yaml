@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: Naming Overlay
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/v1/code_sample/preview"]["post"]
+    update:
+      x-speakeasy-group: codesamples
+  - target: $["paths"]["/v1/code_sample/preview"]["post"]
+    update:
+      x-speakeasy-name-override: preview
+  - target: $["paths"]["/v1/code_sample/preview/async"]["post"]
+    update:
+      x-speakeasy-group: codesamples
+  - target: $["paths"]["/v1/code_sample/preview/async"]["post"]
+    update:
+      x-speakeasy-name-override: previewAsync
+  - target: $["paths"]["/v1/code_sample/preview/async/{jobID}"]["get"]
+    update:
+      x-speakeasy-group: codesamples
+  - target: $["paths"]["/v1/code_sample/preview/async/{jobID}"]["get"]
+    update:
+      x-speakeasy-name-override: getAsync

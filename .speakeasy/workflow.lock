@@ -1,0 +1,33 @@
+speakeasyVersion: 1.441.0
+sources:
+    speakeasy-OAS:
+        sourceNamespace: speakeasy-oas
+        sourceRevisionDigest: sha256:eed9083bc4ba2cf34738402866ce9bded44a4172874f2728d988479367ca0096
+        sourceBlobDigest: sha256:0d8cab250914be6d6f0c159e5f64c6690143fb49dce89117d06c3635bdc784b0
+        tags:
+            - latest
+targets:
+    code_samples_typescript_sdk:
+        source: speakeasy-OAS
+        sourceNamespace: speakeasy-oas
+        sourceRevisionDigest: sha256:eed9083bc4ba2cf34738402866ce9bded44a4172874f2728d988479367ca0096
+        sourceBlobDigest: sha256:0d8cab250914be6d6f0c159e5f64c6690143fb49dce89117d06c3635bdc784b0
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        speakeasy-OAS:
+            inputs:
+                - location: https://www.speakeasy.com/openapi.yaml
+            overlays:
+                - location: overlay.yaml
+            transformations:
+                - filterOperations:
+                    operations: generateCodeSamplePreview, generateCodeSamplePreviewAsync, getCodeSamplePreviewAsync
+                    include: true
+            registry:
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/speakeasy-oas
+    targets:
+        code_samples_typescript_sdk:
+            target: typescript
+            source: speakeasy-OAS
