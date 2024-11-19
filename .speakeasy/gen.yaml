@@ -41,7 +41,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: '@speakeasy-api/code-samples'
+  packageName: '@speakeasyapi/code-samples'
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true
