@@ -1,6 +1,6 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "0.36.3",
+  "version": "0.36.4",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
