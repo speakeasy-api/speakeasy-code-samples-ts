@@ -92,6 +92,9 @@ const sdk = new SDK({
   },
 });
 
+const fileBuffer = await fs.readFile("openapi.json");
+const fileContent = new Uint8Array(fileBuffer);
+
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: ["python", "typescript"],
@@ -107,38 +110,6 @@ async function run() {
 run();
 
 ```
-
-<!-- Start SDK Example Usage [usage] -->
-## SDK Example Usage
-
-### Example
-
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
-
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
-
-async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -178,7 +149,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
 
-<!-- Start File uploads [file-upload] -->
 ## File uploads
 
 Certain SDK methods accept files as part of a multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
@@ -194,7 +164,7 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 
 ```typescript
 import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
+import { promises as fs } from "fs"
 
 const sdk = new SDK({
   security: {
@@ -202,58 +172,17 @@ const sdk = new SDK({
   },
 });
 
-async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End File uploads [file-upload] -->
-
-<!-- Start Retries [retries] -->
-## Retries
-
-Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
-
-To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
-
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const fileBuffer = await fs.readFile("openapi.json");
+const fileContent = new Uint8Array(fileBuffer);
 
 async function run() {
   const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
-  }, {
-    retries: {
-      strategy: "backoff",
-      backoff: {
-        initialInterval: 1,
-        maxInterval: 50,
-        exponent: 1.1,
-        maxElapsedTime: 100,
-      },
-      retryConnectionErrors: false,
+    languages: ["python", "typescript"],
+    schemaFile: {
+      fileName: "openapi.json", // ensure file name is included
+      content: fileContent,
     },
   });
-
   // Handle the result
   console.log(result);
 }
@@ -261,44 +190,6 @@ async function run() {
 run();
 
 ```
-
-If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
-
-const sdk = new SDK({
-  retryConfig: {
-    strategy: "backoff",
-    backoff: {
-      initialInterval: 1,
-      maxInterval: 50,
-      exponent: 1.1,
-      maxElapsedTime: 100,
-    },
-    retryConnectionErrors: false,
-  },
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
-
-async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
