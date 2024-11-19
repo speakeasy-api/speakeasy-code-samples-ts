@@ -83,7 +83,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { SDK } from "@speakeasy-api/code-samples";
+import { SDK } from "@speakeasyapi/code-samples";
 import { promises as fs } from "fs"
 
 const sdk = new SDK({
