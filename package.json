@@ -1,9 +1,13 @@
 {
   "name": "@speakeasy-api/code-samples",
-  "version": "0.36.0",
+  "version": "0.36.1",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/speakeasy-sdks/code-sample-api.git"
+  },
   "scripts": {
     "lint": "eslint --max-warnings=0 src",
     "build": "tsc",

@@ -5,8 +5,10 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.441.0
   generationVersion: 2.460.1
-  releaseVersion: 0.36.0
-  configChecksum: 9505b45b3f0fe8a1a05ea6570deeca6b
+  releaseVersion: 0.36.1
+  configChecksum: 1ff388269dbaf115761162d6af4ed6f3
+  repoURL: https://github.com/speakeasy-sdks/code-sample-api.git
+  installationURL: https://github.com/speakeasy-sdks/code-sample-api
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -112,6 +114,7 @@ examples:
       responses:
         4XX:
           application/json: {"message": "<value>", "status_code": 159498}
+        "200": {}
   generateCodeSamplePreviewAsync:
     speakeasy-default-generate-code-sample-preview-async:
       requestBody:
@@ -131,3 +134,4 @@ examples:
           application/json: {"status": "pending"}
         4XX:
           application/json: {"message": "<value>", "status_code": 893724}
+        "200": {}

@@ -47,25 +47,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/speakeasy-sdks/code-sample-api zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -107,6 +107,38 @@ async function run() {
 run();
 
 ```
+
+<!-- Start SDK Example Usage [usage] -->
+## SDK Example Usage
+
+### Example
+
+```typescript
+import { SDK } from "@speakeasy-api/code-samples";
+import { openAsBlob } from "node:fs";
+
+const sdk = new SDK({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const result = await sdk.codesamples.preview({
+    languages: [
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
