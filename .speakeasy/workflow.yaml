@@ -16,6 +16,7 @@ targets:
     code_samples_typescript_sdk:
         target: typescript
         source: speakeasy-OAS
-        # publish:
-        #     npm:
-        #         token: $npm_token
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/speakeasy-oas-code-samples
+            blocking: false
