@@ -12,7 +12,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 
 <br /><br />
 > [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
+> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-public). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary

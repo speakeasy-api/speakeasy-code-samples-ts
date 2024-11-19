@@ -1,5 +1,5 @@
 lockVersion: 2.0.0
-id: 937c34d0-def7-4851-bcc2-d6582d234c71
+id: c7686174-7704-4859-9d59-8dab3c98a47f
 management:
   docChecksum: c43b59c2013089d85388de072b9a0283
   docVersion: 0.4.0
@@ -37,6 +37,7 @@ generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
+  - CONTRIBUTING.md
   - FUNCTIONS.md
   - RUNTIMES.md
   - USAGE.md
@@ -111,7 +112,6 @@ examples:
       responses:
         4XX:
           application/json: {"message": "<value>", "status_code": 159498}
-        "200": {}
   generateCodeSamplePreviewAsync:
     speakeasy-default-generate-code-sample-preview-async:
       requestBody:
@@ -131,4 +131,3 @@ examples:
           application/json: {"status": "pending"}
         4XX:
           application/json: {"message": "<value>", "status_code": 893724}
-        "200": {}
