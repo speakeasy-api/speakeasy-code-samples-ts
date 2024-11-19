@@ -5,14 +5,15 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.441.0
   generationVersion: 2.460.1
-  releaseVersion: 0.35.0
-  configChecksum: 1de1cbeadb9ebd16f441a50fda7f87b9
+  releaseVersion: 0.36.0
+  configChecksum: 9505b45b3f0fe8a1a05ea6570deeca6b
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     core: 3.18.5
     defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
     downloadStreams: 0.1.1
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
@@ -30,6 +31,9 @@ features:
     tests: 0.7.0
     uploadStreams: 0.1.0
 generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
@@ -107,6 +111,7 @@ examples:
       responses:
         4XX:
           application/json: {"message": "<value>", "status_code": 159498}
+        "200": {}
   generateCodeSamplePreviewAsync:
     speakeasy-default-generate-code-sample-preview-async:
       requestBody:
@@ -126,3 +131,4 @@ examples:
           application/json: {"status": "pending"}
         4XX:
           application/json: {"message": "<value>", "status_code": 893724}
+        "200": {}
