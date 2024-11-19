@@ -16,7 +16,7 @@ This endpoint generates Code Sample previews from a file and configuration param
 ### Example Usage
 
 ```typescript
-import { SDK } from "@speakeasy-api/code-samples";
+import { SDK } from "@speakeasyapi/code-samples";
 import { openAsBlob } from "node:fs";
 
 const sdk = new SDK({
@@ -45,8 +45,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKCore } from "@speakeasy-api/code-samples/core.js";
-import { codesamplesPreview } from "@speakeasy-api/code-samples/funcs/codesamplesPreview.js";
+import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { codesamplesPreview } from "@speakeasyapi/code-samples/funcs/codesamplesPreview.js";
 import { openAsBlob } from "node:fs";
 
 // Use `SDKCore` for best tree-shaking performance.
@@ -104,7 +104,7 @@ This endpoint generates Code Sample previews from a file and configuration param
 ### Example Usage
 
 ```typescript
-import { SDK } from "@speakeasy-api/code-samples";
+import { SDK } from "@speakeasyapi/code-samples";
 import { openAsBlob } from "node:fs";
 
 const sdk = new SDK({
@@ -134,8 +134,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKCore } from "@speakeasy-api/code-samples/core.js";
-import { codesamplesPreviewAsync } from "@speakeasy-api/code-samples/funcs/codesamplesPreviewAsync.js";
+import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { codesamplesPreviewAsync } from "@speakeasyapi/code-samples/funcs/codesamplesPreviewAsync.js";
 import { openAsBlob } from "node:fs";
 
 // Use `SDKCore` for best tree-shaking performance.
@@ -194,7 +194,7 @@ Poll for the result of an asynchronous Code Sample preview generation.
 ### Example Usage
 
 ```typescript
-import { SDK } from "@speakeasy-api/code-samples";
+import { SDK } from "@speakeasyapi/code-samples";
 
 const sdk = new SDK({
   security: {
@@ -217,8 +217,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKCore } from "@speakeasy-api/code-samples/core.js";
-import { codesamplesGetAsync } from "@speakeasy-api/code-samples/funcs/codesamplesGetAsync.js";
+import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { codesamplesGetAsync } from "@speakeasyapi/code-samples/funcs/codesamplesGetAsync.js";
 
 // Use `SDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

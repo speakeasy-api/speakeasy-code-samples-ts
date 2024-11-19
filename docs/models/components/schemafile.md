@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { SchemaFile } from "@speakeasy-api/code-samples/models/components";
+import { SchemaFile } from "@speakeasyapi/code-samples/models/components";
 
 // No examples available for this model
 ```

@@ -5,7 +5,7 @@ The current status of the job. Possible values are `pending` or `running`.
 ## Example Usage
 
 ```typescript
-import { CodeSamplesJobStatus } from "@speakeasy-api/code-samples/models/components";
+import { CodeSamplesJobStatus } from "@speakeasyapi/code-samples/models/components";
 
 let value: CodeSamplesJobStatus = CodeSamplesJobStatus.Running;
 ```
