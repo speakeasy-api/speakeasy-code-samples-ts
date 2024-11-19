@@ -1,0 +1,128 @@
+lockVersion: 2.0.0
+id: 937c34d0-def7-4851-bcc2-d6582d234c71
+management:
+  docChecksum: c43b59c2013089d85388de072b9a0283
+  docVersion: 0.4.0
+  speakeasyVersion: 1.441.0
+  generationVersion: 2.460.1
+  releaseVersion: 0.35.0
+  configChecksum: 1de1cbeadb9ebd16f441a50fda7f87b9
+features:
+  typescript:
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    core: 3.18.5
+    defaultEnabledRetries: 0.1.0
+    downloadStreams: 0.1.1
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    flattening: 2.82.0
+    globalSecurity: 2.82.11
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.4
+    globals: 2.82.1
+    groups: 2.81.2
+    nameOverrides: 2.81.2
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.2.0
+    serverIDs: 2.81.2
+    tests: 0.7.0
+    uploadStreams: 0.1.0
+generatedFiles:
+  - .eslintrc.cjs
+  - .gitattributes
+  - .npmignore
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/codesampleschemainput.md
+  - docs/models/components/codesamplesjobstatus.md
+  - docs/models/components/schemafile.md
+  - docs/models/components/security.md
+  - docs/models/errors/errort.md
+  - docs/models/operations/generatecodesamplepreviewasyncresponsebody.md
+  - docs/models/operations/generatecodesamplepreviewresponse.md
+  - docs/models/operations/getcodesamplepreviewasyncrequest.md
+  - docs/models/operations/getcodesamplepreviewasyncresponse.md
+  - docs/models/operations/getcodesamplepreviewasyncresponsebody.md
+  - docs/sdks/codesamples/README.md
+  - docs/sdks/sdk/README.md
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/codesamplesGetAsync.ts
+  - src/funcs/codesamplesPreview.ts
+  - src/funcs/codesamplesPreviewAsync.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/components/codesampleschemainput.ts
+  - src/models/components/codesamplesjobstatus.ts
+  - src/models/components/index.ts
+  - src/models/components/security.ts
+  - src/models/errors/apierror.ts
+  - src/models/errors/error.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/generatecodesamplepreview.ts
+  - src/models/operations/generatecodesamplepreviewasync.ts
+  - src/models/operations/getcodesamplepreviewasync.ts
+  - src/models/operations/index.ts
+  - src/sdk/codesamples.ts
+  - src/sdk/index.ts
+  - src/sdk/sdk.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  generateCodeSamplePreview:
+    speakeasy-default-generate-code-sample-preview:
+      requestBody:
+        multipart/form-data: {"languages": ["<value>"], "schema_file": {}}
+      responses:
+        4XX:
+          application/json: {"message": "<value>", "status_code": 159498}
+  generateCodeSamplePreviewAsync:
+    speakeasy-default-generate-code-sample-preview-async:
+      requestBody:
+        multipart/form-data: {"languages": ["<value>", "<value>"], "schema_file": {}}
+      responses:
+        "202":
+          application/json: {"job_id": "<id>", "status": "pending"}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 677743}
+  getCodeSamplePreviewAsync:
+    speakeasy-default-get-code-sample-preview-async:
+      parameters:
+        path:
+          jobID: "<id>"
+      responses:
+        "202":
+          application/json: {"status": "pending"}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 893724}

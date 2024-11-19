@@ -29,7 +29,6 @@ async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
       "<value>",
-      "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
   });
@@ -61,7 +60,6 @@ const sdk = new SDKCore({
 async function run() {
   const res = await codesamplesPreview(sdk, {
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
@@ -120,7 +118,6 @@ async function run() {
     languages: [
       "<value>",
       "<value>",
-      "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
   });
@@ -152,7 +149,6 @@ const sdk = new SDKCore({
 async function run() {
   const res = await codesamplesPreviewAsync(sdk, {
     languages: [
-      "<value>",
       "<value>",
       "<value>",
     ],
