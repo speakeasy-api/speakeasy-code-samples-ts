@@ -2,16 +2,19 @@ speakeasyVersion: 1.441.0
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:eed9083bc4ba2cf34738402866ce9bded44a4172874f2728d988479367ca0096
-        sourceBlobDigest: sha256:0d8cab250914be6d6f0c159e5f64c6690143fb49dce89117d06c3635bdc784b0
+        sourceRevisionDigest: sha256:f2d257c7b8eeeaa296d7a348c474f3832d7dd3cf944d3e660feb534293898e25
+        sourceBlobDigest: sha256:785a83db337cb309aac27c4a805335396096391c489e7140d753840935ef8e55
         tags:
             - latest
+            - speakeasy-sdk-regen-1732044743
 targets:
     code_samples_typescript_sdk:
         source: speakeasy-OAS
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:eed9083bc4ba2cf34738402866ce9bded44a4172874f2728d988479367ca0096
-        sourceBlobDigest: sha256:0d8cab250914be6d6f0c159e5f64c6690143fb49dce89117d06c3635bdc784b0
+        sourceRevisionDigest: sha256:f2d257c7b8eeeaa296d7a348c474f3832d7dd3cf944d3e660feb534293898e25
+        sourceBlobDigest: sha256:785a83db337cb309aac27c4a805335396096391c489e7140d753840935ef8e55
+        codeSamplesNamespace: speakeasy-oas-code-samples
+        codeSamplesRevisionDigest: sha256:68bbddcc7e609731394611bdb83f79a0f2942da7bca5f10c9292b47c324c20ae
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -26,12 +29,12 @@ workflow:
                     operations: generateCodeSamplePreview, generateCodeSamplePreviewAsync, getCodeSamplePreviewAsync
                     include: true
             registry:
-                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/speakeasy-oas
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas
     targets:
         code_samples_typescript_sdk:
             target: typescript
             source: speakeasy-OAS
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/speakeasy-oas-code-samples
+                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-code-samples
                 blocking: false
