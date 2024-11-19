@@ -5,10 +5,11 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.441.0
   generationVersion: 2.460.1
-  releaseVersion: 0.36.3
-  configChecksum: 42d8e06cecc178f1d88d31b051e107ce
+  releaseVersion: 0.36.4
+  configChecksum: 7cd97fe24d7bd1e901e2cf45135421f8
   repoURL: https://github.com/speakeasy-sdks/code-sample-api.git
   installationURL: https://github.com/speakeasy-sdks/code-sample-api
+  published: true
 features:
   typescript:
     acceptHeaders: 2.81.2

@@ -47,25 +47,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add https://github.com/speakeasy-sdks/code-sample-api
+npm add @speakeasyapi/code-samples
 ```
 
 ### PNPM
 
 ```bash
-pnpm add https://github.com/speakeasy-sdks/code-sample-api
+pnpm add @speakeasyapi/code-samples
 ```
 
 ### Bun
 
 ```bash
-bun add https://github.com/speakeasy-sdks/code-sample-api
+bun add @speakeasyapi/code-samples
 ```
 
 ### Yarn
 
 ```bash
-yarn add https://github.com/speakeasy-sdks/code-sample-api zod
+yarn add @speakeasyapi/code-samples zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
