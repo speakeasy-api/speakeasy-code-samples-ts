@@ -13,7 +13,6 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <br /><br />
 > [!IMPORTANT]
 > This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-public). Delete this section before > publishing to a package manager.
-
 <!-- Start Summary [summary] -->
 ## Summary
 
@@ -79,9 +78,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
 ## SDK Example Usage
-
 ### Example
-
 ```typescript
 import { SDK } from "@speakeasyapi/code-samples";
 import { promises as fs } from "fs"
@@ -91,9 +88,6 @@ const sdk = new SDK({
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
-
-const fileBuffer = await fs.readFile("openapi.json");
-const fileContent = new Uint8Array(fileBuffer);
 
 async function run() {
   const result = await sdk.codesamples.preview({
@@ -110,7 +104,7 @@ async function run() {
 run();
 
 ```
-
+<!-- No SDK Example Usage [usage] -->
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
@@ -161,7 +155,6 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 > - **Bun:** The native [`Bun.file`](https://bun.sh/docs/api/file-io#reading-files-bun-file) function produces a file handle that can be used for streaming file uploads.
 > - **Browsers:** All supported browsers return an instance to a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) when reading the value from an `<input type="file">` element.
 > - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
-
 ```typescript
 import { SDK } from "@speakeasyapi/code-samples";
 import { promises as fs } from "fs"
@@ -171,9 +164,6 @@ const sdk = new SDK({
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
-
-const fileBuffer = await fs.readFile("openapi.json");
-const fileContent = new Uint8Array(fileBuffer);
 
 async function run() {
   const result = await sdk.codesamples.preview({
@@ -188,8 +178,10 @@ async function run() {
 }
 
 run();
-
 ```
+<!-- No File uploads [file-upload] -->
+
+<!-- No Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
 ## Error Handling
@@ -436,7 +428,6 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 
 > [!WARNING]
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
-
 ```typescript
 import { SDK } from "@speakeasyapi/code-samples";
 
