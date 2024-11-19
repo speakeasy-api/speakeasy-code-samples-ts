@@ -47,25 +47,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/speakeasy-sdks/code-sample-api
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/speakeasy-sdks/code-sample-api zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -96,7 +96,6 @@ const sdk = new SDK({
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
@@ -177,7 +176,6 @@ async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
       "<value>",
-      "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
   });
@@ -210,7 +208,6 @@ const sdk = new SDK({
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
@@ -259,7 +256,6 @@ const sdk = new SDK({
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
@@ -314,7 +310,6 @@ async function run() {
   try {
     result = await sdk.codesamples.preview({
       languages: [
-        "<value>",
         "<value>",
       ],
       schemaFile: await openAsBlob("example.file"),
@@ -378,7 +373,6 @@ async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
       "<value>",
-      "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
   });
@@ -408,7 +402,6 @@ const sdk = new SDK({
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
@@ -499,7 +492,6 @@ const sdk = new SDK({
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
-      "<value>",
       "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),

@@ -13,7 +13,6 @@ async function run() {
   const result = await sdk.codesamples.preview({
     languages: [
       "<value>",
-      "<value>",
     ],
     schemaFile: await openAsBlob("example.file"),
   });
