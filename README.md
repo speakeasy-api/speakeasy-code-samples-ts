@@ -1,4 +1,4 @@
-# @speakeasy-api/code-samples
+# @speakeasyapi/code-samples
 
 Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@speakeasy-api/code-samples* API.
 
