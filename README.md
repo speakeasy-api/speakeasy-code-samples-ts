@@ -78,14 +78,13 @@ yarn add <UNSET> zod
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
-<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
 ### Example
 
 ```typescript
 import { SDK } from "@speakeasy-api/code-samples";
-import { openAsBlob } from "node:fs";
+import { promises as fs } from "fs"
 
 const sdk = new SDK({
   security: {
@@ -95,12 +94,12 @@ const sdk = new SDK({
 
 async function run() {
   const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
+    languages: ["python", "typescript"],
+    schemaFile: {
+      fileName: "openapi.json", // ensure file name is included
+      content: fileContent,
+    },
   });
-
   // Handle the result
   console.log(result);
 }
@@ -108,7 +107,6 @@ async function run() {
 run();
 
 ```
-<!-- End SDK Example Usage [usage] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
