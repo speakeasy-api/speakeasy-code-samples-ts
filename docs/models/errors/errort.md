@@ -5,7 +5,7 @@ The `Status` type defines a logical error model
 ## Example Usage
 
 ```typescript
-import { ErrorT } from "@speakeasy-api/code-samples/models/errors";
+import { ErrorT } from "@speakeasyapi/code-samples/models/errors";
 
 // No examples available for this model
 ```

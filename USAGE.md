@@ -1,6 +1,6 @@
 <!-- Start SDK Example Usage [usage] -->
 ```typescript
-import { SDK } from "@speakeasy-api/code-samples";
+import { SDK } from "@speakeasyapi/code-samples";
 import { openAsBlob } from "node:fs";
 
 const sdk = new SDK({

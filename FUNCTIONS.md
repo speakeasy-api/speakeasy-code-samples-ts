@@ -19,9 +19,9 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { SDKCore } from "@speakeasy-api/code-samples/core.js";
-import { codesamplesPreview } from "@speakeasy-api/code-samples/funcs/codesamplesPreview.js";
-import { SDKValidationError } from "@speakeasy-api/code-samples/models/errors/sdkvalidationerror.js";
+import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { codesamplesPreview } from "@speakeasyapi/code-samples/funcs/codesamplesPreview.js";
+import { SDKValidationError } from "@speakeasyapi/code-samples/models/errors/sdkvalidationerror.js";
 import { openAsBlob } from "node:fs";
 
 // Use `SDKCore` for best tree-shaking performance.

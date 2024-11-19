@@ -5,8 +5,8 @@ Job is still in progress
 ## Example Usage
 
 ```typescript
-import { CodeSamplesJobStatus } from "@speakeasy-api/code-samples/models/components";
-import { GetCodeSamplePreviewAsyncResponseBody } from "@speakeasy-api/code-samples/models/operations";
+import { CodeSamplesJobStatus } from "@speakeasyapi/code-samples/models/components";
+import { GetCodeSamplePreviewAsyncResponseBody } from "@speakeasyapi/code-samples/models/operations";
 
 let value: GetCodeSamplePreviewAsyncResponseBody = {
   status: CodeSamplesJobStatus.Running,

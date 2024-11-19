@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetCodeSamplePreviewAsyncRequest } from "@speakeasy-api/code-samples/models/operations";
+import { GetCodeSamplePreviewAsyncRequest } from "@speakeasyapi/code-samples/models/operations";
 
 let value: GetCodeSamplePreviewAsyncRequest = {
   jobID: "<id>",
