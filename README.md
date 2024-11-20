@@ -89,6 +89,9 @@ const sdk = new SDK({
   },
 });
 
+const fileBuffer = await fs.readFile("openapi.json");
+const fileContent = new Uint8Array(fileBuffer);
+
 async function run() {
   const result = await sdk.codesamples.preview({
     languages: ["python", "typescript"],
@@ -114,6 +117,9 @@ const sdk = new SDK({
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
+
+const fileBuffer = await fs.readFile("openapi.json");
+const fileContent = new Uint8Array(fileBuffer);
 
 async function run() {
   const resultPost = await sdk.codesamples.previewAsync({
@@ -195,6 +201,9 @@ const sdk = new SDK({
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
+
+const fileBuffer = await fs.readFile("openapi.json");
+const fileContent = new Uint8Array(fileBuffer);
 
 async function run() {
   const result = await sdk.codesamples.preview({
