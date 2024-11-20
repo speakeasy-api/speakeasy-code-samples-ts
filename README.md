@@ -104,6 +104,37 @@ async function run() {
 run();
 
 ```
+
+```typescript
+import { SDK } from "@speakeasyapi/code-samples";
+import { promises as fs } from "fs"
+
+const sdk = new SDK({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const resultPost = await sdk.codesamples.previewAsync({
+    languages: ["python", "typescript"],
+    schemaFile: {
+      fileName: "openapi.json", // ensure file name is included
+      content: fileContent,
+    },
+  });
+  // Handle the result
+  console.log(resultPost);
+
+  const resultPoll = await sdk.codesamples.getAsync("<job_id>");
+
+  // Handle the result
+  console.log(resultPoll);
+}
+
+run();
+
+```
 <!-- No SDK Example Usage [usage] -->
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
@@ -378,46 +409,7 @@ const sdk = new SDK({ httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
-<!-- Start Authentication [security] -->
-## Authentication
-
-### Per-Client Security Schemes
-
-This SDK supports the following security schemes globally:
-
-| Name                  | Type   | Scheme      |
-| --------------------- | ------ | ----------- |
-| `apiKey`              | apiKey | API key     |
-| `workspaceIdentifier` | apiKey | API key     |
-| `bearer`              | http   | HTTP Bearer |
-
-You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
-
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
-
-async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-
-```
-<!-- End Authentication [security] -->
+<!-- No Authentication [security] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging
