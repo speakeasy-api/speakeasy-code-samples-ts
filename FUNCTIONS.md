@@ -20,9 +20,8 @@ specific category of applications.
 
 ```typescript
 import { SDKCore } from "@speakeasyapi/code-samples/core.js";
-import { codesamplesPreview } from "@speakeasyapi/code-samples/funcs/codesamplesPreview.js";
+import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.js";
 import { SDKValidationError } from "@speakeasyapi/code-samples/models/errors/sdkvalidationerror.js";
-import { openAsBlob } from "node:fs";
 
 // Use `SDKCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -33,11 +32,8 @@ const sdk = new SDKCore({
 });
 
 async function run() {
-  const res = await codesamplesPreview(sdk, {
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
+  const res = await codeSamplesGet(sdk, {
+    registryUrl: "https://normal-making.name",
   });
 
   switch (true) {

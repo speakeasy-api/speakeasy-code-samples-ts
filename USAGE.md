@@ -1,7 +1,6 @@
 <!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { SDK } from "@speakeasyapi/code-samples";
-import { openAsBlob } from "node:fs";
 
 const sdk = new SDK({
   security: {
@@ -10,11 +9,8 @@ const sdk = new SDK({
 });
 
 async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: [
-      "<value>",
-    ],
-    schemaFile: await openAsBlob("example.file"),
+  const result = await sdk.codeSamples.get({
+    registryUrl: "https://normal-making.name",
   });
 
   // Handle the result

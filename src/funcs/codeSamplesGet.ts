@@ -3,7 +3,7 @@
  */
 
 import { SDKCore } from "../core.js";
-import { readableStreamToArrayBuffer } from "../lib/files.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -21,23 +21,21 @@ import {
 import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
-import { isBlobLike } from "../types/blobs.js";
 import { Result } from "../types/fp.js";
-import { isReadableStream } from "../types/streams.js";
 
 /**
- * Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+ * Retrieve usage snippets from document stored in the registry
  *
  * @remarks
- * This endpoint generates Code Sample previews from a file and configuration parameters, receiving an async JobID response for polling.
+ * Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
  */
-export async function codesamplesPreviewAsync(
+export async function codeSamplesGet(
   client: SDKCore,
-  request: components.CodeSampleSchemaInput,
+  request: operations.GetCodeSamplesRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
-    operations.GenerateCodeSamplePreviewAsyncResponseBody,
+    components.UsageSnippets,
     | errors.ErrorT
     | APIError
     | SDKValidationError
@@ -50,41 +48,22 @@ export async function codesamplesPreviewAsync(
 > {
   const parsed = safeParse(
     request,
-    (value) => components.CodeSampleSchemaInput$outboundSchema.parse(value),
+    (value) => operations.GetCodeSamplesRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = new FormData();
+  const body = null;
 
-  body.append("languages", String(payload.languages));
-  if (isBlobLike(payload.schema_file)) {
-    body.append("schema_file", payload.schema_file);
-  } else if (isReadableStream(payload.schema_file.content)) {
-    const buffer = await readableStreamToArrayBuffer(
-      payload.schema_file.content,
-    );
-    const blob = new Blob([buffer], { type: "application/octet-stream" });
-    body.append("schema_file", blob);
-  } else {
-    body.append(
-      "schema_file",
-      new Blob([payload.schema_file.content], {
-        type: "application/octet-stream",
-      }),
-      payload.schema_file.fileName,
-    );
-  }
-  if (payload.package_name !== undefined) {
-    body.append("package_name", payload.package_name);
-  }
-  if (payload.sdk_class_name !== undefined) {
-    body.append("sdk_class_name", payload.sdk_class_name);
-  }
+  const path = pathToFunc("/v1/code_sample")();
 
-  const path = pathToFunc("/v1/code_sample/preview/async")();
+  const query = encodeFormQuery({
+    "languages": payload.languages,
+    "operation_ids": payload.operation_ids,
+    "registry_url": payload.registry_url,
+  });
 
   const headers = new Headers({
     Accept: "application/json",
@@ -94,7 +73,7 @@ export async function codesamplesPreviewAsync(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "generateCodeSamplePreviewAsync",
+    operationID: "getCodeSamples",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -108,9 +87,11 @@ export async function codesamplesPreviewAsync(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
+    baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -135,7 +116,7 @@ export async function codesamplesPreviewAsync(
   };
 
   const [result] = await M.match<
-    operations.GenerateCodeSamplePreviewAsyncResponseBody,
+    components.UsageSnippets,
     | errors.ErrorT
     | APIError
     | SDKValidationError
@@ -145,11 +126,9 @@ export async function codesamplesPreviewAsync(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(
-      202,
-      operations.GenerateCodeSamplePreviewAsyncResponseBody$inboundSchema,
-    ),
-    M.jsonErr(["4XX", "5XX"], errors.ErrorT$inboundSchema),
+    M.json("2XX", components.UsageSnippets$inboundSchema),
+    M.jsonErr("4XX", errors.ErrorT$inboundSchema),
+    M.fail("5XX"),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;
