@@ -1,22 +1,28 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/speakeasy-sdks/code-sample-api.git"
-  },
   "scripts": {
     "lint": "eslint --max-warnings=0 src",
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
+    "@tanstack/react-query": "^5",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
     "zod": ">= 3"
   },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {"optional":true},
+    "react": {"optional":true},
+    "react-dom": {"optional":true}
+  },
   "devDependencies": {
+    "@tanstack/react-query": "^5.61.4",
+    "@types/react": "^18.3.12",
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^8.57.0",

@@ -3,20 +3,20 @@ generation:
   devContainers:
     enabled: true
     schemaPath: openapi.json
-  sdkClassName: SDK
+  sdkClassName: SpeakeasyCodeSamples
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
   useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: true
-    parameterOrderingFeb2024: true
-    requestResponseComponentNamesFeb2024: true
+    nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 1.0.0
+  version: 2.0.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -25,6 +25,7 @@ typescript:
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
+  enableReactQuery: true
   enumFormat: enum
   flattenGlobalSecurity: true
   flatteningOrder: body-first
@@ -41,7 +42,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: '@speakeasyapi/code-samples'
+  packageName: "@speakeasyapi/code-samples"
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

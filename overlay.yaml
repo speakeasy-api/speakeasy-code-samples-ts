@@ -3,21 +3,33 @@ info:
   title: Naming Overlay
   version: 0.0.0
 actions:
-  - target: $["paths"]["/v1/code_sample/preview"]["post"]
+  - target: $['x-speakeasy-globals']['parameters']
+    remove: true
+  - target: $['x-speakeasy-globals']
     update:
-      x-speakeasy-group: codesamples
-  - target: $["paths"]["/v1/code_sample/preview"]["post"]
+      parameters:
+        - name: registry_url
+          description: The registry URL from which to retrieve the snippets.
+          example: https://spec.speakeasy.com/org/ws/my-source
+          in: query
+          required: true
+          schema:
+            type: string
+  - target: $["security"][*]
+    remove: true
+  - target: $["security"]
     update:
-      x-speakeasy-name-override: preview
-  - target: $["paths"]["/v1/code_sample/preview/async"]["post"]
+      - APIKey: []
+  - target: $["tags"][*]
+    remove: true
+  - target: $["tags"]
     update:
-      x-speakeasy-group: codesamples
-  - target: $["paths"]["/v1/code_sample/preview/async"]["post"]
+      - name: CodeSamples
+        description: REST APIs for retrieving Code Samples
+  - target: $["components"]["securitySchemes"]["WorkspaceIdentifier"]
+    remove: true
+  - target: $["components"]["securitySchemes"]["Bearer"]
+    remove: true
+  - target: $["paths"]["/v1/code_sample"]["get"]
     update:
-      x-speakeasy-name-override: previewAsync
-  - target: $["paths"]["/v1/code_sample/preview/async/{jobID}"]["get"]
-    update:
-      x-speakeasy-group: codesamples
-  - target: $["paths"]["/v1/code_sample/preview/async/{jobID}"]["get"]
-    update:
-      x-speakeasy-name-override: getAsync
+      x-speakeasy-group: codeSamples

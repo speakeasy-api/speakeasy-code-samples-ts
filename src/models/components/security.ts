@@ -9,9 +9,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Security = {
-  apiKey?: string | undefined;
-  workspaceIdentifier?: string | undefined;
-  bearer?: string | undefined;
+  apiKey: string;
 };
 
 /** @internal */
@@ -20,22 +18,16 @@ export const Security$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  APIKey: z.string().optional(),
-  WorkspaceIdentifier: z.string().optional(),
-  Bearer: z.string().optional(),
+  APIKey: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "APIKey": "apiKey",
-    "WorkspaceIdentifier": "workspaceIdentifier",
-    "Bearer": "bearer",
   });
 });
 
 /** @internal */
 export type Security$Outbound = {
-  APIKey?: string | undefined;
-  WorkspaceIdentifier?: string | undefined;
-  Bearer?: string | undefined;
+  APIKey: string;
 };
 
 /** @internal */
@@ -44,14 +36,10 @@ export const Security$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Security
 > = z.object({
-  apiKey: z.string().optional(),
-  workspaceIdentifier: z.string().optional(),
-  bearer: z.string().optional(),
+  apiKey: z.string(),
 }).transform((v) => {
   return remap$(v, {
     apiKey: "APIKey",
-    workspaceIdentifier: "WorkspaceIdentifier",
-    bearer: "Bearer",
   });
 });
 

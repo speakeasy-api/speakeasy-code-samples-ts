@@ -1,4 +1,4 @@
-speakeasyVersion: 1.441.0
+speakeasyVersion: 1.463.1
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
@@ -13,8 +13,6 @@ targets:
         sourceNamespace: speakeasy-oas
         sourceRevisionDigest: sha256:3ce4076b437393a6fb3f102ac083c3d05a6e9e3e6daf47f99c6c4cf3a65b0e4c
         sourceBlobDigest: sha256:785a83db337cb309aac27c4a805335396096391c489e7140d753840935ef8e55
-        codeSamplesNamespace: speakeasy-oas-code-samples
-        codeSamplesRevisionDigest: sha256:e5da15a44c4e0e5137d00c8cba0a0349cac5002cb0232608b12c6d34a517724f
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -26,7 +24,7 @@ workflow:
                 - location: overlay.yaml
             transformations:
                 - filterOperations:
-                    operations: generateCodeSamplePreview, generateCodeSamplePreviewAsync, getCodeSamplePreviewAsync
+                    operations: getCodeSamples
                     include: true
             registry:
                 location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas

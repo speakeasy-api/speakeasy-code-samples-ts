@@ -1,25 +1,25 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    speakeasy-OAS:
-        inputs:
-            - location: https://www.speakeasy.com/openapi.yaml
-        overlays:
-            - location: overlay.yaml
-        transformations:
-            - filterOperations:
-                operations: generateCodeSamplePreview, generateCodeSamplePreviewAsync, getCodeSamplePreviewAsync
-                include: true
-        registry:
-            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas
+  speakeasy-OAS:
+    inputs:
+      - location: https://www.speakeasy.com/openapi.yaml
+    overlays:
+      - location: overlay.yaml
+    transformations:
+      - filterOperations:
+          operations: getCodeSamples
+          include: true
+    registry:
+      location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas
 targets:
-    code_samples_typescript_sdk:
-        target: typescript
-        source: speakeasy-OAS
-        publish:
-            npm:
-                token: $npm_token
-        codeSamples:
-            registry:
-                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-code-samples
-            blocking: false
+  code_samples_typescript_sdk:
+    target: typescript
+    source: speakeasy-OAS
+    publish:
+      npm:
+        token: $npm_token
+    codeSamples:
+      registry:
+        location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-code-samples
+      blocking: false

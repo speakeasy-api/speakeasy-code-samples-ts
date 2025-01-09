@@ -3,11 +3,11 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { Codesamples } from "./codesamples.js";
+import { CodeSamples } from "./codesamples.js";
 
-export class SDK extends ClientSDK {
-  private _codesamples?: Codesamples;
-  get codesamples(): Codesamples {
-    return (this._codesamples ??= new Codesamples(this._options));
+export class SpeakeasyCodeSamples extends ClientSDK {
+  private _codeSamples?: CodeSamples;
+  get codeSamples(): CodeSamples {
+    return (this._codeSamples ??= new CodeSamples(this._options));
   }
 }

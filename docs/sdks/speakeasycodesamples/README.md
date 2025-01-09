@@ -1,4 +1,4 @@
-# SDK
+# SpeakeasyCodeSamples SDK
 
 ## Overview
 
@@ -6,3 +6,5 @@ Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry 
 
 The Speakeasy Platform Documentation
 </docs>
+
+### Available Operations

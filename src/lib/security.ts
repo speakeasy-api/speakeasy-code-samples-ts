@@ -117,7 +117,7 @@ export function resolveSecurity(
   ...options: SecurityInput[][]
 ): SecurityState | null {
   const state: SecurityState = {
-    basic: { username: "", password: "" },
+    basic: {},
     headers: {},
     queryParams: {},
     cookies: {},
@@ -237,20 +237,6 @@ export function resolveGlobalSecurity(
         fieldName: "x-api-key",
         type: "apiKey:header",
         value: security?.apiKey,
-      },
-    ],
-    [
-      {
-        fieldName: "x-workspace-identifier",
-        type: "apiKey:header",
-        value: security?.workspaceIdentifier,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.bearer,
       },
     ],
   );
