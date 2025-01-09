@@ -18,14 +18,13 @@ your React app at the root or layout component. For example:
 
 ```tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SDKCore } from "@speakeasyapi/code-samples";
-import { SDKProvider } from "@speakeasyapi/code-samples/react-query";
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamplesProvider } from "@speakeasyapi/code-samples/react-query";
 
 const queryClient = new QueryClient();
-const sdk = new SDKCore({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 // Retries are handled by the underlying SDK.
@@ -35,9 +34,9 @@ queryClient.setMutationDefaults(["@speakeasyapi/code-samples"], { retry: false }
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <SDKProvider client={sdk}> 
+      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}> 
         {/* Your app logic starts here */}
-      </SDKProvider>
+      </SpeakeasyCodeSamplesProvider>
     </QueryClientProvider>
   );
 }
@@ -56,7 +55,7 @@ import { useCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSa
 
 export function Example() {
   const { data, error, status } = useCodeSamplesGet({
-    registryUrl: "https://normal-making.name",
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Render the UI here...
@@ -76,7 +75,7 @@ export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
   const { data, error, status } = useCodeSamplesGet(
     {
-      registryUrl: "https://normal-making.name",
+      registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
     },
     {
       // TanStack Query options:
@@ -158,21 +157,20 @@ hooks that integrate neatly with React Suspense.
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { SDKCore } from "@speakeasyapi/code-samples";
-import { SDKProvider } from "@speakeasyapi/code-samples/react-query";
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamplesProvider } from "@speakeasyapi/code-samples/react-query";
 import { useCodeSamplesGetSuspense } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 const queryClient = new QueryClient();
-const sdk = new SDKCore({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <SDKProvider client={sdk}> 
+      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}> 
         <QueryErrorResetBoundary>
           {({ reset }) => (
             <ErrorBoundary
@@ -191,14 +189,14 @@ export function App() {
             </ErrorBoundary>
           )}
         </QueryErrorResetBoundary>
-      </SDKProvider>
+      </SpeakeasyCodeSamplesProvider>
     </QueryClientProvider>
   );
 }
 
 function Example() {
   const { data } = useCodeSamplesGetSuspense({
-    registryUrl: "https://normal-making.name",
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Render the UI here...
@@ -218,19 +216,18 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { SDKCore } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples";
 import { prefetchCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 export default async function Page() {
   const queryClient = new QueryClient();
-  const sdk = new SDKCore({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
+  const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+    apiKey: "<YOUR_API_KEY_HERE>",
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
-  await prefetchCodeSamplesGet(queryClient, sdk, {
-    registryUrl: "https://normal-making.name",
+  await prefetchCodeSamplesGet(queryClient, speakeasyCodeSamples, {
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   return (

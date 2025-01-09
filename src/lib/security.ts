@@ -239,20 +239,6 @@ export function resolveGlobalSecurity(
         value: security?.apiKey,
       },
     ],
-    [
-      {
-        fieldName: "x-workspace-identifier",
-        type: "apiKey:header",
-        value: security?.workspaceIdentifier,
-      },
-    ],
-    [
-      {
-        fieldName: "Authorization",
-        type: "http:bearer",
-        value: security?.bearer,
-      },
-    ],
   );
 }
 

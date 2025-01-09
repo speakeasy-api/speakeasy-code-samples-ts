@@ -19,21 +19,20 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core.js";
 import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.js";
 import { SDKValidationError } from "@speakeasyapi/code-samples/models/errors/sdkvalidationerror.js";
 
-// Use `SDKCore` for best tree-shaking performance.
+// Use `SpeakeasyCodeSamplesCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const sdk = new SDKCore({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const res = await codeSamplesGet(sdk, {
-    registryUrl: "https://normal-making.name",
+  const res = await codeSamplesGet(speakeasyCodeSamples, {
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   switch (true) {

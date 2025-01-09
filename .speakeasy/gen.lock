@@ -1,14 +1,12 @@
 lockVersion: 2.0.0
-id: c7686174-7704-4859-9d59-8dab3c98a47f
+id: 74386feb-f8da-4ec0-8b02-29dfddf22161
 management:
-  docChecksum: c53d80182e179c30c3ef54a71a25bc0e
+  docChecksum: a0841885f1d2df6bf65c33550d1be776
   docVersion: 0.4.0
   speakeasyVersion: 1.463.1
   generationVersion: 2.486.6
   releaseVersion: 2.0.0
-  configChecksum: 1a0c6924656a2d352f9b86dc2654dcfd
-  repoURL: https://github.com/speakeasy-sdks/code-sample-api.git
-  installationURL: https://github.com/speakeasy-sdks/code-sample-api
+  configChecksum: 88c5e327e8ad8129a9654dc84dd0c36d
   published: true
 features:
   typescript:
@@ -19,6 +17,7 @@ features:
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
     globals: 2.82.1
     groups: 2.81.2
@@ -35,7 +34,6 @@ generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - REACT_QUERY.md
   - RUNTIMES.md
@@ -45,9 +43,10 @@ generatedFiles:
   - docs/models/components/usagesnippet.md
   - docs/models/components/usagesnippets.md
   - docs/models/errors/errort.md
+  - docs/models/operations/getcodesamplesglobals.md
   - docs/models/operations/getcodesamplesrequest.md
   - docs/sdks/codesamples/README.md
-  - docs/sdks/sdk/README.md
+  - docs/sdks/speakeasycodesamples/README.md
   - jsr.json
   - package.json
   - src/core.ts
@@ -99,42 +98,14 @@ generatedFiles:
   - src/types/streams.ts
   - tsconfig.json
 examples:
-  generateCodeSamplePreview:
-    speakeasy-default-generate-code-sample-preview:
-      requestBody:
-        multipart/form-data: {"languages": ["<value>"], "schema_file": {}}
-      responses:
-        4XX:
-          application/json: {"message": "<value>", "status_code": 159498}
-        "200": {}
-  generateCodeSamplePreviewAsync:
-    speakeasy-default-generate-code-sample-preview-async:
-      requestBody:
-        multipart/form-data: {"languages": ["<value>", "<value>"], "schema_file": {}}
-      responses:
-        "202":
-          application/json: {"job_id": "<id>", "status": "pending"}
-        4XX:
-          application/json: {"message": "<value>", "status_code": 677743}
-  getCodeSamplePreviewAsync:
-    speakeasy-default-get-code-sample-preview-async:
-      parameters:
-        path:
-          jobID: "<id>"
-      responses:
-        "202":
-          application/json: {"status": "pending"}
-        4XX:
-          application/json: {"message": "<value>", "status_code": 893724}
-        "200": {}
   getCodeSamples:
     speakeasy-default-get-code-samples:
       parameters:
         query:
-          registry_url: "https://normal-making.name"
+          registry_url: "https://spec.speakeasy.com/org/ws/my-source"
       responses:
         2XX:
-          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
         4XX:
-          application/json: {"message": "<value>", "status_code": 458049}
+          application/json: {"message": "<value>", "status_code": 558834}
 generatedTests: {}

@@ -3,7 +3,7 @@ generation:
   devContainers:
     enabled: true
     schemaPath: openapi.json
-  sdkClassName: SDK
+  sdkClassName: SpeakeasyCodeSamples
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
@@ -42,7 +42,7 @@ typescript:
   methodArguments: require-security-and-request
   moduleFormat: commonjs
   outputModelSuffix: output
-  packageName: '@speakeasyapi/code-samples'
+  packageName: "@speakeasyapi/code-samples"
   responseFormat: flat
   templateVersion: v2
   useIndexModules: true

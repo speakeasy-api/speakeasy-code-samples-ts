@@ -14,17 +14,16 @@ Retrieve usage snippets from document stored in the registry. Supports filtering
 ### Example Usage
 
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const result = await sdk.codeSamples.get({
-    registryUrl: "https://normal-making.name",
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Handle the result
@@ -39,20 +38,19 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { SDKCore } from "@speakeasyapi/code-samples/core.js";
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core.js";
 import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.js";
 
-// Use `SDKCore` for best tree-shaking performance.
+// Use `SpeakeasyCodeSamplesCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
-const sdk = new SDKCore({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const res = await codeSamplesGet(sdk, {
-    registryUrl: "https://normal-making.name",
+  const res = await codeSamplesGet(speakeasyCodeSamples, {
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   if (!res.ok) {

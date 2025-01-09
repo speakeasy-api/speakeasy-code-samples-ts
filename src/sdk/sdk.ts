@@ -5,7 +5,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { CodeSamples } from "./codesamples.js";
 
-export class SDK extends ClientSDK {
+export class SpeakeasyCodeSamples extends ClientSDK {
   private _codeSamples?: CodeSamples;
   get codeSamples(): CodeSamples {
     return (this._codeSamples ??= new CodeSamples(this._options));

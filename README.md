@@ -1,9 +1,9 @@
 # @speakeasyapi/code-samples
 
-Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@speakeasy-api/code-samples* API.
+Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@speakeasyapi/code-samples* API.
 
 <div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=@speakeasy-api/code-samples&utm_campaign=typescript"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+    <a href="https://www.speakeasy.com/?utm_source=@speakeasyapi/code-samples&utm_campaign=typescript"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
@@ -12,7 +12,8 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 
 <br /><br />
 > [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-public). Delete this section before > publishing to a package manager.
+> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
+
 <!-- Start Summary [summary] -->
 ## Summary
 
@@ -28,9 +29,12 @@ For more information about the API: [The Speakeasy Platform Documentation](/docs
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
   * [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
+  * [Global Parameters](#global-parameters)
+  * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
@@ -88,29 +92,24 @@ yarn add @tanstack/react-query react react-dom
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 <!-- End Requirements [requirements] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-### Example
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { promises as fs } from "fs"
 
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+### Example
+
+```typescript
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
-const fileBuffer = await fs.readFile("openapi.json");
-const fileContent = new Uint8Array(fileBuffer);
-
 async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: ["python", "typescript"],
-    schemaFile: {
-      fileName: "openapi.json", // ensure file name is included
-      content: fileContent,
-    },
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
+
   // Handle the result
   console.log(result);
 }
@@ -118,41 +117,42 @@ async function run() {
 run();
 
 ```
+<!-- End SDK Example Usage [usage] -->
 
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name     | Type   | Scheme  |
+| -------- | ------ | ------- |
+| `apiKey` | apiKey | API key |
+
+To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { promises as fs } from "fs"
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
-const fileBuffer = await fs.readFile("openapi.json");
-const fileContent = new Uint8Array(fileBuffer);
-
 async function run() {
-  const resultPost = await sdk.codesamples.previewAsync({
-    languages: ["python", "typescript"],
-    schemaFile: {
-      fileName: "openapi.json", // ensure file name is included
-      content: fileContent,
-    },
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
-  // Handle the result
-  console.log(resultPost);
-
-  const resultPoll = await sdk.codesamples.getAsync("<job_id>");
 
   // Handle the result
-  console.log(resultPoll);
+  console.log(result);
 }
 
 run();
 
 ```
-<!-- No SDK Example Usage [usage] -->
+<!-- End Authentication [security] -->
+
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
@@ -187,49 +187,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
 
-## File uploads
-
-Certain SDK methods accept files as part of a multi-part request. It is possible and typically recommended to upload files as a stream rather than reading the entire contents into memory. This avoids excessive memory consumption and potentially crashing with out-of-memory errors when working with very large files. The following example demonstrates how to attach a file stream to a request.
-
-> [!TIP]
->
-> Depending on your JavaScript runtime, there are convenient utilities that return a handle to a file without reading the entire contents into memory:
->
-> - **Node.js v20+:** Since v20, Node.js comes with a native `openAsBlob` function in [`node:fs`](https://nodejs.org/docs/latest-v20.x/api/fs.html#fsopenasblobpath-options).
-> - **Bun:** The native [`Bun.file`](https://bun.sh/docs/api/file-io#reading-files-bun-file) function produces a file handle that can be used for streaming file uploads.
-> - **Browsers:** All supported browsers return an instance to a [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) when reading the value from an `<input type="file">` element.
-> - **Node.js v18:** A file stream can be created using the `fileFrom` helper from [`fetch-blob/from.js`](https://www.npmjs.com/package/fetch-blob).
-```typescript
-import { SDK } from "@speakeasyapi/code-samples";
-import { promises as fs } from "fs"
-
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
-
-const fileBuffer = await fs.readFile("openapi.json");
-const fileContent = new Uint8Array(fileBuffer);
-
-async function run() {
-  const result = await sdk.codesamples.preview({
-    languages: ["python", "typescript"],
-    schemaFile: {
-      fileName: "openapi.json", // ensure file name is included
-      content: fileContent,
-    },
-  });
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-<!-- No File uploads [file-upload] -->
-
-<!-- No Retries [retries] -->
-
 <!-- Start React hooks with TanStack Query [react-query] -->
 ## React hooks with TanStack Query
 
@@ -257,6 +214,117 @@ To learn about this feature and how to get started, check
 </details>
 <!-- End React hooks with TanStack Query [react-query] -->
 
+<!-- Start Global Parameters [global-parameters] -->
+## Global Parameters
+
+A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
+
+For example, you can set `registry_url` to `"https://spec.speakeasy.com/org/ws/my-source"` at SDK initialization and then you do not have to pass the same value on calls to operations like `get`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
+
+### Available Globals
+
+The following global parameter is available.
+
+| Name        | Type   | Description                                           |
+| ----------- | ------ | ----------------------------------------------------- |
+| registryUrl | string | The registry URL from which to retrieve the snippets. |
+
+### Example
+
+```typescript
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+});
+
+async function run() {
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Global Parameters [global-parameters] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+```typescript
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+});
+
+async function run() {
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+  }, {
+    retries: {
+      strategy: "backoff",
+      backoff: {
+        initialInterval: 1,
+        maxInterval: 50,
+        exponent: 1.1,
+        maxElapsedTime: 100,
+      },
+      retryConnectionErrors: false,
+    },
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+```typescript
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 1,
+      maxInterval: 50,
+      exponent: 1.1,
+      maxElapsedTime: 100,
+    },
+    retryConnectionErrors: false,
+  },
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+});
+
+async function run() {
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Retries [retries] -->
+
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
@@ -270,23 +338,22 @@ Some methods specify known errors which can be thrown. All the known errors are 
 If the method throws an error and it is not captured by the known errors, it will default to throwing a `APIError`.
 
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 import {
   ErrorT,
   SDKValidationError,
 } from "@speakeasyapi/code-samples/models/errors";
 
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
   let result;
   try {
-    result = await sdk.codeSamples.get({
-      registryUrl: "https://normal-making.name",
+    result = await speakeasyCodeSamples.codeSamples.get({
+      registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
     });
 
     // Handle the result
@@ -345,18 +412,17 @@ You can override the default server globally by passing a server name to the `se
 #### Example
 
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   server: "prod",
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const result = await sdk.codeSamples.get({
-    registryUrl: "https://normal-making.name",
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Handle the result
@@ -371,18 +437,17 @@ run();
 
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   serverURL: "https://api.prod.speakeasyapi.dev",
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const result = await sdk.codeSamples.get({
-    registryUrl: "https://normal-making.name",
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Handle the result
@@ -412,7 +477,7 @@ custom header and a timeout to requests and how to use the `"requestError"` hook
 to log errors:
 
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 import { HTTPClient } from "@speakeasyapi/code-samples/lib/http";
 
 const httpClient = new HTTPClient({
@@ -439,11 +504,9 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new SDK({ httpClient });
+const sdk = new SpeakeasyCodeSamples({ httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
-
-<!-- No Authentication [security] -->
 
 <!-- Start Debugging [debug] -->
 ## Debugging
@@ -456,9 +519,9 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({ debugLogger: console });
+const sdk = new SpeakeasyCodeSamples({ debugLogger: console });
 ```
 <!-- End Debugging [debug] -->
 
@@ -477,4 +540,4 @@ looking for the latest version.
 While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
 We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=@speakeasy-api/code-samples&utm_campaign=typescript)
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=@speakeasyapi/code-samples&utm_campaign=typescript)

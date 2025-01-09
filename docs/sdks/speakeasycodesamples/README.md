@@ -1,4 +1,4 @@
-# SDK
+# SpeakeasyCodeSamples SDK
 
 ## Overview
 

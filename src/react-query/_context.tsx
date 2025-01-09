@@ -1,22 +1,22 @@
 
 import React from "react";
 
-import { SDKCore } from "../core.js";
+import { SpeakeasyCodeSamplesCore } from "../core.js";
 
-const SDKContext = React.createContext<SDKCore | null>(null);
+const SpeakeasyCodeSamplesContext = React.createContext<SpeakeasyCodeSamplesCore | null>(null);
 
-export function SDKProvider(props: { client: SDKCore, children: React.ReactNode }): React.ReactNode { 
+export function SpeakeasyCodeSamplesProvider(props: { client: SpeakeasyCodeSamplesCore, children: React.ReactNode }): React.ReactNode { 
   return (
-    <SDKContext.Provider value={props.client}>
+    <SpeakeasyCodeSamplesContext.Provider value={props.client}>
       {props.children}
-    </SDKContext.Provider>
+    </SpeakeasyCodeSamplesContext.Provider>
   );
 }
 
-export function useSDKContext(): SDKCore { 
-  const value = React.useContext(SDKContext);
+export function useSpeakeasyCodeSamplesContext(): SpeakeasyCodeSamplesCore { 
+  const value = React.useContext(SpeakeasyCodeSamplesContext);
   if (value === null) {
-    throw new Error("SDK not initialized. Create an instance of SDKCore and pass it to <SDKProvider />.");
+    throw new Error("SDK not initialized. Create an instance of SpeakeasyCodeSamplesCore and pass it to <SpeakeasyCodeSamplesProvider />.");
   }
   return value;
 }

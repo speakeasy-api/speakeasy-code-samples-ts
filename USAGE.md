@@ -1,16 +1,15 @@
 <!-- Start SDK Example Usage [usage] -->
 ```typescript
-import { SDK } from "@speakeasyapi/code-samples";
+import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
-const sdk = new SDK({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
+const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
-  const result = await sdk.codeSamples.get({
-    registryUrl: "https://normal-making.name",
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   // Handle the result

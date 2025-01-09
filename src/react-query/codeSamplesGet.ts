@@ -12,14 +12,14 @@ import {
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SDKCore } from "../core.js";
+import { SpeakeasyCodeSamplesCore } from "../core.js";
 import { codeSamplesGet } from "../funcs/codeSamplesGet.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
 import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
-import { useSDKContext } from "./_context.js";
+import { useSpeakeasyCodeSamplesContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
@@ -38,7 +38,7 @@ export function useCodeSamplesGet(
   request: operations.GetCodeSamplesRequest,
   options?: QueryHookOptions<CodeSamplesGetQueryData>,
 ): UseQueryResult<CodeSamplesGetQueryData, Error> {
-  const client = useSDKContext();
+  const client = useSpeakeasyCodeSamplesContext();
   return useQuery({
     ...buildCodeSamplesGetQuery(
       client,
@@ -59,7 +59,7 @@ export function useCodeSamplesGetSuspense(
   request: operations.GetCodeSamplesRequest,
   options?: SuspenseQueryHookOptions<CodeSamplesGetQueryData>,
 ): UseSuspenseQueryResult<CodeSamplesGetQueryData, Error> {
-  const client = useSDKContext();
+  const client = useSpeakeasyCodeSamplesContext();
   return useSuspenseQuery({
     ...buildCodeSamplesGetQuery(
       client,
@@ -72,7 +72,7 @@ export function useCodeSamplesGetSuspense(
 
 export function prefetchCodeSamplesGet(
   queryClient: QueryClient,
-  client$: SDKCore,
+  client$: SpeakeasyCodeSamplesCore,
   request: operations.GetCodeSamplesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
@@ -87,7 +87,7 @@ export function setCodeSamplesGetData(
   client: QueryClient,
   queryKeyBase: [
     parameters: {
-      registryUrl: string;
+      registryUrl?: string | undefined;
       operationIds?: Array<string> | undefined;
       languages?: Array<string> | undefined;
     },
@@ -103,7 +103,7 @@ export function invalidateCodeSamplesGet(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [parameters: {
-      registryUrl: string;
+      registryUrl?: string | undefined;
       operationIds?: Array<string> | undefined;
       languages?: Array<string> | undefined;
     }]
@@ -132,7 +132,7 @@ export function invalidateAllCodeSamplesGet(
 }
 
 export function buildCodeSamplesGetQuery(
-  client$: SDKCore,
+  client$: SpeakeasyCodeSamplesCore,
   request: operations.GetCodeSamplesRequest,
   options?: RequestOptions,
 ): {
@@ -165,7 +165,7 @@ export function buildCodeSamplesGetQuery(
 
 export function queryKeyCodeSamplesGet(
   parameters: {
-    registryUrl: string;
+    registryUrl?: string | undefined;
     operationIds?: Array<string> | undefined;
     languages?: Array<string> | undefined;
   },

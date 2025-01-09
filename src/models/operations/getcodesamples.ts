@@ -8,14 +8,83 @@ import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type GetCodeSamplesGlobals = {
+  /**
+   * The registry URL from which to retrieve the snippets.
+   */
+  registryUrl?: string | undefined;
+};
+
 export type GetCodeSamplesRequest = {
   /**
    * The registry URL from which to retrieve the snippets. E.g. https://spec.speakeasy.com/org/ws/my-source
    */
-  registryUrl: string;
+  registryUrl?: string | undefined;
   operationIds?: Array<string> | undefined;
   languages?: Array<string> | undefined;
 };
+
+/** @internal */
+export const GetCodeSamplesGlobals$inboundSchema: z.ZodType<
+  GetCodeSamplesGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  registry_url: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "registry_url": "registryUrl",
+  });
+});
+
+/** @internal */
+export type GetCodeSamplesGlobals$Outbound = {
+  registry_url?: string | undefined;
+};
+
+/** @internal */
+export const GetCodeSamplesGlobals$outboundSchema: z.ZodType<
+  GetCodeSamplesGlobals$Outbound,
+  z.ZodTypeDef,
+  GetCodeSamplesGlobals
+> = z.object({
+  registryUrl: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    registryUrl: "registry_url",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetCodeSamplesGlobals$ {
+  /** @deprecated use `GetCodeSamplesGlobals$inboundSchema` instead. */
+  export const inboundSchema = GetCodeSamplesGlobals$inboundSchema;
+  /** @deprecated use `GetCodeSamplesGlobals$outboundSchema` instead. */
+  export const outboundSchema = GetCodeSamplesGlobals$outboundSchema;
+  /** @deprecated use `GetCodeSamplesGlobals$Outbound` instead. */
+  export type Outbound = GetCodeSamplesGlobals$Outbound;
+}
+
+export function getCodeSamplesGlobalsToJSON(
+  getCodeSamplesGlobals: GetCodeSamplesGlobals,
+): string {
+  return JSON.stringify(
+    GetCodeSamplesGlobals$outboundSchema.parse(getCodeSamplesGlobals),
+  );
+}
+
+export function getCodeSamplesGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetCodeSamplesGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetCodeSamplesGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetCodeSamplesGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
@@ -23,7 +92,7 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  registry_url: z.string(),
+  registry_url: z.string().optional(),
   operation_ids: z.array(z.string()).optional(),
   languages: z.array(z.string()).optional(),
 }).transform((v) => {
@@ -35,7 +104,7 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetCodeSamplesRequest$Outbound = {
-  registry_url: string;
+  registry_url?: string | undefined;
   operation_ids?: Array<string> | undefined;
   languages?: Array<string> | undefined;
 };
@@ -46,7 +115,7 @@ export const GetCodeSamplesRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetCodeSamplesRequest
 > = z.object({
-  registryUrl: z.string(),
+  registryUrl: z.string().optional(),
   operationIds: z.array(z.string()).optional(),
   languages: z.array(z.string()).optional(),
 }).transform((v) => {
