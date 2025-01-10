@@ -1,4 +1,4 @@
-speakeasyVersion: 1.463.1
+speakeasyVersion: 1.467.0
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
