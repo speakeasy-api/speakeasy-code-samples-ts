@@ -1,8 +1,20 @@
 speakeasyVersion: 1.468.0
-sources: {}
+sources:
+    speakeasy-OAS:
+        sourceNamespace: speakeasy-oas
+        sourceRevisionDigest: sha256:e5381a3d4618e3ceb004638ed32db80ef320e129842a069cee332e9dfacffeda
+        sourceBlobDigest: sha256:6d9de4a70686f4366747b9dbf16917300a43dea8857ad6583f35ef3531bffbdb
+        tags:
+            - latest
+            - 0.4.0
 targets:
     code_samples_typescript_sdk:
         source: speakeasy-OAS
+        sourceNamespace: speakeasy-oas
+        sourceRevisionDigest: sha256:e5381a3d4618e3ceb004638ed32db80ef320e129842a069cee332e9dfacffeda
+        sourceBlobDigest: sha256:6d9de4a70686f4366747b9dbf16917300a43dea8857ad6583f35ef3531bffbdb
+        codeSamplesNamespace: speakeasy-oas-code-samples
+        codeSamplesRevisionDigest: sha256:8fb9df7fa1596d782db9a83042a97f149d37564875aa0d55f0e95d7c6d1728f2
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
