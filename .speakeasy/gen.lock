@@ -5,8 +5,10 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.468.0
   generationVersion: 2.492.3
-  releaseVersion: 2.0.8
-  configChecksum: 643ed30c5614e747b249cd911c80eac7
+  releaseVersion: 2.0.9
+  configChecksum: bf1f9ab236c7c97be9d8bda7632656bb
+  repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
+  installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:

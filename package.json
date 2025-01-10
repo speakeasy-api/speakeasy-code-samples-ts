@@ -1,9 +1,13 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "author": "Speakeasy",
   "main": "./index.js",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/speakeasy-api/speakeasy-code-samples-ts.git"
+  },
   "scripts": {
     "lint": "eslint --max-warnings=0 src",
     "build": "tsc",
@@ -16,15 +20,9 @@
     "zod": ">= 3"
   },
   "peerDependenciesMeta": {
-    "@tanstack/react-query": {
-      "optional": true
-    },
-    "react": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
+    "@tanstack/react-query": {"optional":true},
+    "react": {"optional":true},
+    "react-dom": {"optional":true}
   },
   "devDependencies": {
     "@tanstack/react-query": "^5.61.4",
@@ -37,6 +35,7 @@
     "typescript": "^5.4.5",
     "zod": "^3.23.4"
   },
-  "dependencies": {},
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
+  "dependencies": {
+    
+  }
 }
