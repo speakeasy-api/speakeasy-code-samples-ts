@@ -1,4 +1,4 @@
-speakeasyVersion: 1.467.0
+speakeasyVersion: 1.468.0
 sources: {}
 targets:
     code_samples_typescript_sdk:
@@ -27,5 +27,5 @@ workflow:
                     token: $npm_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-code-samples
+                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-typescript-code-samples
                 blocking: false
