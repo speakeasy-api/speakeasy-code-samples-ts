@@ -1,12 +1,14 @@
 lockVersion: 2.0.0
-id: 74386feb-f8da-4ec0-8b02-29dfddf22161
+id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
   docChecksum: a0841885f1d2df6bf65c33550d1be776
   docVersion: 0.4.0
-  speakeasyVersion: 1.467.0
+  speakeasyVersion: 1.468.0
   generationVersion: 2.492.3
-  releaseVersion: 2.0.4
-  configChecksum: 5956da297bd706125921a8685c2d332c
+  releaseVersion: 2.0.9
+  configChecksum: bf1f9ab236c7c97be9d8bda7632656bb
+  repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
+  installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
@@ -34,7 +36,6 @@ generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - REACT_QUERY.md
   - RUNTIMES.md

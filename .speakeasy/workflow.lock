@@ -1,18 +1,21 @@
-speakeasyVersion: 1.467.0
+speakeasyVersion: 1.468.0
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:3ce4076b437393a6fb3f102ac083c3d05a6e9e3e6daf47f99c6c4cf3a65b0e4c
-        sourceBlobDigest: sha256:785a83db337cb309aac27c4a805335396096391c489e7140d753840935ef8e55
+        sourceRevisionDigest: sha256:038ecf1b32c8ee26ccf70e2bc310264b713a8e848702ede9d3f9e8ef0d3bc218
+        sourceBlobDigest: sha256:6d9de4a70686f4366747b9dbf16917300a43dea8857ad6583f35ef3531bffbdb
         tags:
             - latest
-            - speakeasy-sdk-regen-1732056263
+            - speakeasy-sdk-regen-1736542759
+            - 0.4.0
 targets:
     code_samples_typescript_sdk:
         source: speakeasy-OAS
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:3ce4076b437393a6fb3f102ac083c3d05a6e9e3e6daf47f99c6c4cf3a65b0e4c
-        sourceBlobDigest: sha256:785a83db337cb309aac27c4a805335396096391c489e7140d753840935ef8e55
+        sourceRevisionDigest: sha256:038ecf1b32c8ee26ccf70e2bc310264b713a8e848702ede9d3f9e8ef0d3bc218
+        sourceBlobDigest: sha256:6d9de4a70686f4366747b9dbf16917300a43dea8857ad6583f35ef3531bffbdb
+        codeSamplesNamespace: speakeasy-oas-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:ee0e99dcc3793b27016c3d401676bddcd807d115845b378ad293cb688172f9e3
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -37,5 +40,5 @@ workflow:
                     token: $npm_token
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-code-samples
+                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-typescript-code-samples
                 blocking: false
