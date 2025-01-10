@@ -1,5 +1,5 @@
 lockVersion: 2.0.0
-id: 74386feb-f8da-4ec0-8b02-29dfddf22161
+id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
   docChecksum: a0841885f1d2df6bf65c33550d1be776
   docVersion: 0.4.0
@@ -34,7 +34,6 @@ generatedFiles:
   - .eslintrc.cjs
   - .gitattributes
   - .npmignore
-  - CONTRIBUTING.md
   - FUNCTIONS.md
   - REACT_QUERY.md
   - RUNTIMES.md
