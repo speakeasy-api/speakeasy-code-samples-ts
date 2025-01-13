@@ -16,7 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.0.11
+  version: 2.0.12
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -40,7 +40,7 @@ typescript:
   inputModelSuffix: input
   maxMethodParams: 1
   methodArguments: require-security-and-request
-  moduleFormat: commonjs
+  moduleFormat: esm
   outputModelSuffix: output
   packageName: '@speakeasyapi/code-samples'
   responseFormat: flat

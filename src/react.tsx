@@ -1,13 +1,21 @@
 import React from "react";
-import { useCodeSamplesGet } from "./react-query/codeSamplesGet";
+import { QueryHookOptions } from "./react-query/_types.js";
+import {
+  CodeSamplesGetQueryData,
+  useCodeSamplesGet,
+} from "./react-query/codeSamplesGet.js";
 
-type SpeakeasyCodeSampleProps = {
+export * from "./react-query/index.js";
+
+type CodeSampleProps = {
   /**
-   * The URL of the registry that you would like to fetch a code sample from.
+   * The URL of the registry that you would like to fetch a code sample from. If
+   * the client was provided with a registry URL, then this prop is optional.
    *
    * @example "https://spec.speakeasy.com/my-org/my-workspace/my-source"
-   */
-  registryUrl: string;
+   * */
+  registryUrl?: string;
+
   /**
    * The `operationId` of the operation that you would like to fetch a code
    * sample for.
@@ -15,6 +23,7 @@ type SpeakeasyCodeSampleProps = {
    * @example "getPetById"
    * */
   operationId: string;
+
   /**
    * The language of the code sample that you would like to fetch.
    *
@@ -22,65 +31,97 @@ type SpeakeasyCodeSampleProps = {
    * */
   language: string;
 
-  renderError?: (err: Error) => React.ReactNode;
-  renderPending?: () => React.ReactNode;
-  renderSuccess?: (codeSample: string) => React.ReactNode;
+  queryOptions?: QueryHookOptions<CodeSamplesGetQueryData>;
+
+  /**
+   * The component to render if there is an error fetching the code sample.
+   *
+   * @example
+   * ```tsx
+   * (err: Error) => <>{err.message}</>
+   * ```
+   */
+  error?: (err: Error) => React.ReactNode;
+
+  /**
+   * The component to render while fetching the code sample.
+   *
+   * @example
+   * ```tsx
+   * () => <>Fetching Code Sample...</>
+   * ```
+   */
+  pending?: React.ReactNode | (() => React.ReactNode);
+
+  /**
+   * The component to render when the code sample has been successfully fetched.
+   *
+   * @example
+   * ```tsx
+   * (codeSample: string) => <pre></code>{codeSample}</code></pre>
+   * ```
+   */
+  success?: (codeSample: string) => React.ReactNode;
 };
 
 /**
- * SpeakeasyCodeSample is a React component that fetches and displays a code
- * sample snippet from the Speakeasy Code Samples API. It uses the
- * `useCodeSamplesGet` hook to retrieve the code sample based on the provided
- * props.
+ * React component that fetches and displays a code sample snippet from the
+ * Speakeasy Code Samples API. It uses a Speakeasy-generated React Query to
+ * retrieve the code sample based on the provided props.
  *
- * @param {SpeakeasyCodeSampleProps} props - The properties passed to the component.
- * @param {string} props.registryUrl - The URL of the code sample registry.
- * @param {string} props.operationId - The operation ID for which the code sample is requested.
- * @param {string} props.language - The programming language of the code sample.
+ * __**IMPORTANT:**  This component must be rendered within a structure wrapped
+ * by both `QueryClientProvider` and `SpeakeasyCodeSamplesProvider`. This
+ * ensures that the necessary context and query client are properly initialized
+ * for the component to function.__
  *
- * @returns {JSX.Element} A JSX element that displays the code sample snippet, a loading message, or an error message.
+ * @param {CodeSampleProps} props - The properties passed to the component.
  *
+ * @returns {JSX.Element} A JSX element that displays the code sample snippet, a
+ * loading message, or an error message.
  * @example
  * Usage within a component that provides code highlighting:
  *
  * ```tsx
- * import { SpeakeasyCodeSample } from "@speakeasyapi/react";
+ * import { CodeSample } from "@speakeasyapi/code-samples/react";
  * import { Code } from './components/code-highlighting';
  *
  * const ExampleComponent: React.FC = () => (
- *   <Code language="typescript">
- *     <SpeakeasyCodeSample
+ *     <CodeSample
  *       registryUrl="https://spec.speakeasy.com/my-org/my-workspace/my-source"
  *       operationId="getPetById"
  *       language="typescript"
+ *       error={(err) => <>{err.message}</>}
+ *       pending={() => <>Fetching Code Sample...</>}
+ *       success={(snippet) => <Code language="typescript" code={snippet} />}
  *     />
- *   </Code>
  * );
  * ```
- */
-export const SpeakeasyCodeSample: React.FC<SpeakeasyCodeSampleProps> = (
-  props
-) => {
+ * */
+export const CodeSample: React.FC<CodeSampleProps> = (props) => {
   const {
-    renderError = (err: Error) => <>{err.message}</>,
-    renderPending = () => <>Fetching Code Sample...</>,
-    renderSuccess = (codeSample: string) => <>{codeSample}</>,
+    error: renderError = (err: Error) => <>{err.message}</>,
+    pending: renderPending = <>Fetching Code Sample...</>,
+    success: renderSuccess = (codeSample: string) => <>{codeSample}</>,
+    queryOptions,
     ...queryParams
   } = props;
 
-  const { isPending, isError, error, data } = useCodeSamplesGet({
-    registryUrl: queryParams.registryUrl,
-    operationIds: [queryParams.operationId],
-    languages: [queryParams.language],
-  });
+  const { isPending, isError, error, data } = useCodeSamplesGet(
+    {
+      registryUrl: queryParams.registryUrl,
+      operationIds: [queryParams.operationId],
+      languages: [queryParams.language],
+    },
+    queryOptions
+  );
 
   if (isPending) {
-    return renderPending();
+    return renderPending instanceof Function ? renderPending() : renderPending;
   }
 
   if (isError) {
     return renderError(error);
   }
 
-  return <>{data.snippets[0]?.code ?? "No code snippet found."}</>;
+  return renderSuccess(data.snippets[0]!.code);
 };

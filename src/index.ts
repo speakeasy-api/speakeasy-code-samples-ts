@@ -5,5 +5,3 @@
 export * from "./lib/config.js";
 export * as files from "./lib/files.js";
 export * from "./sdk/sdk.js";
-
-export * from "./index.extras.js";
