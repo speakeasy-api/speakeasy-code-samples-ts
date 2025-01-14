@@ -16,15 +16,17 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.0.12
+  version: 2.0.13
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
-    peerDependencies: {}
+    peerDependencies:
+      highlight.js: ^11.11.1
   additionalPackageJSON: {}
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
+  enableCustomCodeRegions: false
   enableReactQuery: true
   enumFormat: enum
   flattenGlobalSecurity: true

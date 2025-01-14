@@ -1,6 +1,6 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "author": "Speakeasy",
   "type": "module",
   "main": "./esm/index.js",
@@ -54,6 +54,7 @@
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5",
+    "highlight.js": "^11.11.1",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
     "zod": ">= 3"

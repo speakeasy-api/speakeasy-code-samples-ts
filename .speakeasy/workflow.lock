@@ -1,4 +1,4 @@
-speakeasyVersion: 1.468.0
+speakeasyVersion: 1.468.5
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
@@ -13,8 +13,6 @@ targets:
         sourceNamespace: speakeasy-oas
         sourceRevisionDigest: sha256:eccb5c0b494c102a3985fedd96b152ad956b8be90681e6f5f21b5756463f66ab
         sourceBlobDigest: sha256:6d9de4a70686f4366747b9dbf16917300a43dea8857ad6583f35ef3531bffbdb
-        codeSamplesNamespace: speakeasy-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:b21e9f5e10bf036c791b2e888f9d5eb8177a85f23f84ebdd01bac5bc90f418f3
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
