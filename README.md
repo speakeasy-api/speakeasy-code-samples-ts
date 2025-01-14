@@ -1,6 +1,6 @@
 # @speakeasyapi/code-samples
 
-Developer-friendly & type-safe Typescript SDK specifically catered to leverage *@speakeasyapi/code-samples* API.
+Developer-friendly & type-safe Typescript SDK specifically catered to leverage _@speakeasyapi/code-samples_ API.
 
 <div align="left">
     <a href="https://www.speakeasy.com/?utm_source=@speakeasyapi/code-samples&utm_campaign=typescript"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
@@ -9,8 +9,8 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
     </a>
 </div>
 
-
 <br /><br />
+
 > [!IMPORTANT]
 > This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
 
@@ -122,6 +122,49 @@ run();
 
 ```
 <!-- End SDK Example Usage [usage] -->
+
+### React Component
+
+This library includes a React component that fetches and highlights code
+snippets using `highlight.js`. Along with displaying the snippet, it shows a loading state during
+fetching and provides a fallback view if an error occurs.
+
+```tsx
+import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core";
+import {
+  CodeSample,
+  SpeakeasyCodeSamplesProvider,
+} from "@speakeasyapi/code-samples/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
+const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  apiKey: "<YOUR_API_KEY_HERE>",
+  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+});
+
+// Retries are handled by the underlying SDK.
+queryClient.setQueryDefaults(["@speakeasyapi/code-samples"], { retry: false });
+
+queryClient.setMutationDefaults(["@speakeasyapi/code-samples"], {
+  retry: false,
+});
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}>
+        <CodeSample operationId="getPetById" language="typescript" />
+      </SpeakeasyCodeSamplesProvider>
+    </QueryClientProvider>
+  );
+}
+```
+
+> [!NOTE]
+> To apply styles to the highlighted code, import a `highlight.js` theme CSS
+> file into your project using methods like a `<link>` tag.
 
 <!-- Start Authentication [security] -->
 ## Authentication
@@ -541,7 +584,7 @@ looking for the latest version.
 
 ## Contributions
 
-While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
-We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation.
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release.
 
 ### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=@speakeasyapi/code-samples&utm_campaign=typescript)

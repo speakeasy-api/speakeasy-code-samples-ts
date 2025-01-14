@@ -4,7 +4,10 @@ import {
   type CodeSamplesGetQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
-import { Highlight, type HighlightLanguage as Language } from "./highlight.js";
+import {
+  Highlight,
+  type HighlightLanguage as CodeSampleLanguage,
+} from "./highlight.js";
 
 type CodeSampleProps = {
   /**
@@ -20,7 +23,7 @@ type CodeSampleProps = {
   operationId: string;
 
   /** The language of the code sample that you would like to fetch. */
-  language: Language;
+  language: CodeSampleLanguage;
 
   /** The options for the TanStack query that fetches the code snippet. */
   queryOptions?: QueryHookOptions<CodeSamplesGetQueryData>;
