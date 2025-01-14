@@ -22,6 +22,7 @@ type CodeSampleProps = {
   /** The language of the code sample that you would like to fetch. */
   language: Language;
 
+  /** The options for the TanStack query that fetches the code snippet. */
   queryOptions?: QueryHookOptions<CodeSamplesGetQueryData>;
 
   /** The component to render if there is an error fetching the code sample. */
