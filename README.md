@@ -111,7 +111,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -188,7 +194,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -208,7 +220,7 @@ run();
 
 ### [codeSamples](docs/sdks/codesamples/README.md)
 
-* [get](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets from document stored in the registry
+* [get](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
 
 
 </details>
@@ -229,7 +241,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`codeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets from document stored in the registry
+- [`codeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -256,7 +268,7 @@ To learn about this feature and how to get started, check
 
 <summary>Available React hooks</summary>
 
-- [`useCodeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets from document stored in the registry
+- [`useCodeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
 
 </details>
 <!-- End React hooks with TanStack Query [react-query] -->
@@ -289,7 +301,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -317,7 +335,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   }, {
     retries: {
       strategy: "backoff",
@@ -360,7 +384,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -400,7 +430,13 @@ async function run() {
   let result;
   try {
     result = await speakeasyCodeSamples.codeSamples.get({
-      registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+      registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+      operationIds: [
+        "getPetById",
+      ],
+      languages: [
+        "python",
+      ],
     });
 
     // Handle the result
@@ -469,7 +505,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -494,7 +536,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result

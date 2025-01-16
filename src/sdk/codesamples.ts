@@ -10,10 +10,10 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class CodeSamples extends ClientSDK {
   /**
-   * Retrieve usage snippets from document stored in the registry
+   * Retrieve usage snippets
    *
    * @remarks
-   * Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
+   * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
    */
   async get(
     request: operations.GetCodeSamplesRequest,
