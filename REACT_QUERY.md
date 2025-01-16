@@ -55,7 +55,13 @@ import { useCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSa
 
 export function Example() {
   const { data, error, status } = useCodeSamplesGet({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Render the UI here...
@@ -75,7 +81,13 @@ export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
   const { data, error, status } = useCodeSamplesGet(
     {
-      registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+      registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+      operationIds: [
+        "getPetById",
+      ],
+      languages: [
+        "python",
+      ],
     },
     {
       // TanStack Query options:
@@ -196,7 +208,13 @@ export function App() {
 
 function Example() {
   const { data } = useCodeSamplesGetSuspense({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Render the UI here...
@@ -227,7 +245,13 @@ export default async function Page() {
   });
 
   await prefetchCodeSamplesGet(queryClient, speakeasyCodeSamples, {
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   return (

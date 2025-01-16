@@ -9,7 +9,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result

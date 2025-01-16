@@ -29,10 +29,10 @@ import {
 export type CodeSamplesGetQueryData = components.UsageSnippets;
 
 /**
- * Retrieve usage snippets from document stored in the registry
+ * Retrieve usage snippets
  *
  * @remarks
- * Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
+ * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
  */
 export function useCodeSamplesGet(
   request: operations.GetCodeSamplesRequest,
@@ -50,10 +50,10 @@ export function useCodeSamplesGet(
 }
 
 /**
- * Retrieve usage snippets from document stored in the registry
+ * Retrieve usage snippets
  *
  * @remarks
- * Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
+ * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
  */
 export function useCodeSamplesGetSuspense(
   request: operations.GetCodeSamplesRequest,

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: a0841885f1d2df6bf65c33550d1be776
+  docChecksum: ef41927baaf8adac37d125d0ae44097c
   docVersion: 0.4.0
-  speakeasyVersion: 1.468.5
-  generationVersion: 2.493.11
-  releaseVersion: 2.0.13
-  configChecksum: bb0274b648f58e16f339f488f406677b
+  speakeasyVersion: 1.468.8
+  generationVersion: 2.493.19
+  releaseVersion: 2.0.14
+  configChecksum: d413f3ea951f34adef2528339fa6640a
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.14
+    core: 3.18.15
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.1.2
@@ -110,4 +110,55 @@ examples:
           application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
         4XX:
           application/json: {"message": "<value>", "status_code": 558834}
+    "":
+      parameters:
+        query:
+          registry_url: "https://spec.speakeasy.com/my-org/my-workspace/my-source"
+          operation_ids: ["getPetById"]
+      responses:
+        2XX:
+          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 558834}
+    python:
+      parameters:
+        query:
+          registry_url: "https://spec.speakeasy.com/org/ws/my-source"
+          operation_ids: ["getPetById"]
+          languages: ["python"]
+      responses:
+        2XX:
+          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 521235}
+    typescript:
+      parameters:
+        query:
+          registry_url: "https://spec.speakeasy.com/org/ws/my-source"
+          operation_ids: ["getPetById"]
+          languages: ["typescript"]
+      responses:
+        2XX:
+          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 458049}
+    java:
+      parameters:
+        query:
+          registry_url: "https://spec.speakeasy.com/org/ws/my-source"
+          operation_ids: ["getPetById"]
+          languages: ["java"]
+      responses:
+        2XX:
+          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 262795}
+    default:
+      parameters:
+        query:
+          registry_url: "https://spec.speakeasy.com/org/ws/my-source"
+          operation_ids: ["getPetById"]
+      responses:
+        2XX:
+          application/json: {"snippets": [{"operationId": "getPetById", "language": "typescript", "code": "import { Petstore } from \"petstore-sdk\";\n\nconst petstore = new Petstore({\n  apiKey: \"<YOUR_API_KEY_HERE>\",\n});\n\nasync function run() {\n  const result = await petstore.pet.getById({\n    id: 137396,\n  });\n\n  // Handle the result\n  console.log(result);\n}\n\nrun();"}]}
 generatedTests: {}

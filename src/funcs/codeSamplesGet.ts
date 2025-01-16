@@ -25,10 +25,10 @@ import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Retrieve usage snippets from document stored in the registry
+ * Retrieve usage snippets
  *
  * @remarks
- * Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
+ * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
  */
 export async function codeSamplesGet(
   client: SpeakeasyCodeSamplesCore,
