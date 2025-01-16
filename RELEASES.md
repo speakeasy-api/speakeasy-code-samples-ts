@@ -63,3 +63,13 @@ Based on:
 - [typescript v2.0.14] .
 ### Releases
 - [NPM v2.0.14] https://www.npmjs.com/package/@speakeasyapi/code-samples/v/2.0.14 - .
+
+## 2025-01-16 02:43:22
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.468.8 (2.493.19) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v2.0.15] .
+### Releases
+- [NPM v2.0.15] https://www.npmjs.com/package/@speakeasyapi/code-samples/v/2.0.15 - .

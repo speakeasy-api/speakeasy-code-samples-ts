@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: ef41927baaf8adac37d125d0ae44097c
+  docChecksum: 9937567df112ab271aff66d72d0fa2fb
   docVersion: 0.4.0
   speakeasyVersion: 1.468.8
   generationVersion: 2.493.19
-  releaseVersion: 2.0.14
-  configChecksum: d413f3ea951f34adef2528339fa6640a
+  releaseVersion: 2.0.15
+  configChecksum: a7febf2d7327405b6ee7a59c114089ef
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
