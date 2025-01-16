@@ -17,10 +17,16 @@ export type GetCodeSamplesGlobals = {
 
 export type GetCodeSamplesRequest = {
   /**
-   * The registry URL from which to retrieve the snippets. E.g. https://spec.speakeasy.com/org/ws/my-source
+   * The registry URL from which to retrieve the snippets.
    */
   registryUrl?: string | undefined;
+  /**
+   * The operation IDs to retrieve snippets for.
+   */
   operationIds?: Array<string> | undefined;
+  /**
+   * The languages to retrieve snippets for.
+   */
   languages?: Array<string> | undefined;
 };
 

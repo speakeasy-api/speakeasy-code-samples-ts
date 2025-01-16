@@ -5,11 +5,12 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve usage snippets from document stored in the registry
+* [get](#get) - Retrieve usage snippets
 
 ## get
 
-Retrieve usage snippets from document stored in the registry. Supports filtering by language and operation ID.
+Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
+
 
 ### Example Usage
 
@@ -23,7 +24,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   // Handle the result
@@ -50,7 +57,13 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
 
 async function run() {
   const res = await codeSamplesGet(speakeasyCodeSamples, {
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPetById",
+    ],
+    languages: [
+      "python",
+    ],
   });
 
   if (!res.ok) {
