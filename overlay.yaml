@@ -3,6 +3,12 @@ info:
   title: Naming Overlay
   version: 0.0.0
 actions:
+  - target: $.info
+    update:
+      title: Speakeasy Code Samples API
+      description: >
+        REST APIs for retrieving SDK usage snippets from the Speakeasy Code
+        Samples API.
   - target: $['x-speakeasy-globals']['parameters']
     remove: true
   - target: $['x-speakeasy-globals']
@@ -22,10 +28,6 @@ actions:
       - APIKey: []
   - target: $["tags"][*]
     remove: true
-  - target: $["tags"]
-    update:
-      - name: CodeSamples
-        description: REST APIs for retrieving Code Samples
   - target: $["components"]["securitySchemes"]["WorkspaceIdentifier"]
     remove: true
   - target: $["components"]["securitySchemes"]["Bearer"]
