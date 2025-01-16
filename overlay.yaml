@@ -26,7 +26,7 @@ actions:
   - target: $["security"]
     update:
       - APIKey: []
-  - target: $["tags"][*]
+  - target: $..tags
     remove: true
   - target: $["components"]["securitySchemes"]["WorkspaceIdentifier"]
     remove: true
