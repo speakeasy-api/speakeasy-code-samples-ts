@@ -57,10 +57,17 @@ export function Example() {
   const { data, error, status } = useCodeSamplesGet({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -83,10 +90,17 @@ export function ExampleWithOptions() {
     {
       registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
       operationIds: [
-        "getPetById",
+        "getPets",
+      ],
+      methodPaths: [
+        {
+          method: HttpMethod.Get,
+          path: "/pets",
+        },
       ],
       languages: [
         "python",
+        "javascript",
       ],
     },
     {
@@ -210,10 +224,17 @@ function Example() {
   const { data } = useCodeSamplesGetSuspense({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -247,10 +268,17 @@ export default async function Page() {
   await prefetchCodeSamplesGet(queryClient, speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 

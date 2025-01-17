@@ -6,6 +6,7 @@ import * as z from "zod";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetCodeSamplesGlobals = {
@@ -13,6 +14,11 @@ export type GetCodeSamplesGlobals = {
    * The registry URL from which to retrieve the snippets.
    */
   registryUrl?: string | undefined;
+};
+
+export type MethodPaths = {
+  method: components.HttpMethod;
+  path: string;
 };
 
 export type GetCodeSamplesRequest = {
@@ -24,6 +30,10 @@ export type GetCodeSamplesRequest = {
    * The operation IDs to retrieve snippets for.
    */
   operationIds?: Array<string> | undefined;
+  /**
+   * The method paths to retrieve snippets for.
+   */
+  methodPaths?: Array<MethodPaths> | undefined;
   /**
    * The languages to retrieve snippets for.
    */
@@ -93,6 +103,59 @@ export function getCodeSamplesGlobalsFromJSON(
 }
 
 /** @internal */
+export const MethodPaths$inboundSchema: z.ZodType<
+  MethodPaths,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  method: components.HttpMethod$inboundSchema,
+  path: z.string(),
+});
+
+/** @internal */
+export type MethodPaths$Outbound = {
+  method: string;
+  path: string;
+};
+
+/** @internal */
+export const MethodPaths$outboundSchema: z.ZodType<
+  MethodPaths$Outbound,
+  z.ZodTypeDef,
+  MethodPaths
+> = z.object({
+  method: components.HttpMethod$outboundSchema,
+  path: z.string(),
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MethodPaths$ {
+  /** @deprecated use `MethodPaths$inboundSchema` instead. */
+  export const inboundSchema = MethodPaths$inboundSchema;
+  /** @deprecated use `MethodPaths$outboundSchema` instead. */
+  export const outboundSchema = MethodPaths$outboundSchema;
+  /** @deprecated use `MethodPaths$Outbound` instead. */
+  export type Outbound = MethodPaths$Outbound;
+}
+
+export function methodPathsToJSON(methodPaths: MethodPaths): string {
+  return JSON.stringify(MethodPaths$outboundSchema.parse(methodPaths));
+}
+
+export function methodPathsFromJSON(
+  jsonString: string,
+): SafeParseResult<MethodPaths, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MethodPaths$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MethodPaths' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
   GetCodeSamplesRequest,
   z.ZodTypeDef,
@@ -100,11 +163,13 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
 > = z.object({
   registry_url: z.string().optional(),
   operation_ids: z.array(z.string()).optional(),
+  method_paths: z.array(z.lazy(() => MethodPaths$inboundSchema)).optional(),
   languages: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "registry_url": "registryUrl",
     "operation_ids": "operationIds",
+    "method_paths": "methodPaths",
   });
 });
 
@@ -112,6 +177,7 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
 export type GetCodeSamplesRequest$Outbound = {
   registry_url?: string | undefined;
   operation_ids?: Array<string> | undefined;
+  method_paths?: Array<MethodPaths$Outbound> | undefined;
   languages?: Array<string> | undefined;
 };
 
@@ -123,11 +189,13 @@ export const GetCodeSamplesRequest$outboundSchema: z.ZodType<
 > = z.object({
   registryUrl: z.string().optional(),
   operationIds: z.array(z.string()).optional(),
+  methodPaths: z.array(z.lazy(() => MethodPaths$outboundSchema)).optional(),
   languages: z.array(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     registryUrl: "registry_url",
     operationIds: "operation_ids",
+    methodPaths: "method_paths",
   });
 });
 

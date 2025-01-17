@@ -8,6 +8,8 @@ import { UsageSnippets } from "@speakeasyapi/code-samples/models/components";
 let value: UsageSnippets = {
   snippets: [
     {
+      path: "/root",
+      method: "<value>",
       operationId: "<id>",
       language: "<value>",
       code: "<value>",

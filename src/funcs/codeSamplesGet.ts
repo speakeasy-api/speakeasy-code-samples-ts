@@ -62,6 +62,7 @@ export async function codeSamplesGet(
 
   const query = encodeFormQuery({
     "languages": payload.languages,
+    "method_paths": payload.method_paths,
     "operation_ids": payload.operation_ids,
     "registry_url": payload.registry_url ?? client._options.registryUrl,
   });

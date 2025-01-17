@@ -89,6 +89,7 @@ export function setCodeSamplesGetData(
     parameters: {
       registryUrl?: string | undefined;
       operationIds?: Array<string> | undefined;
+      methodPaths?: Array<operations.MethodPaths> | undefined;
       languages?: Array<string> | undefined;
     },
   ],
@@ -105,6 +106,7 @@ export function invalidateCodeSamplesGet(
     [parameters: {
       registryUrl?: string | undefined;
       operationIds?: Array<string> | undefined;
+      methodPaths?: Array<operations.MethodPaths> | undefined;
       languages?: Array<string> | undefined;
     }]
   >,
@@ -143,6 +145,7 @@ export function buildCodeSamplesGetQuery(
     queryKey: queryKeyCodeSamplesGet({
       registryUrl: request.registryUrl,
       operationIds: request.operationIds,
+      methodPaths: request.methodPaths,
       languages: request.languages,
     }),
     queryFn: async function codeSamplesGetQueryFn(
@@ -167,6 +170,7 @@ export function queryKeyCodeSamplesGet(
   parameters: {
     registryUrl?: string | undefined;
     operationIds?: Array<string> | undefined;
+    methodPaths?: Array<operations.MethodPaths> | undefined;
     languages?: Array<string> | undefined;
   },
 ): QueryKey {
