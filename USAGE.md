@@ -1,6 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -11,10 +12,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 

@@ -9,6 +9,14 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UsageSnippet = {
   /**
+   * The path of the operation
+   */
+  path: string;
+  /**
+   * The HTTP method of the operation
+   */
+  method?: any | undefined;
+  /**
    * The operation ID for the snippet
    */
   operationId: string;
@@ -28,6 +36,8 @@ export const UsageSnippet$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  path: z.string(),
+  method: z.any().optional(),
   operationId: z.string(),
   language: z.string(),
   code: z.string(),
@@ -35,6 +45,8 @@ export const UsageSnippet$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UsageSnippet$Outbound = {
+  path: string;
+  method?: any | undefined;
   operationId: string;
   language: string;
   code: string;
@@ -46,6 +58,8 @@ export const UsageSnippet$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UsageSnippet
 > = z.object({
+  path: z.string(),
+  method: z.any().optional(),
   operationId: z.string(),
   language: z.string(),
   code: z.string(),

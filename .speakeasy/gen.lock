@@ -1,21 +1,23 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: 9937567df112ab271aff66d72d0fa2fb
+  docChecksum: a1a59c22189bc31196cf2fee084ce983
   docVersion: 0.4.0
-  speakeasyVersion: 1.468.8
-  generationVersion: 2.493.19
-  releaseVersion: 2.0.15
-  configChecksum: a7febf2d7327405b6ee7a59c114089ef
+  speakeasyVersion: 1.469.1
+  generationVersion: 2.493.21
+  releaseVersion: 2.1.0
+  configChecksum: 6939a47fc02096e5c82ee23222b77765
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.15
+    core: 3.18.16
+    deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
+    enumUnions: 0.1.0
     envVarSecurityUsage: 0.1.2
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
@@ -41,12 +43,14 @@ generatedFiles:
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/models/components/httpmethod.md
   - docs/models/components/security.md
   - docs/models/components/usagesnippet.md
   - docs/models/components/usagesnippets.md
   - docs/models/errors/errort.md
   - docs/models/operations/getcodesamplesglobals.md
   - docs/models/operations/getcodesamplesrequest.md
+  - docs/models/operations/methodpaths.md
   - docs/sdks/codesamples/README.md
   - docs/sdks/speakeasycodesamples/README.md
   - jsr.json
@@ -72,6 +76,7 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/models/components/httpmethod.ts
   - src/models/components/index.ts
   - src/models/components/security.ts
   - src/models/components/usagesnippet.ts
@@ -114,10 +119,12 @@ examples:
       parameters:
         query:
           registry_url: "https://spec.speakeasy.com/my-org/my-workspace/my-source"
-          operation_ids: ["getPetById"]
+          operation_ids: ["getPets"]
+          method_paths: [{"method": "get", "path": "/pets"}]
+          languages: ["python", "javascript"]
       responses:
         2XX:
-          application/json: {"snippets": [{"operationId": "<id>", "language": "<value>", "code": "<value>"}, {"operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+          application/json: {"snippets": [{"path": "/usr/bin", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}, {"path": "/sbin", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}]}
         4XX:
           application/json: {"message": "<value>", "status_code": 558834}
     python:
@@ -157,8 +164,10 @@ examples:
       parameters:
         query:
           registry_url: "https://spec.speakeasy.com/org/ws/my-source"
-          operation_ids: ["getPetById"]
+          operation_ids: ["getPets"]
+          method_paths: [{"method": "get", "path": "/pets"}]
+          languages: ["python", "javascript"]
       responses:
         2XX:
-          application/json: {"snippets": [{"operationId": "getPetById", "language": "typescript", "code": "import { Petstore } from \"petstore-sdk\";\n\nconst petstore = new Petstore({\n  apiKey: \"<YOUR_API_KEY_HERE>\",\n});\n\nasync function run() {\n  const result = await petstore.pet.getById({\n    id: 137396,\n  });\n\n  // Handle the result\n  console.log(result);\n}\n\nrun();"}]}
+          application/json: {"snippets": [{"path": "/pet/{id}", "method": "get", "operationId": "getPetById", "language": "typescript", "code": "import { Petstore } from \"petstore-sdk\";\n\nconst petstore = new Petstore({\n  apiKey: \"<YOUR_API_KEY_HERE>\",\n});\n\nasync function run() {\n  const result = await petstore.pet.getById({\n    id: 137396,\n  });\n\n  // Handle the result\n  console.log(result);\n}\n\nrun();"}]}
 generatedTests: {}

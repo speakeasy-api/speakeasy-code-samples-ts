@@ -11,11 +11,11 @@
 
 Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
 
-
 ### Example Usage
 
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -26,10 +26,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -47,6 +54,7 @@ The standalone function version of this method:
 ```typescript
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core.js";
 import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.js";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 // Use `SpeakeasyCodeSamplesCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -59,10 +67,17 @@ async function run() {
   const res = await codeSamplesGet(speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 

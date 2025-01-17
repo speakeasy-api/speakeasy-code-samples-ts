@@ -104,6 +104,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -114,10 +115,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -187,6 +195,7 @@ This SDK supports the following security scheme globally:
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -197,10 +206,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -294,6 +310,7 @@ The following global parameter is available.
 
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -304,10 +321,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -328,6 +352,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -338,10 +363,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   }, {
     retries: {
@@ -367,6 +399,7 @@ run();
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   retryConfig: {
@@ -387,10 +420,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -417,6 +457,7 @@ If the method throws an error and it is not captured by the known errors, it wil
 
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 import {
   ErrorT,
   SDKValidationError,
@@ -433,10 +474,17 @@ async function run() {
     result = await speakeasyCodeSamples.codeSamples.get({
       registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
       operationIds: [
-        "getPetById",
+        "getPets",
+      ],
+      methodPaths: [
+        {
+          method: HttpMethod.Get,
+          path: "/pets",
+        },
       ],
       languages: [
         "python",
+        "javascript",
       ],
     });
 
@@ -497,6 +545,7 @@ You can override the default server globally by passing a server name to the `se
 
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   server: "prod",
@@ -508,10 +557,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
@@ -528,6 +584,7 @@ run();
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   serverURL: "https://api.prod.speakeasyapi.dev",
@@ -539,10 +596,17 @@ async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 

@@ -21,6 +21,7 @@ specific category of applications.
 ```typescript
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core.js";
 import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.js";
+import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 import { SDKValidationError } from "@speakeasyapi/code-samples/models/errors/sdkvalidationerror.js";
 
 // Use `SpeakeasyCodeSamplesCore` for best tree-shaking performance.
@@ -34,10 +35,17 @@ async function run() {
   const res = await codeSamplesGet(speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPetById",
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: HttpMethod.Get,
+        path: "/pets",
+      },
     ],
     languages: [
       "python",
+      "javascript",
     ],
   });
 
