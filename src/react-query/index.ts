@@ -8,4 +8,4 @@ export {
 } from "./_context.js";
 export * from "./_types.js";
 
-export * from "./codeSamplesGet.js";
+export * from "./codeSamples.js";

@@ -26,7 +26,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type CodeSamplesGetQueryData = components.UsageSnippets;
+export type CodeSamplesQueryData = components.UsageSnippets;
 
 /**
  * Retrieve usage snippets
@@ -34,13 +34,13 @@ export type CodeSamplesGetQueryData = components.UsageSnippets;
  * @remarks
  * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
  */
-export function useCodeSamplesGet(
+export function useCodeSamples(
   request: operations.GetCodeSamplesRequest,
-  options?: QueryHookOptions<CodeSamplesGetQueryData>,
-): UseQueryResult<CodeSamplesGetQueryData, Error> {
+  options?: QueryHookOptions<CodeSamplesQueryData>,
+): UseQueryResult<CodeSamplesQueryData, Error> {
   const client = useSpeakeasyCodeSamplesContext();
   return useQuery({
-    ...buildCodeSamplesGetQuery(
+    ...buildCodeSamplesQuery(
       client,
       request,
       options,
@@ -55,13 +55,13 @@ export function useCodeSamplesGet(
  * @remarks
  * Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.
  */
-export function useCodeSamplesGetSuspense(
+export function useCodeSamplesSuspense(
   request: operations.GetCodeSamplesRequest,
-  options?: SuspenseQueryHookOptions<CodeSamplesGetQueryData>,
-): UseSuspenseQueryResult<CodeSamplesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<CodeSamplesQueryData>,
+): UseSuspenseQueryResult<CodeSamplesQueryData, Error> {
   const client = useSpeakeasyCodeSamplesContext();
   return useSuspenseQuery({
-    ...buildCodeSamplesGetQuery(
+    ...buildCodeSamplesQuery(
       client,
       request,
       options,
@@ -70,20 +70,20 @@ export function useCodeSamplesGetSuspense(
   });
 }
 
-export function prefetchCodeSamplesGet(
+export function prefetchCodeSamples(
   queryClient: QueryClient,
   client$: SpeakeasyCodeSamplesCore,
   request: operations.GetCodeSamplesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
-    ...buildCodeSamplesGetQuery(
+    ...buildCodeSamplesQuery(
       client$,
       request,
     ),
   });
 }
 
-export function setCodeSamplesGetData(
+export function setCodeSamplesData(
   client: QueryClient,
   queryKeyBase: [
     parameters: {
@@ -93,14 +93,14 @@ export function setCodeSamplesGetData(
       languages?: Array<string> | undefined;
     },
   ],
-  data: CodeSamplesGetQueryData,
-): CodeSamplesGetQueryData | undefined {
-  const key = queryKeyCodeSamplesGet(...queryKeyBase);
+  data: CodeSamplesQueryData,
+): CodeSamplesQueryData | undefined {
+  const key = queryKeyCodeSamples(...queryKeyBase);
 
-  return client.setQueryData<CodeSamplesGetQueryData>(key, data);
+  return client.setQueryData<CodeSamplesQueryData>(key, data);
 }
 
-export function invalidateCodeSamplesGet(
+export function invalidateCodeSamples(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
     [parameters: {
@@ -123,7 +123,7 @@ export function invalidateCodeSamplesGet(
   });
 }
 
-export function invalidateAllCodeSamplesGet(
+export function invalidateAllCodeSamples(
   client: QueryClient,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
@@ -133,24 +133,24 @@ export function invalidateAllCodeSamplesGet(
   });
 }
 
-export function buildCodeSamplesGetQuery(
+export function buildCodeSamplesQuery(
   client$: SpeakeasyCodeSamplesCore,
   request: operations.GetCodeSamplesRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<CodeSamplesGetQueryData>;
+  queryFn: (context: QueryFunctionContext) => Promise<CodeSamplesQueryData>;
 } {
   return {
-    queryKey: queryKeyCodeSamplesGet({
+    queryKey: queryKeyCodeSamples({
       registryUrl: request.registryUrl,
       operationIds: request.operationIds,
       methodPaths: request.methodPaths,
       languages: request.languages,
     }),
-    queryFn: async function codeSamplesGetQueryFn(
+    queryFn: async function codeSamplesQueryFn(
       ctx,
-    ): Promise<CodeSamplesGetQueryData> {
+    ): Promise<CodeSamplesQueryData> {
       const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
       const mergedOptions = {
         ...options,
@@ -166,7 +166,7 @@ export function buildCodeSamplesGetQuery(
   };
 }
 
-export function queryKeyCodeSamplesGet(
+export function queryKeyCodeSamples(
   parameters: {
     registryUrl?: string | undefined;
     operationIds?: Array<string> | undefined;

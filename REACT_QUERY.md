@@ -51,10 +51,10 @@ from TanStack Query.
 [use-query]: https://tanstack.com/query/v5/docs/framework/react/reference/useQuery
 
 ```tsx
-import { useCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import { useCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 export function Example() {
-  const { data, error, status } = useCodeSamplesGet({
+  const { data, error, status } = useCodeSamples({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
       "getPets",
@@ -82,11 +82,11 @@ more options provided by the query hooks to control these behaviors.
 
 ```tsx
 import { useState } from "react";
-import { useCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import { useCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
-  const { data, error, status } = useCodeSamplesGet(
+  const { data, error, status } = useCodeSamples(
     {
       registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
       operationIds: [
@@ -137,7 +137,7 @@ query hook there are two functions that help invalidate cached data:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { invalidateCodeSamplesGet, invalidateAllCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import { invalidateCodeSamples, invalidateAllCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 // Replace this with a real mutation
 import { useExampleMutation } from "@speakeasyapi/code-samples/react-query/example.js";
 
@@ -155,9 +155,9 @@ export function Example() {
         mutate(formData, {
           onSuccess: () => {
             // Invalidate a single cache entry:
-            invalidateCodeSamplesGet(queryClient, /* ... arguments ... */);
+            invalidateCodeSamples(queryClient, /* ... arguments ... */);
             // OR, invalidate all cache entries for the query targets:
-            invalidateAllCodeSamplesGet(queryClient);
+            invalidateAllCodeSamples(queryClient);
           },
         });
       }}
@@ -185,7 +185,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples";
 import { SpeakeasyCodeSamplesProvider } from "@speakeasyapi/code-samples/react-query";
-import { useCodeSamplesGetSuspense } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import { useCodeSamplesSuspense } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 const queryClient = new QueryClient();
 const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
@@ -221,7 +221,7 @@ export function App() {
 }
 
 function Example() {
-  const { data } = useCodeSamplesGetSuspense({
+  const { data } = useCodeSamplesSuspense({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
       "getPets",
@@ -256,7 +256,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples";
-import { prefetchCodeSamplesGet } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import { prefetchCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -265,7 +265,7 @@ export default async function Page() {
     registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
-  await prefetchCodeSamplesGet(queryClient, speakeasyCodeSamples, {
+  await prefetchCodeSamples(queryClient, speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
       "getPets",
