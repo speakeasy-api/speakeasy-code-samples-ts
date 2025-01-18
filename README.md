@@ -285,7 +285,7 @@ To learn about this feature and how to get started, check
 
 <summary>Available React hooks</summary>
 
-- [`useCodeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
+- [`useCodeSamples`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
 
 </details>
 <!-- End React hooks with TanStack Query [react-query] -->

@@ -107,18 +107,18 @@ associated utilities.
 ```tsx
 import {
   // Query hooks for fetching data.
-  useCodeSamplesGet,
-  useCodeSamplesGetSuspense,
+  useCodeSamples,
+  useCodeSamplesSuspense,
 
   // Utility for prefetching data during server-side rendering and in React
   // Server Components that will be immediately available to client components
   // using the hooks.
-  prefetchCodeSamplesGet,
+  prefetchCodeSamples,
   
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
-  invalidateCodeSamplesGet,
-  invalidateAllCodeSamplesGet,
+  invalidateCodeSamples,
+  invalidateAllCodeSamples,
 } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 ```
 

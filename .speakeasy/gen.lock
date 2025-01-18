@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: a1a59c22189bc31196cf2fee084ce983
+  docChecksum: a16089f06495dd5f7de1f5121d72ec45
   docVersion: 0.4.0
   speakeasyVersion: 1.469.1
   generationVersion: 2.493.21
-  releaseVersion: 2.1.0
-  configChecksum: 6939a47fc02096e5c82ee23222b77765
+  releaseVersion: 2.1.1
+  configChecksum: 4b92b57c7f6bd5b3b6d7532b6b9cb49b
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
@@ -90,7 +90,7 @@ generatedFiles:
   - src/models/operations/index.ts
   - src/react-query/_context.tsx
   - src/react-query/_types.ts
-  - src/react-query/codeSamplesGet.ts
+  - src/react-query/codeSamples.ts
   - src/react-query/index.ts
   - src/sdk/codesamples.ts
   - src/sdk/index.ts
