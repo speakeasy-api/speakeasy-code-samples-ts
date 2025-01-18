@@ -35,3 +35,5 @@ actions:
   - target: $["paths"]["/v1/code_sample"]["get"]
     update:
       x-speakeasy-group: codeSamples
+      x-speakeasy-react-hook:
+        name: CodeSamples

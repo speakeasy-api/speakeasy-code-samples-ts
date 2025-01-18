@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  useCodeSamplesGet,
-  type CodeSamplesGetQueryData,
+  useCodeSamples,
+  type CodeSamplesQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
 import {
@@ -26,7 +26,7 @@ type CodeSampleProps = {
   language: CodeSampleLanguage;
 
   /** The options for the TanStack query that fetches the code snippet. */
-  queryOptions?: QueryHookOptions<CodeSamplesGetQueryData>;
+  queryOptions?: QueryHookOptions<CodeSamplesQueryData>;
 
   /** The component to render if there is an error fetching the code sample. */
   error?: (err: Error) => React.ReactNode;
@@ -84,7 +84,7 @@ export const CodeSample: React.FC<CodeSampleProps> = (props) => {
     ...restProps
   } = props;
 
-  const { isPending, isError, error, data } = useCodeSamplesGet(
+  const { isPending, isError, error, data } = useCodeSamples(
     {
       registryUrl: registryUrl,
       operationIds: [operationId],
