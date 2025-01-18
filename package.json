@@ -1,6 +1,6 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "author": "Speakeasy",
   "type": "module",
   "main": "./esm/index.js",
