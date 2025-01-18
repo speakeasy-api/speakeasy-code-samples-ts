@@ -5,8 +5,8 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.469.1
   generationVersion: 2.493.21
-  releaseVersion: 2.1.4
-  configChecksum: 22599104bf7d0e70df30902fae0020b5
+  releaseVersion: 2.1.5
+  configChecksum: 04582a1dd2d7ea07d7682cb354d2593a
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
