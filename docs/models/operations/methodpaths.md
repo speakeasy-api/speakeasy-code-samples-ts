@@ -3,11 +3,10 @@
 ## Example Usage
 
 ```typescript
-import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 import { MethodPaths } from "@speakeasyapi/code-samples/models/operations";
 
 let value: MethodPaths = {
-  method: HttpMethod.Delete,
+  method: "delete",
   path: "/opt/sbin",
 };
 ```

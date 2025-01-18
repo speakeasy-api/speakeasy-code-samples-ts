@@ -3,7 +3,6 @@
 ## Example Usage
 
 ```typescript
-import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 import { GetCodeSamplesRequest } from "@speakeasyapi/code-samples/models/operations";
 
 let value: GetCodeSamplesRequest = {
@@ -13,7 +12,7 @@ let value: GetCodeSamplesRequest = {
   ],
   methodPaths: [
     {
-      method: HttpMethod.Get,
+      method: "get",
       path: "/pets",
     },
   ],

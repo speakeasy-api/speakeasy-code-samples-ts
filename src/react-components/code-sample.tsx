@@ -1,9 +1,12 @@
 import React from "react";
+import { HttpMethod } from "../models/components/httpmethod.js";
+import { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
 import {
   useCodeSamples,
   type CodeSamplesQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
+import { OneOf } from "../types/custom.js";
 import {
   Highlight,
   type HighlightLanguage as CodeSampleLanguage,
@@ -16,12 +19,6 @@ type CodeSampleProps = {
    * */
   registryUrl?: string;
 
-  /**
-   * The `operationId` of the operation that you would like to fetch a code
-   * sample for.
-   * */
-  operationId: string;
-
   /** The language of the code sample that you would like to fetch. */
   language: CodeSampleLanguage;
 
@@ -33,6 +30,11 @@ type CodeSampleProps = {
 
   /** The component to render while fetching the code sample. */
   pending?: React.ReactNode | (() => React.ReactNode);
+
+  /** The operation to get a code sample for. Can be queried by either operationId or method+path. */
+  operation: OneOf<
+    [{ operationId: string }, { method: HttpMethod; path: string }]
+  >;
 } & JSX.IntrinsicElements["pre"];
 
 /**
@@ -56,40 +58,62 @@ type CodeSampleProps = {
  *   fetched.
  *
  * @example
- * Usage within a component that provides code highlighting:
- *
+ * Fetch a code sample by operationId:
  * ```tsx
  * import { CodeSample } from "@speakeasyapi/code-samples/react/code-sample";
- * import { Highlight } from "@speakeasyapi/code-samples/react/highlight";
  *
  * const ExampleComponent: React.FC = () => (
- *     <CodeSample
- *       registryUrl="https://spec.speakeasy.com/my-org/my-workspace/my-source"
- *       operationId="getPetById"
- *       language="typescript"
- *       error={(err) => <>{err.message}</>}
- *       pending={() => <>Fetching Code Sample...</>}
- *     />
+ *   <CodeSample
+ *     language="typescript"
+ *     operation={{ operationId: "getPetById" }}
+ *     error={(err) => <>{err.message}</>}
+ *     pending={() => <>Fetching Code Sample...</>}
+ *   />
+ * );
+ * ```
+ *
+ * Fetch a code sample by method and path:
+ * ```tsx
+ * import { CodeSample } from "@speakeasyapi/code-samples/react/code-sample";
+ *
+ * const ExampleComponent: React.FC = () => (
+ *   <CodeSample
+ *     language="typescript"
+       operation={{ method: "get", path: "/pet/{id}" }}
+ *     error={(err) => <>{err.message}</>}
+ *     pending={() => <>Fetching Code Sample...</>}
+ *   />
  * );
  * ```
  */
-export const CodeSample: React.FC<CodeSampleProps> = (props) => {
+export function CodeSample(props: CodeSampleProps): React.ReactNode {
   const {
     error: renderError = (err: Error) => <>{err.message}</>,
     pending: renderPending = <>Fetching Code Sample...</>,
     registryUrl,
     queryOptions,
     language,
-    operationId,
+    operation,
     ...restProps
   } = props;
 
+  const query: GetCodeSamplesRequest = {
+    registryUrl,
+    languages: [language],
+  };
+
+  if (operation.method && operation.path) {
+    query.methodPaths = [{ ...operation }];
+  } else if (operation.operationId) {
+    query.operationIds = [operation.operationId];
+  } else {
+    throw new Error(
+      "You must provide either an operationId or a method and path to fetch a code sample."
+    );
+  }
+
   const { isPending, isError, error, data } = useCodeSamples(
-    {
-      registryUrl: registryUrl,
-      operationIds: [operationId],
-      languages: [language],
-    },
+    query,
     queryOptions
   );
 
@@ -108,4 +132,4 @@ export const CodeSample: React.FC<CodeSampleProps> = (props) => {
       {...restProps}
     />
   );
-};
+}

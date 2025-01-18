@@ -61,7 +61,7 @@ export function Example() {
     ],
     methodPaths: [
       {
-        method: HttpMethod.Get,
+        method: "get",
         path: "/pets",
       },
     ],
@@ -94,7 +94,7 @@ export function ExampleWithOptions() {
       ],
       methodPaths: [
         {
-          method: HttpMethod.Get,
+          method: "get",
           path: "/pets",
         },
       ],
@@ -228,7 +228,7 @@ function Example() {
     ],
     methodPaths: [
       {
-        method: HttpMethod.Get,
+        method: "get",
         path: "/pets",
       },
     ],
@@ -272,7 +272,7 @@ export default async function Page() {
     ],
     methodPaths: [
       {
-        method: HttpMethod.Get,
+        method: "get",
         path: "/pets",
       },
     ],

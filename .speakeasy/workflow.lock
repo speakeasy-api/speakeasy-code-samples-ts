@@ -2,20 +2,19 @@ speakeasyVersion: 1.469.1
 sources:
     speakeasy-OAS:
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:c69fca1c1936f3efccfca1a87dec5637194adb3aeda5ab642b734e9e9aa52689
+        sourceRevisionDigest: sha256:6334bc3fe86d1f119e05db75370765ef6e503383b2e99d0de9041da31e61714d
         sourceBlobDigest: sha256:63701f5ff26c0ac6e0ea6e314b9dc7bf7063bf75b72a16206b62050baf740623
         tags:
             - latest
-            - speakeasy-sdk-regen-1737159897
             - 0.4.0
 targets:
     code_samples_typescript_sdk:
         source: speakeasy-OAS
         sourceNamespace: speakeasy-oas
-        sourceRevisionDigest: sha256:c69fca1c1936f3efccfca1a87dec5637194adb3aeda5ab642b734e9e9aa52689
+        sourceRevisionDigest: sha256:6334bc3fe86d1f119e05db75370765ef6e503383b2e99d0de9041da31e61714d
         sourceBlobDigest: sha256:63701f5ff26c0ac6e0ea6e314b9dc7bf7063bf75b72a16206b62050baf740623
         codeSamplesNamespace: speakeasy-oas-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:d21ba30bee6a57bc8e484768a7f4d9bd55420fe5439cc48ba23034941477356c
+        codeSamplesRevisionDigest: sha256:edde53e65546b1bb8548635d8e77eef0f83015b94f02882c97b54e3349cabbf5
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -41,4 +40,6 @@ workflow:
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-public/speakeasy-oas-typescript-code-samples
+                labelOverride:
+                    fixedValue: TypeScript (SDK)
                 blocking: false

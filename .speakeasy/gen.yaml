@@ -16,7 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.1.1
+  version: 2.1.4
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -28,7 +28,7 @@ typescript:
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableReactQuery: true
-  enumFormat: enum
+  enumFormat: union
   flattenGlobalSecurity: true
   flatteningOrder: body-first
   imports:

@@ -3,17 +3,19 @@
  */
 
 import * as z from "zod";
+import { ClosedEnum } from "../../types/enums.js";
 
-export enum HttpMethod {
-  Get = "get",
-  Post = "post",
-  Put = "put",
-  Patch = "patch",
-  Delete = "delete",
-  Head = "head",
-  Options = "options",
-  Trace = "trace",
-}
+export const HttpMethod = {
+  Get: "get",
+  Post: "post",
+  Put: "put",
+  Patch: "patch",
+  Delete: "delete",
+  Head: "head",
+  Options: "options",
+  Trace: "trace",
+} as const;
+export type HttpMethod = ClosedEnum<typeof HttpMethod>;
 
 /** @internal */
 export const HttpMethod$inboundSchema: z.ZodNativeEnum<typeof HttpMethod> = z

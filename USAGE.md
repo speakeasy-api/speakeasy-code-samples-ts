@@ -1,7 +1,6 @@
 <!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
-import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
   apiKey: "<YOUR_API_KEY_HERE>",
@@ -16,7 +15,7 @@ async function run() {
     ],
     methodPaths: [
       {
-        method: HttpMethod.Get,
+        method: "get",
         path: "/pets",
       },
     ],
