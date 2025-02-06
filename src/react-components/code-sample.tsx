@@ -1,26 +1,42 @@
+import { beta, SupportedLanguage } from "@speakeasy-api/moonshine";
+import "@speakeasy-api/moonshine/moonshine.css";
 import React from "react";
+import { clsx } from "../lib/clsx.js";
 import { HttpMethod } from "../models/components/httpmethod.js";
-import { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
+import type { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
 import {
   useCodeSamples,
   type CodeSamplesQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
 import { OneOf } from "../types/custom.js";
-import {
-  Highlight,
-  type HighlightLanguage as CodeSampleLanguage,
-} from "./highlight.js";
+
+export type { SupportedLanguage };
+
+const { CodePlayground } = beta;
+
+type CodePlaygroundProps = React.ComponentProps<typeof beta.CodePlayground>;
 
 type CodeSampleProps = {
+  /**
+   * The color mode for the code playground.
+   * - '': Forces dark mode
+   * - 'light': Forces light mode
+   * - 'system': Follows system preferences
+   * @default 'system'
+   */
+  mode?: "light" | "dark" | "system";
   /**
    * The URL of the registry that you would like to fetch a code sample from. If
    * the client was provided with a registry URL, then this prop is optional.
    * */
   registryUrl?: string;
 
-  /** The language of the code sample that you would like to fetch. */
-  language: CodeSampleLanguage;
+  /**
+   * The language of the code sample that you would like to fetch. If no language
+   * is provided, then all languages will be displayed.
+   * */
+  languages?: SupportedLanguage[];
 
   /** The options for the TanStack query that fetches the code snippet. */
   queryOptions?: QueryHookOptions<CodeSamplesQueryData>;
@@ -35,21 +51,18 @@ type CodeSampleProps = {
   operation: OneOf<
     [{ operationId: string }, { method: HttpMethod; path: string }]
   >;
-} & JSX.IntrinsicElements["pre"];
+} & Omit<CodePlaygroundProps, "snippets">;
 
 /**
+ *
  * React component that fetches and displays a code sample snippet from the
- * Speakeasy Code Samples API. It uses a Speakeasy-generated React Query to
- * retrieve the code sample based on the provided props.
+ * Speakeasy Code Samples API. It uses a Speakeasy-generated React Query
+ * retrieve the code sample base on the provided props.
  *
  * __**IMPORTANT:**  This component must be rendered within a structure wrapped
  * by both `QueryClientProvider` and `SpeakeasyCodeSamplesProvider`. This
  * ensures that the necessary context and query client are properly initialized
  * for the component to function.__
- *
- * This component uses highlight.js for rendering code samples with syntax
- * highlighting. To apply styles to the highlighted code, import a highlight.js
- * theme CSS file into your project using methods like a `<link>` tag.
  *
  * **Slot Methods:**
  * - `error`: Renders a fallback UI when there is an error fetching the code
@@ -58,13 +71,13 @@ type CodeSampleProps = {
  *   fetched.
  *
  * @example
- * Fetch a code sample by operationId:
+ * Fetch a code samples by operationId:
  * ```tsx
  * import { CodeSample } from "@speakeasyapi/code-samples/react/code-sample";
  *
  * const ExampleComponent: React.FC = () => (
  *   <CodeSample
- *     language="typescript"
+ *     languages=["typescript", "go"]
  *     operation={{ operationId: "getPetById" }}
  *     error={(err) => <>{err.message}</>}
  *     pending={() => <>Fetching Code Sample...</>}
@@ -92,14 +105,16 @@ export function CodeSample(props: CodeSampleProps): React.ReactNode {
     pending: renderPending = <>Fetching Code Sample...</>,
     registryUrl,
     queryOptions,
-    language,
+    languages,
     operation,
-    ...restProps
+    mode = "light",
+    className,
+    ...codePlaygroundProps
   } = props;
 
   const query: GetCodeSamplesRequest = {
     registryUrl,
-    languages: [language],
+    languages: languages,
   };
 
   if (operation.method && operation.path) {
@@ -108,13 +123,13 @@ export function CodeSample(props: CodeSampleProps): React.ReactNode {
     query.operationIds = [operation.operationId];
   } else {
     throw new Error(
-      "You must provide either an operationId or a method and path to fetch a code sample."
+      "You must provide either an operationId or a method and path to fetch a code sample.",
     );
   }
 
   const { isPending, isError, error, data } = useCodeSamples(
     query,
-    queryOptions
+    queryOptions,
   );
 
   if (isPending) {
@@ -125,11 +140,28 @@ export function CodeSample(props: CodeSampleProps): React.ReactNode {
     return renderError(error);
   }
 
+  const snippetMap = data.snippets.reduce(
+    (acc, snippet) => {
+      acc[snippet.language as SupportedLanguage] = snippet.code;
+      return acc;
+    },
+    {} as React.ComponentProps<typeof CodePlayground>["snippets"],
+  );
+
+  let systemColor = "light";
+  if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
+    systemColor = "dark";
+  }
+
   return (
-    <Highlight
-      code={data.snippets[0]!.code}
-      language={props.language}
-      {...restProps}
+    <CodePlayground
+      {...codePlaygroundProps}
+      className={clsx(
+        mode === "system" && systemColor,
+        mode,
+        className as string,
+      )}
+      snippets={snippetMap}
     />
   );
 }

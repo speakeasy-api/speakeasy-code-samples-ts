@@ -16,9 +16,10 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.1.5
+  version: 2.1.6
   additionalDependencies:
-    dependencies: {}
+    dependencies:
+      '@speakeasy-api/moonshine': ^0.69.0
     devDependencies: {}
     peerDependencies:
       highlight.js: ^11.11.1
@@ -42,7 +43,7 @@ typescript:
   inputModelSuffix: input
   maxMethodParams: 1
   methodArguments: require-security-and-request
-  moduleFormat: esm
+  moduleFormat: dual
   outputModelSuffix: output
   packageName: '@speakeasyapi/code-samples'
   responseFormat: flat

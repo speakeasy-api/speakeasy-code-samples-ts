@@ -87,8 +87,7 @@ yarn add @tanstack/react-query react react-dom
 ```
 
 > [!NOTE]
-> This package is published as an ES Module (ESM) only. For applications using
-> CommonJS, use `await import("@speakeasyapi/code-samples")` to import and use this package.
+> This package is published with CommonJS and ES Modules (ESM) support.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -140,8 +139,8 @@ run();
 ### React Component
 
 This library includes a React component that fetches and highlights code
-snippets using `highlight.js`. Along with displaying the snippet, it shows a loading state during
-fetching and provides a fallback view if an error occurs.
+snippets using `highlight.js`. Along with displaying the snippet, it shows a
+loading state during fetching and provides a fallback view if an error occurs.
 
 ```tsx
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core";
