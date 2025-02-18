@@ -3,17 +3,17 @@ id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
   docChecksum: a16089f06495dd5f7de1f5121d72ec45
   docVersion: 0.4.0
-  speakeasyVersion: 1.484.1
-  generationVersion: 2.503.2
-  releaseVersion: 2.1.6
-  configChecksum: 21f134167daabccf2f501cd418de0227
+  speakeasyVersion: 1.488.0
+  generationVersion: 2.506.0
+  releaseVersion: 2.1.11
+  configChecksum: 6110142ef342c1d51bd542a38c650667
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.18.22
+    core: 3.19.0
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
@@ -115,7 +115,7 @@ examples:
           languages: ["python", "javascript"]
       responses:
         2XX:
-          application/json: {"snippets": [{"path": "/sbin", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}, {"path": "/root", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}]}
+          application/json: {"snippets": [{"path": "/sbin", "method": "<value>", "operationId": "<id>", "language": "php,", "code": "<value>"}, {"path": "/root", "method": "<value>", "operationId": "<id>", "language": "unity,", "code": "<value>"}]}
         4XX:
           application/json: {"message": "<value>", "status_code": 521235}
     default:

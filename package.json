@@ -1,21 +1,45 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "2.1.6",
+  "version": "2.1.11",
   "author": "Speakeasy",
   "type": "module",
-  "tshy": {
-    "sourceDialects": [
-      "@speakeasyapi/code-samples/source"
-    ],
-    "exports": {
-      ".": "./src/index.ts",
-      "./package.json": "./package.json",
-      "./types": "./src/types/index.ts",
-      "./models/errors": "./src/models/errors/index.ts",
-      "./models/components": "./src/models/components/index.ts",
-      "./models/operations": "./src/models/operations/index.ts",
-      "./*.js": "./src/*.ts",
-      "./*": "./src/*.ts"
+  "main": "./esm/index.js",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "types": "./esm/index.d.ts",
+      "default": "./esm/index.js"
+    },
+    "./package.json": "./package.json",
+    "./types": {
+      "source": "./src/types/index.ts",
+      "types": "./esm/types/index.d.ts",
+      "default": "./esm/types/index.js"
+    },
+    "./models/errors": {
+      "source": "./src/models/errors/index.ts",
+      "types": "./esm/models/errors/index.d.ts",
+      "default": "./esm/models/errors/index.js"
+    },
+    "./models/components": {
+      "source": "./src/models/components/index.ts",
+      "types": "./esm/models/components/index.d.ts",
+      "default": "./esm/models/components/index.js"
+    },
+    "./models/operations": {
+      "source": "./src/models/operations/index.ts",
+      "types": "./esm/models/operations/index.d.ts",
+      "default": "./esm/models/operations/index.js"
+    },
+    "./*.js": {
+      "source": "./src/*.ts",
+      "types": "./esm/*.d.ts",
+      "default": "./esm/*.js"
+    },
+    "./*": {
+      "source": "./src/*.ts",
+      "types": "./esm/*.d.ts",
+      "default": "./esm/*.js"
     }
   },
   "sideEffects": false,
@@ -25,12 +49,11 @@
   },
   "scripts": {
     "lint": "eslint --cache --max-warnings=0 src",
-    "build": "tshy",
+    "build": "tsc",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@tanstack/react-query": "^5",
-    "highlight.js": "^11.11.1",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
     "zod": ">= 3"
@@ -52,95 +75,15 @@
     "@types/react": "^18.3.12",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
-    "tshy": "^2.0.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^8.22.0",
     "zod": "^3.23.4"
   },
   "dependencies": {
-    "@speakeasy-api/moonshine": "^0.69.0"
+    "@emotion/css": "^11.13.5",
+    "@emotion/react": "^11.14.0",
+    "codehike": "^1.0.4",
+    "devicons-react": "^1.4.0"
   },
-  "exports": {
-    ".": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/index.ts",
-        "types": "./dist/esm/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/index.d.ts",
-        "default": "./dist/commonjs/index.js"
-      }
-    },
-    "./package.json": "./package.json",
-    "./types": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/types/index.ts",
-        "types": "./dist/esm/types/index.d.ts",
-        "default": "./dist/esm/types/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/types/index.d.ts",
-        "default": "./dist/commonjs/types/index.js"
-      }
-    },
-    "./models/errors": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/models/errors/index.ts",
-        "types": "./dist/esm/models/errors/index.d.ts",
-        "default": "./dist/esm/models/errors/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/models/errors/index.d.ts",
-        "default": "./dist/commonjs/models/errors/index.js"
-      }
-    },
-    "./models/components": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/models/components/index.ts",
-        "types": "./dist/esm/models/components/index.d.ts",
-        "default": "./dist/esm/models/components/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/models/components/index.d.ts",
-        "default": "./dist/commonjs/models/components/index.js"
-      }
-    },
-    "./models/operations": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/models/operations/index.ts",
-        "types": "./dist/esm/models/operations/index.d.ts",
-        "default": "./dist/esm/models/operations/index.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/models/operations/index.d.ts",
-        "default": "./dist/commonjs/models/operations/index.js"
-      }
-    },
-    "./*.js": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/*.ts",
-        "types": "./dist/esm/*.d.ts",
-        "default": "./dist/esm/*.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/*.d.ts",
-        "default": "./dist/commonjs/*.js"
-      }
-    },
-    "./*": {
-      "import": {
-        "@speakeasyapi/code-samples/source": "./src/*.ts",
-        "types": "./dist/esm/*.d.ts",
-        "default": "./dist/esm/*.js"
-      },
-      "require": {
-        "types": "./dist/commonjs/*.d.ts",
-        "default": "./dist/commonjs/*.js"
-      }
-    }
-  },
-  "main": "./dist/commonjs/index.js",
-  "types": "./dist/commonjs/index.d.ts",
-  "module": "./dist/esm/index.js"
+  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
 }

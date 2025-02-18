@@ -1,7 +1,4 @@
-import { beta, SupportedLanguage } from "@speakeasy-api/moonshine";
-import "@speakeasy-api/moonshine/moonshine.css";
 import React from "react";
-import { clsx } from "../lib/clsx.js";
 import { HttpMethod } from "../models/components/httpmethod.js";
 import type { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
 import {
@@ -9,13 +6,11 @@ import {
   type CodeSamplesQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
-import { OneOf } from "../types/custom.js";
-
-export type { SupportedLanguage };
-
-const { CodePlayground } = beta;
-
-type CodePlaygroundProps = React.ComponentProps<typeof beta.CodePlayground>;
+import { isNonEmptyArray, OneOf } from "../types/custom.js";
+import { SupportedLanguage } from "./utils.js";
+import { CodePlayground } from "./code-playground.js";
+import { CodeSampleMethodTitle, CodeSampleTitleComponent } from "./titles.js";
+import { useSystemColorMode } from "./styles.js";
 
 type CodeSampleProps = {
   /**
@@ -51,7 +46,11 @@ type CodeSampleProps = {
   operation: OneOf<
     [{ operationId: string }, { method: HttpMethod; path: string }]
   >;
-} & Omit<CodePlaygroundProps, "snippets">;
+
+  className?: string;
+
+  title?: CodeSampleTitleComponent;
+};
 
 /**
  *
@@ -107,10 +106,11 @@ export function CodeSample(props: CodeSampleProps): React.ReactNode {
     queryOptions,
     languages,
     operation,
-    mode = "light",
     className,
-    ...codePlaygroundProps
+    title = CodeSampleMethodTitle,
+    mode = "system",
   } = props;
+  const systemColorMode = useSystemColorMode();
 
   const query: GetCodeSamplesRequest = {
     registryUrl,
@@ -140,28 +140,16 @@ export function CodeSample(props: CodeSampleProps): React.ReactNode {
     return renderError(error);
   }
 
-  const snippetMap = data.snippets.reduce(
-    (acc, snippet) => {
-      acc[snippet.language as SupportedLanguage] = snippet.code;
-      return acc;
-    },
-    {} as React.ComponentProps<typeof CodePlayground>["snippets"],
-  );
-
-  let systemColor = "light";
-  if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
-    systemColor = "dark";
+  if (!isNonEmptyArray(data.snippets)) {
+    return renderError(new Error(`No snippets were found for this operation.`));
   }
 
   return (
     <CodePlayground
-      {...codePlaygroundProps}
-      className={clsx(
-        mode === "system" && systemColor,
-        mode,
-        className as string,
-      )}
-      snippets={snippetMap}
+      title={title}
+      className={className}
+      snippets={data.snippets}
+      theme={mode === "system" ? systemColorMode : mode}
     />
   );
 }

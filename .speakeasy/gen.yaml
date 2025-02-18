@@ -16,13 +16,13 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.1.6
+  version: 2.1.11
   additionalDependencies:
     dependencies:
-      '@speakeasy-api/moonshine': ^0.69.0
+      '@emotion/react': ^11.14.0
+      codehike: ^1.0.4
     devDependencies: {}
-    peerDependencies:
-      highlight.js: ^11.11.1
+    peerDependencies: {}
   additionalPackageJSON: {}
   author: Speakeasy
   clientServerStatusCodesAsErrors: true
@@ -43,7 +43,7 @@ typescript:
   inputModelSuffix: input
   maxMethodParams: 1
   methodArguments: require-security-and-request
-  moduleFormat: dual
+  moduleFormat: esm
   outputModelSuffix: output
   packageName: '@speakeasyapi/code-samples'
   responseFormat: flat
