@@ -9,19 +9,23 @@ generation:
     optionalPropertyRendering: withExample
   useClassNamesForArrayFields: true
   fixes:
-    nameResolutionDec2023: false
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.1.11
+  version: 2.2.1
   additionalDependencies:
+    '@types/react': ^18.3.18
     dependencies:
-      '@emotion/react': ^11.14.0
+      '@emotion/css': ^11.13.5
       codehike: ^1.0.4
-    devDependencies: {}
+      devicons-react: ^1.4.0
+    devDependencies:
+      tsup: ^8.3.6
     peerDependencies: {}
   additionalPackageJSON: {}
   author: Speakeasy

@@ -531,9 +531,9 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                              |
-| ------ | ----------------------------------- |
-| `prod` | `https://api.prod.speakeasyapi.dev` |
+| Name   | Server                              | Description |
+| ------ | ----------------------------------- | ----------- |
+| `prod` | `https://api.prod.speakeasyapi.dev` |             |
 
 #### Example
 
