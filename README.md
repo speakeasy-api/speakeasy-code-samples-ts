@@ -18,11 +18,15 @@
 > [!IMPORTANT]
 > This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/f5ab386f-39bb-4ae2-aa0d-54e2f95b656d" alt="Description" width="750"/>
+  <p><em>CodeSamples React Component in Action</em></p>
+</div>
+
 <!-- Start Summary [summary] -->
 ## Summary
 
 Speakeasy Code Samples API: REST APIs for retrieving SDK usage snippets from the Speakeasy Code Samples API.
-
 
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
