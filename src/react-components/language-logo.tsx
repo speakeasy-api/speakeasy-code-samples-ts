@@ -1,57 +1,89 @@
-import _PythonPlain from "devicons-react/icons/PythonPlain";
-import _CsharpPlain from "devicons-react/icons/CsharpPlain";
-import _GoPlain from "devicons-react/icons/GoPlain";
-import _JavaPlain from "devicons-react/icons/JavaPlain";
-import _PhpPlain from "devicons-react/icons/PhpPlain";
-import _PostmanPlain from "devicons-react/icons/PostmanPlain";
-import _RubyPlain from "devicons-react/icons/RubyPlain";
-import _SwiftPlain from "devicons-react/icons/SwiftPlain";
-import _TerraformPlain from "devicons-react/icons/TerraformPlain";
-import _TypescriptPlain from "devicons-react/icons/TypescriptPlain";
-import _UnityPlain from "devicons-react/icons/UnityPlain";
-
-const PythonPlain = _PythonPlain.default;
-const CsharpPlain = _CsharpPlain.default;
-const GoPlain = _GoPlain.default;
-const JavaPlain = _JavaPlain.default;
-const PhpPlain = _PhpPlain.default;
-const PostmanPlain = _PostmanPlain.default;
-const RubyPlain = _RubyPlain.default;
-const SwiftPlain = _SwiftPlain.default;
-const TerraformPlain = _TerraformPlain.default;
-const TypescriptPlain = _TypescriptPlain.default;
-const UnityPlain = _UnityPlain.default;
-
 interface LanguageLogoProps extends React.SVGProps<SVGElement> {
   language: string;
   color?: string;
   size?: number | string;
 }
 
-export const LanguageLogo = ({ language, ...svgProps }: LanguageLogoProps) => {
+export const LanguageLogo = ({ language }: LanguageLogoProps) => {
+  const dims = { height: 20, width: 20 };
   switch (language) {
     case "python":
-      return <PythonPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+        />
+      );
     case "ruby":
-      return <RubyPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-plain.svg"
+        />
+      );
     case "terraform":
-      return <TerraformPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg"
+        />
+      );
     case "typescript":
-      return <TypescriptPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-plain.svg"
+        />
+      );
     case "csharp":
-      return <CsharpPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-line.svg"
+        />
+      );
     case "unity":
-      return <UnityPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-plain.svg"
+        />
+      );
     case "java":
-      return <JavaPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
+        />
+      );
     case "swift":
-      return <SwiftPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg"
+        />
+      );
     case "php":
-      return <PhpPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
+        />
+      );
     case "go":
-      return <GoPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg"
+        />
+      );
     case "postman":
-      return <PostmanPlain {...svgProps} />;
+      return (
+        <img
+          {...dims}
+          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-plain.svg"
+        />
+      );
     default:
       return null;
   }

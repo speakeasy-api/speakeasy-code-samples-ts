@@ -1,11 +1,30 @@
 import { css } from "@emotion/css";
 import { Pre } from "codehike/code";
-import { UsageSnippet } from "../models/components/usagesnippet.js";
-import { NonEmptyArray } from "../types/custom.js";
+import { useMemo } from "react";
+import {
+  GetCodeSamplesRequest,
+  MethodPaths,
+} from "../models/operations/getcodesamples.js";
+import {
+  useHighlightedCodeSamples,
+  useSafeSpeakeasyCodeSamplesContext,
+  useSelectedSnippet,
+} from "./hooks.js";
+import { LanguageSelector } from "./language-selector.js";
+import { lineNumbers } from "./line-numbers.js";
+import {
+  LanguageSelectorSkeleton,
+  LoadingSkeleton,
+  TitleSkeleton,
+} from "./skeleton.js";
+import {
+  cssVarKey,
+  getCssVars,
+  githubColorVars,
+  useSystemColorMode,
+} from "./styles.js";
 import { CodeSampleTitleComponent } from "./titles.js";
-import { prettyLanguageName } from "./utils.js";
-import { cssVarKey, getCssVars } from "./styles.js";
-import { useCodeHighlighting, useSelectedSnippet } from "./hooks.js";
+import { tokenTransitions } from "./token-transitions.js";
 
 const classes = {
   root: css({
@@ -24,87 +43,100 @@ const classes = {
   }),
   selector: css({}),
   codeContainer: css({
+    position: "relative",
     paddingInline: "0.75rem",
+    overflowX: "scroll",
+  }),
+  pre: css({
+    position: "relative",
   }),
 };
 
+type OperationId = string;
+
 export type CodePlaygroundProps = {
-  snippets: NonEmptyArray<UsageSnippet>;
-  theme?: "dark" | "light";
+  theme?: "system" | "dark" | "light";
   className?: string | undefined;
   title?: CodeSampleTitleComponent;
+  operation: MethodPaths | OperationId;
 };
 
 export function CodePlayground({
-  snippets,
-  theme = "light",
+  theme = "system",
   className,
   title,
+  operation,
 }: CodePlaygroundProps) {
   const TitleComponent = title;
 
+  const systemColorMode = useSystemColorMode();
+
+  const codeTheme = useMemo(() => {
+    if (theme === "system") return githubColorVars[systemColorMode];
+    return githubColorVars[theme];
+  }, [theme, systemColorMode]);
+
+  const request: GetCodeSamplesRequest = useMemo(() => {
+    if (typeof operation === "string") return { operationIds: [operation] };
+    return { methoPaths: [operation] };
+  }, [operation]);
+
+  const client = useSafeSpeakeasyCodeSamplesContext();
+  const { status, data, error } = useHighlightedCodeSamples(client, request);
+
   const { selectedSnippet, selectedLang, setSelectedLang } =
-    useSelectedSnippet(snippets);
+    useSelectedSnippet(data);
 
-  //const [selectedLang, setSelectedLang] = useState<string>(
-  //  snippets[0].language,
-  //);
-  //
-  //const selectedSnippet: UsageSnippet = useMemo(() => {
-  //  const snippet = snippets.find((s) => s.language === selectedLang);
-  //  if (!snippet)
-  //    throw Error(`The selected language ${selectedLang} does not exist`);
-  //  return snippet;
-  //}, [selectedLang]);
-  //
+  const longestCodeHeight = useMemo(() => {
+    const largestLines = Math.max(
+      ...Object.values(data ?? [])
+        .filter((snippet) => snippet.code !== undefined)
+        .map((code) => code.code!.split("\n").length),
+    );
 
-  const highlighted = useCodeHighlighting(
-    selectedSnippet.code,
-    selectedLang,
-    theme,
-  );
-
-  //const [highlighted, setHighlighted] = useState<HighlightedCode | null>(null);
-  //
-  //const updateHighlighted = useCallback(
-  //  async (code: string, language: string, theme: CodeHikeTheme) => {
-  //    const highlighted = await highlightCode(code, language, theme);
-  //    setHighlighted(highlighted);
-  //  },
-  //  [],
-  //);
-
-  //useEffect(() => {
-  //  const chTheme = theme === "dark" ? "github-dark" : "github-light";
-  //  updateHighlighted(selectedSnippet.code, selectedLang, chTheme);
-  //}, [selectedSnippet, selectedLang, theme]);
-  //
-  //useEffect(() => {
-  //  const chTheme = theme === "dark" ? "github-dark" : "github-light";
-  //  updateHighlighted(selectedSnippet.code, selectedLang, chTheme);
-  //}, [selectedLang, theme]);
+    const lineHeight = 23;
+    const padding = 12;
+    return largestLines * lineHeight + padding * 2;
+  }, [data]);
 
   return (
     <div
-      style={{ ...(getCssVars(theme) as React.CSSProperties) }}
+      style={{
+        ...codeTheme,
+        ...(getCssVars(
+          theme === "system" ? systemColorMode : theme,
+        ) as React.CSSProperties),
+      }}
       className={`${classes.root} ${className}`}
     >
       <div className={classes.heading}>
-        {TitleComponent ? <TitleComponent {...selectedSnippet} /> : <div></div>}
-        <select
-          value={selectedLang}
-          onChange={(e) => setSelectedLang(e.target.value)}
-          className={classes.selector}
-        >
-          {snippets.map(({ language }, index) => (
-            <option key={index} value={language}>
-              {prettyLanguageName(language)}
-            </option>
-          ))}
-        </select>
+        {status === "loading" && error === undefined ? (
+          <TitleSkeleton />
+        ) : TitleComponent && selectedSnippet ? (
+          <TitleComponent {...selectedSnippet!.raw} />
+        ) : null}
+        {status === "loading" && error === undefined ? (
+          <LanguageSelectorSkeleton />
+        ) : (
+          <LanguageSelector
+            value={selectedLang}
+            onChange={setSelectedLang}
+            snippets={data ?? []}
+            className={classes.selector}
+          />
+        )}
       </div>
       <div className={classes.codeContainer}>
-        {highlighted && <Pre code={highlighted}></Pre>}
+        {status === "loading" ? (
+          <LoadingSkeleton />
+        ) : selectedSnippet ? (
+          <Pre
+            className={classes.pre}
+            style={{ height: longestCodeHeight }}
+            handlers={[lineNumbers, tokenTransitions]}
+            code={selectedSnippet}
+          />
+        ) : null}
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { UsageSnippet } from "../models/components/usagesnippet.js";
 import { css } from "@emotion/css";
+import { UsageSnippet } from "../models/components/usagesnippet.js";
+import { LanguageLogo } from "./language-logo.js";
 import { color, fontFamily, fontSize, fontWeight, spacing } from "./styles.js";
 import { makeFilename } from "./utils.js";
-import { LanguageLogo } from "./language-logo.js";
 
 export type CodeSampleTitleComponent = React.ComponentType<UsageSnippet>;
 

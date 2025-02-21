@@ -1,16 +1,13 @@
 import React from "react";
-import { HttpMethod } from "../models/components/httpmethod.js";
-import type { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
+import type { MethodPaths } from "../models/operations/getcodesamples.js";
 import {
-  useCodeSamples,
   type CodeSamplesQueryData,
   type QueryHookOptions,
 } from "../react-query/index.js";
-import { isNonEmptyArray, OneOf } from "../types/custom.js";
-import { SupportedLanguage } from "./utils.js";
+import { OperationId } from "../types/custom.js";
 import { CodePlayground } from "./code-playground.js";
 import { CodeSampleMethodTitle, CodeSampleTitleComponent } from "./titles.js";
-import { useSystemColorMode } from "./styles.js";
+import { SupportedLanguage } from "./utils.js";
 
 type CodeSampleProps = {
   /**
@@ -43,9 +40,7 @@ type CodeSampleProps = {
   pending?: React.ReactNode | (() => React.ReactNode);
 
   /** The operation to get a code sample for. Can be queried by either operationId or method+path. */
-  operation: OneOf<
-    [{ operationId: string }, { method: HttpMethod; path: string }]
-  >;
+  operation: OperationId | MethodPaths;
 
   className?: string;
 
@@ -99,57 +94,9 @@ type CodeSampleProps = {
  * ```
  */
 export function CodeSample(props: CodeSampleProps): React.ReactNode {
-  const {
-    error: renderError = (err: Error) => <>{err.message}</>,
-    pending: renderPending = <>Fetching Code Sample...</>,
-    registryUrl,
-    queryOptions,
-    languages,
-    operation,
-    className,
-    title = CodeSampleMethodTitle,
-    mode = "system",
-  } = props;
-  const systemColorMode = useSystemColorMode();
-
-  const query: GetCodeSamplesRequest = {
-    registryUrl,
-    languages: languages,
-  };
-
-  if (operation.method && operation.path) {
-    query.methodPaths = [{ ...operation }];
-  } else if (operation.operationId) {
-    query.operationIds = [operation.operationId];
-  } else {
-    throw new Error(
-      "You must provide either an operationId or a method and path to fetch a code sample.",
-    );
-  }
-
-  const { isPending, isError, error, data } = useCodeSamples(
-    query,
-    queryOptions,
-  );
-
-  if (isPending) {
-    return renderPending instanceof Function ? renderPending() : renderPending;
-  }
-
-  if (isError) {
-    return renderError(error);
-  }
-
-  if (!isNonEmptyArray(data.snippets)) {
-    return renderError(new Error(`No snippets were found for this operation.`));
-  }
+  const { operation, className, title = CodeSampleMethodTitle } = props;
 
   return (
-    <CodePlayground
-      title={title}
-      className={className}
-      snippets={data.snippets}
-      theme={mode === "system" ? systemColorMode : mode}
-    />
+    <CodePlayground title={title} operation={operation} className={className} />
   );
 }

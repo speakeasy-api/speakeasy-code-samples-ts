@@ -59,9 +59,15 @@
     "zod": ">= 3"
   },
   "peerDependenciesMeta": {
-    "@tanstack/react-query": {"optional":true},
-    "react": {"optional":true},
-    "react-dom": {"optional":true}
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
@@ -77,6 +83,9 @@
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "codehike": "^1.0.4",
-    "devicons-react": "^1.4.0"
+    "devicons-react": "^1.4.0",
+    "highlight.js": "^11.11.1",
+    "highlightjs": "^9.16.2",
+    "motion": "^12.4.5"
   }
 }

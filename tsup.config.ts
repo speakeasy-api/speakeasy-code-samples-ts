@@ -89,8 +89,11 @@ export default defineConfig((options: Options) => [
   //},
   {
     ...baseOptions,
-    entry: ["src/**/*.ts?(x)"],
+    entry: ["./src/index.ts", "./src/core.ts", "./src/react.tsx"],
+    //entry: ["./src/**/*.ts?(x)"],
     dts: true,
     bundle: true,
+    watch: ["src/react-components"],
+    sourcemap: true,
   },
 ]);
