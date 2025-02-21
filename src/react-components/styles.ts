@@ -7,6 +7,8 @@ export const fontFamily = {
 
 export const fontSize = {
   sm: "0.875rem",
+  md: "1rem",
+  lg: "1.125rem",
 } as const;
 
 export const fontWeight = {
@@ -19,6 +21,7 @@ export const fontWeight = {
 export const spacing = {
   "0.5": "0.125rem",
   "1": "0.25rem",
+  "1.5": "0.375rem",
   "2": "0.5rem",
   "3": "0.75rem",
 } as const;

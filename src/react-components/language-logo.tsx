@@ -1,90 +1,40 @@
-interface LanguageLogoProps extends React.SVGProps<SVGElement> {
+import { SupportedLanguage } from "./utils.js";
+
+interface LanguageLogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   language: string;
-  color?: string;
-  size?: number | string;
 }
 
-export const LanguageLogo = ({ language }: LanguageLogoProps) => {
-  const dims = { height: 20, width: 20 };
-  switch (language) {
-    case "python":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-        />
-      );
-    case "ruby":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ruby/ruby-plain.svg"
-        />
-      );
-    case "terraform":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg"
-        />
-      );
-    case "typescript":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-plain.svg"
-        />
-      );
-    case "csharp":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-line.svg"
-        />
-      );
-    case "unity":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/unity/unity-plain.svg"
-        />
-      );
-    case "java":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
-        />
-      );
-    case "swift":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swift/swift-original.svg"
-        />
-      );
-    case "php":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
-        />
-      );
-    case "go":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg"
-        />
-      );
-    case "postman":
-      return (
-        <img
-          {...dims}
-          src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-plain.svg"
-        />
-      );
-    default:
-      return null;
+const baseUrl = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
+const langPaths: Record<SupportedLanguage, string> = {
+  python: "python/python-original.svg",
+  ruby: "ruby/ruby-plain.svg",
+  terraform: "terraform/terraform-original.svg",
+  typescript: "typescript/typescript-plain.svg",
+  csharp: "csharp/csharp-line.svg",
+  unity: "unity/unity-plain.svg",
+  java: "java/java-original.svg",
+  swift: "swift/swift-original.svg",
+  php: "php/php-original.svg",
+  go: "go/go-original-wordmark.svg",
+  postman: "go/go-original-wordmark.svg",
+} as const;
+
+export const LanguageLogo = ({ language, ...imgProps }: LanguageLogoProps) => {
+  const defaultDimensions = { height: 20, width: 20 };
+
+  const path = langPaths[language as keyof typeof langPaths];
+
+  if (!path) {
+    return null;
   }
+
+  return (
+    <img
+      src={`${baseUrl}/${path}`}
+      alt={`${language} logo`}
+      {...imgProps}
+      style={{ ...defaultDimensions, ...imgProps.style }}
+    />
+  );
 };

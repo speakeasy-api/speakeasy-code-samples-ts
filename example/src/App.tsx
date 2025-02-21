@@ -1,34 +1,29 @@
-import {
-  CodeSample,
-  SpeakeasyCodeSamplesProvider,
-  CodeSampleFilenameTitle,
-} from "@speakeasyapi/code-samples/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./App.css";
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core";
-import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
+import {
+  CodeSampleFilenameTitle,
+  CodeSamplesViewer,
+  SpeakeasyCodeSamplesProvider,
+} from "@speakeasyapi/code-samples/react";
+import "./App.css";
 
 function App() {
-  console.log({ SpeakeasyCodeSamples });
-
-  const queryClient = new QueryClient();
   const coreSdk = new SpeakeasyCodeSamplesCore({
     apiKey: import.meta.env.VITE_SPEAKEASY_API_KEY,
     registryUrl: import.meta.env.VITE_SPEAKEASY_REGISTRY_URL,
   });
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <SpeakeasyCodeSamplesProvider client={coreSdk}>
-        <h1 className="">Speakeasy Code Samples</h1>
-        <div style={{ width: "100%", marginInline: "auto" }}>
-          <CodeSample
-            title={CodeSampleFilenameTitle}
-            operation={"getPassageText"}
-          />
-        </div>
-      </SpeakeasyCodeSamplesProvider>
-    </QueryClientProvider>
+    <SpeakeasyCodeSamplesProvider client={coreSdk}>
+      <h1 className="">Speakeasy Code Samples</h1>
+      <div style={{ width: "50%", marginInline: "auto" }}>
+        <CodeSamplesViewer
+          copyable
+          defaultLang={"typescript"}
+          title={CodeSampleFilenameTitle}
+          operation={"getPassageText"}
+        />
+      </div>
+    </SpeakeasyCodeSamplesProvider>
   );
 }
 

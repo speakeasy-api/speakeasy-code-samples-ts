@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
 import { AnnotationHandler, InnerLine } from "codehike/code";
-import { spacing } from "./styles.js";
+import { spacing } from "../styles.js";
 
 const classes = {
   root: css({
@@ -12,6 +12,7 @@ const classes = {
   lineNumber: css({
     userSelect: "none",
     paddingInlineEnd: spacing["3"],
+    color: "var(--ch-1)",
   }),
   innerLine: css({
     display: "inline-block",

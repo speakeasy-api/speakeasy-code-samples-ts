@@ -5,7 +5,7 @@ import { codeSamplesGet } from "../funcs/codeSamplesGet.js";
 import { UsageSnippet } from "../models/components/usagesnippet.js";
 import { GetCodeSamplesRequest } from "../models/operations/getcodesamples.js";
 import { useSpeakeasyCodeSamplesContext } from "../react-query/_context.js";
-import { CodeHikeTheme, highlightCode } from "./utils.js";
+import { highlightCode } from "./utils.js";
 
 type SpeakeasyHighlightedCode = HighlightedCode & {
   /** The snippet data from the code samples api */
@@ -90,8 +90,11 @@ export const useHighlightedCodeSamples = (
 
 export function useSelectedSnippet(
   snippets: SpeakeasyHighlightedCode[] | undefined,
+  defaultLang?: string,
 ) {
-  const [selectedLang, setSelectedLang] = useState<string>();
+  const [selectedLang, setSelectedLang] = useState<string | undefined>(
+    defaultLang,
+  );
 
   const selectedSnippet = useMemo(
     () => snippets?.find((s) => s.lang === (selectedLang ?? snippets[0]?.lang)),
@@ -99,31 +102,8 @@ export function useSelectedSnippet(
   );
 
   return {
-    selectedLang: selectedLang ?? snippets?.[0]?.lang,
+    selectedLang: selectedLang ?? defaultLang ?? snippets?.[0]?.lang,
     setSelectedLang,
     selectedSnippet,
   };
-}
-
-export function useCodeHighlighting(
-  code: string,
-  language: string,
-  theme: "dark" | "light",
-) {
-  const [highlighted, setHighlighted] = useState<HighlightedCode | null>(null);
-
-  const updateHighlighted = useCallback(
-    async (code: string, language: string, theme: CodeHikeTheme) => {
-      const highlighted = await highlightCode(code, language, theme);
-      setHighlighted(highlighted);
-    },
-    [],
-  );
-
-  useEffect(() => {
-    const chTheme = theme === "dark" ? "github-dark" : "github-light";
-    updateHighlighted(code, language, chTheme);
-  }, [code, language, theme, updateHighlighted]);
-
-  return highlighted;
 }

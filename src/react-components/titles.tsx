@@ -6,7 +6,7 @@ import { makeFilename } from "./utils.js";
 
 export type CodeSampleTitleComponent = React.ComponentType<UsageSnippet>;
 
-export const CodeSampleMethodTitle = ({ method, path }: UsageSnippet) => {
+export const CodeSampleMethodPathTitle = ({ method, path }: UsageSnippet) => {
   const classes = {
     root: css({
       display: "flex",
@@ -51,7 +51,7 @@ export const CodeSampleFilenameTitle = (props: UsageSnippet) => {
 
   return (
     <div className={classes.root}>
-      <LanguageLogo size="18px" language={props.language} />
+      <LanguageLogo language={props.language} />
       <span className={classes.fileName}>{makeFilename(props)}</span>
     </div>
   );

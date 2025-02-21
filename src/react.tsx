@@ -1,7 +1,10 @@
-export { CodeSample } from "./react-components/code-sample.js";
-export { SpeakeasyCodeSamplesProvider } from "./react-query/index.js";
+export { CodeSamplesViewer } from "./react-components/code-sample.js";
+export type { CodeSamplesViewerProps } from "./react-components/code-sample.js";
+
 export {
-  CodeSampleMethodTitle,
   CodeSampleFilenameTitle,
-  type CodeSampleTitleComponent,
+  CodeSampleMethodPathTitle,
 } from "./react-components/titles.js";
+export type { CodeSampleTitleComponent } from "./react-components/titles.js";
+
+export { SpeakeasyCodeSamplesProvider } from "./react-query/index.js";
