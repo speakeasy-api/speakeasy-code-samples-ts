@@ -19,7 +19,10 @@
 > This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/f5ab386f-39bb-4ae2-aa0d-54e2f95b656d" alt="Description" width="750"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./images/code-samples-demo-dark.webm">
+    <img alt="animation of viewing code, switching programming languages, and copying the displayed text" src="./images/code-samples-demo-light.webm">
+  </picture>
   <p><em>CodeSamples React Component in Action</em></p>
 </div>
 
@@ -28,13 +31,13 @@
 
 Speakeasy Code Samples API: REST APIs for retrieving SDK usage snippets from the Speakeasy Code Samples API.
 
+
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [@speakeasyapi/code-samples](#speakeasyapicode-samples)
   * [SDK Installation](#sdk-installation)
   * [Requirements](#requirements)
   * [SDK Example Usage](#sdk-example-usage)
@@ -95,7 +98,8 @@ yarn add @tanstack/react-query react react-dom
 ```
 
 > [!NOTE]
-> This package is published with CommonJS and ES Modules (ESM) support.
+> This package is published as an ES Module (ESM) only. For applications using
+> CommonJS, use `await import("@speakeasyapi/code-samples")` to import and use this package.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
@@ -147,45 +151,38 @@ run();
 ### React Component
 
 This library includes a React component that fetches and highlights code
-snippets using `highlight.js`. Along with displaying the snippet, it shows a
+snippets using `codehike`. Along with displaying the snippet, it shows a
 loading state during fetching and provides a fallback view if an error occurs.
 
 ```tsx
 import { SpeakeasyCodeSamplesCore } from "@speakeasyapi/code-samples/core";
 import {
-  CodeSample,
+  CodeSampleFilenameTitle,
+  CodeSamplesViewer,
   SpeakeasyCodeSamplesProvider,
 } from "@speakeasyapi/code-samples/react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
   apiKey: "<YOUR_API_KEY_HERE>",
   registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
-// Retries are handled by the underlying SDK.
-queryClient.setQueryDefaults(["@speakeasyapi/code-samples"], { retry: false });
-
-queryClient.setMutationDefaults(["@speakeasyapi/code-samples"], {
-  retry: false,
-});
-
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}>
-        <CodeSample operationId="getPetById" language="typescript" />
-      </SpeakeasyCodeSamplesProvider>
-    </QueryClientProvider>
+    <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}>
+      <CodeSamplesViewer
+        copyable
+        defaultLang={"typescript"}
+        title={CodeSampleFilenameTitle}
+        operation={"getPassageText"}
+        // client={speakeasyCodeSamples} 
+        // 👆optional, if you want to pass the client directly 
+        // instead of using the provider
+      />
+    </SpeakeasyCodeSamplesProvider>
   );
 }
 ```
-
-> [!NOTE]
-> To apply styles to the highlighted code, import a `highlight.js` theme CSS
-> file into your project using methods like a `<link>` tag.
 
 <!-- Start Authentication [security] -->
 ## Authentication
@@ -538,9 +535,9 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                              |
-| ------ | ----------------------------------- |
-| `prod` | `https://api.prod.speakeasyapi.dev` |
+| Name   | Server                              | Description |
+| ------ | ----------------------------------- | ----------- |
+| `prod` | `https://api.prod.speakeasyapi.dev` |             |
 
 #### Example
 

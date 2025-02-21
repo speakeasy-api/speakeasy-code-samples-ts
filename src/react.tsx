@@ -1,6 +1,10 @@
-export * from "./react-components/code-sample.js";
-export type {
-  HighlightLanguage as CodeSampleLanguage,
-  Highlight,
-} from "./react-components/highlight.js";
-export * from "./react-query/index.js";
+export { CodeSamplesViewer } from "./react-components/code-sample.js";
+export type { CodeSamplesViewerProps } from "./react-components/code-sample.js";
+
+export {
+  CodeSampleFilenameTitle,
+  CodeSampleMethodPathTitle,
+} from "./react-components/titles.js";
+export type { CodeSampleTitleComponent } from "./react-components/titles.js";
+
+export { SpeakeasyCodeSamplesProvider } from "./react-query/index.js";
