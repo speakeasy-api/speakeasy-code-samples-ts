@@ -15,9 +15,6 @@
 
 </div>
 
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/speakeasy-self/speakeasy-self). Delete this section before > publishing to a package manager.
-
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./images/codesamples-demo-dark.gif">
@@ -176,7 +173,7 @@ function App() {
         title={CodeSampleFilenameTitle}
         operation={"getPassageText"}
         // client={speakeasyCodeSamples} 
-        // 👆optional, if you want to pass the client directly 
+        // 👆 optional, if you want to pass the client directly 
         // instead of using the provider
       />
     </SpeakeasyCodeSamplesProvider>
