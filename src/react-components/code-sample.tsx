@@ -67,6 +67,7 @@ export function CodeSamplesViewer({
   style,
   copyable,
   defaultLang,
+  client: clientProp,
 }: CodeSamplesViewerProps) {
   const TitleComponent = title;
 
@@ -82,7 +83,7 @@ export function CodeSamplesViewer({
     return { methoPaths: [operation] };
   }, [operation]);
 
-  const client = useSafeSpeakeasyCodeSamplesContext();
+  const client = useSafeSpeakeasyCodeSamplesContext(clientProp);
   const { status, data, error } = useHighlightedCodeSamples(client, request);
 
   const { selectedSnippet, selectedLang, setSelectedLang } = useSelectedSnippet(

@@ -32,12 +32,12 @@ type SuccessState = {
 
 type CodeSamplesState = LoadingState | ErrorState | SuccessState;
 
-export const useSafeSpeakeasyCodeSamplesContext = (opts?: {
-  apiKey: string;
-  registryUrl: string;
-}) => {
-  if (opts) {
-    return new SpeakeasyCodeSamplesCore(opts);
+/** Intended to give the user the option of providing their own client. */
+export const useSafeSpeakeasyCodeSamplesContext = (
+  coreClient?: SpeakeasyCodeSamplesCore,
+) => {
+  if (coreClient) {
+    return coreClient;
   }
 
   try {

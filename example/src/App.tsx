@@ -12,6 +12,8 @@ function App() {
     registryUrl: import.meta.env.VITE_SPEAKEASY_REGISTRY_URL,
   });
 
+  // You can use the context provider to pass the core SDK instance to the code
+  // samples viewer
   return (
     <SpeakeasyCodeSamplesProvider client={coreSdk}>
       <h1 className="">Speakeasy Code Samples</h1>
@@ -21,6 +23,7 @@ function App() {
           defaultLang={"typescript"}
           title={CodeSampleFilenameTitle}
           operation={"getPassageText"}
+          // client={coreSdk}
         />
       </div>
     </SpeakeasyCodeSamplesProvider>
