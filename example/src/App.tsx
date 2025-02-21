@@ -21,10 +21,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <SpeakeasyCodeSamplesProvider client={coreSdk}>
         <h1 className="">Speakeasy Code Samples</h1>
-        <div style={{ width: "660px", marginInline: "auto" }}>
+        <div style={{ width: "100%", marginInline: "auto" }}>
           <CodeSample
             title={CodeSampleFilenameTitle}
-            operation={{ operationId: "getPassageText" }}
+            operation={"getPassageText"}
           />
         </div>
       </SpeakeasyCodeSamplesProvider>
