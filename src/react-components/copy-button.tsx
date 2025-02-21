@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { motion } from "motion/react";
+import * as m from "motion/react-m";
 import { useState } from "react";
 import { cssVarKey, fontSize, radius, spacing } from "./styles.js";
 
@@ -37,7 +37,7 @@ export function CopyButton({ code }: CopyButtonProps) {
   };
 
   return (
-    <motion.button
+    <m.button
       onClick={handleCopy}
       className={classes.button}
       type="button"
@@ -45,7 +45,7 @@ export function CopyButton({ code }: CopyButtonProps) {
       whileTap={{ scale: 0.9 }}
     >
       {copied ? (
-        <motion.div
+        <m.div
           key="check"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -53,9 +53,9 @@ export function CopyButton({ code }: CopyButtonProps) {
           transition={{ duration: 0.2 }}
         >
           <CheckIcon className={classes.icon} />
-        </motion.div>
+        </m.div>
       ) : (
-        <motion.div
+        <m.div
           key="clipboard"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -63,9 +63,9 @@ export function CopyButton({ code }: CopyButtonProps) {
           transition={{ duration: 0.2 }}
         >
           <ClipboardIcon className={classes.icon} />
-        </motion.div>
+        </m.div>
       )}
-    </motion.button>
+    </m.button>
   );
 }
 

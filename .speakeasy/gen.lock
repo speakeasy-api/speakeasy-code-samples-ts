@@ -5,8 +5,8 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.495.1
   generationVersion: 2.515.4
-  releaseVersion: 2.2.1
-  configChecksum: 8f895bd14d372b2800021914dc852e74
+  releaseVersion: 2.2.6
+  configChecksum: 231056298e32bcbdbe85ed747f3eb244
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
@@ -104,6 +104,7 @@ generatedFiles:
   - src/types/operations.ts
   - src/types/rfcdate.ts
   - src/types/streams.ts
+  - tsconfig.json
 examples:
   getCodeSamples:
     "":

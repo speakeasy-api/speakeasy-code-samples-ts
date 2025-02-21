@@ -1,5 +1,5 @@
 import { css } from "@emotion/css";
-import { motion } from "framer-motion";
+import * as m from "motion/react-m";
 import React from "react";
 import { cssVarKey, radius, spacing } from "./styles.js";
 
@@ -27,7 +27,7 @@ const Skeleton = ({ className, style = {} }: SkeletonProps) => {
       style={{ ...style, borderRadius: radius.md }}
       className={`${skeletonStyles} ${className || ""}`}
     >
-      <motion.div
+      <m.div
         className={shimmerStyles}
         animate={{
           x: ["-100%", "100%"],
@@ -37,7 +37,7 @@ const Skeleton = ({ className, style = {} }: SkeletonProps) => {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-      ></motion.div>
+      ></m.div>
     </div>
   );
 };

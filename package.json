@@ -1,6 +1,6 @@
 {
   "name": "@speakeasyapi/code-samples",
-  "version": "2.2.1",
+  "version": "2.2.6",
   "author": "Speakeasy",
   "type": "module",
   "main": "./esm/index.js",
@@ -59,20 +59,14 @@
     "zod": ">= 3"
   },
   "peerDependenciesMeta": {
-    "@tanstack/react-query": {
-      "optional": true
-    },
-    "react": {
-      "optional": true
-    },
-    "react-dom": {
-      "optional": true
-    }
+    "@tanstack/react-query": {"optional":true},
+    "react": {"optional":true},
+    "react-dom": {"optional":true}
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@tanstack/react-query": "^5.61.4",
-    "@types/react": "^18.3.12",
+    "@types/react": "^18.3.18",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "tsup": "^8.3.6",
@@ -83,9 +77,6 @@
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "codehike": "^1.0.4",
-    "devicons-react": "^1.4.0",
-    "highlight.js": "^11.11.1",
-    "highlightjs": "^9.16.2",
-    "motion": "^12.4.5"
+    "motion": "^12.4.7"
   }
 }

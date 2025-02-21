@@ -23,6 +23,7 @@ import { CodeSampleFilenameTitle, CodeSampleTitleComponent } from "./titles.js";
 import { tokenTransitions } from "./codehike/token-transitions.js";
 import { SpeakeasyCodeSamplesCore } from "../core.js";
 import { OperationId } from "../types/custom.js";
+import { LazyMotion, domAnimation } from "motion/react";
 
 export type CodeSamplesViewerProps = {
   /** Whether the code snippet should be copyable. */
@@ -104,50 +105,52 @@ export function CodeSamplesViewer({
   }, [data]);
 
   return (
-    <div
-      style={{
-        ...codeTheme,
-        ...(getCssVars(
-          theme === "system" ? systemColorMode : theme,
-        ) as React.CSSProperties),
-        ...style,
-      }}
-      className={`${classes.root} ${className ?? ""}`}
-    >
-      <div className={classes.heading}>
-        {status === "loading" && error === undefined ? (
-          <TitleSkeleton />
-        ) : TitleComponent && selectedSnippet ? (
-          <TitleComponent {...selectedSnippet!.raw} />
-        ) : (
-          <CodeSampleFilenameTitle {...selectedSnippet!.raw} />
-        )}
-        {status === "loading" && error === undefined ? (
-          <LanguageSelectorSkeleton />
-        ) : (
-          <LanguageSelector
-            value={selectedLang}
-            onChange={setSelectedLang}
-            snippets={data ?? []}
-            className={classes.selector}
-          />
-        )}
-      </div>
-      <div className={classes.codeContainer}>
-        {status === "loading" ? (
-          <LoadingSkeleton />
-        ) : selectedSnippet ? (
-          <>
-            {copyable && <CopyButton code={selectedSnippet.code} />}
-            <Pre
-              className={classes.pre}
-              style={{ height: longestCodeHeight }}
-              handlers={[lineNumbers, tokenTransitions]}
-              code={selectedSnippet}
+    <LazyMotion strict features={domAnimation}>
+      <div
+        style={{
+          ...codeTheme,
+          ...(getCssVars(
+            theme === "system" ? systemColorMode : theme,
+          ) as React.CSSProperties),
+          ...style,
+        }}
+        className={`${classes.root} ${className ?? ""}`}
+      >
+        <div className={classes.heading}>
+          {status === "loading" && error === undefined ? (
+            <TitleSkeleton />
+          ) : TitleComponent && selectedSnippet ? (
+            <TitleComponent {...selectedSnippet!.raw} />
+          ) : (
+            <CodeSampleFilenameTitle {...selectedSnippet!.raw} />
+          )}
+          {status === "loading" && error === undefined ? (
+            <LanguageSelectorSkeleton />
+          ) : (
+            <LanguageSelector
+              value={selectedLang}
+              onChange={setSelectedLang}
+              snippets={data ?? []}
+              className={classes.selector}
             />
-          </>
-        ) : null}
+          )}
+        </div>
+        <div className={classes.codeContainer}>
+          {status === "loading" ? (
+            <LoadingSkeleton />
+          ) : selectedSnippet ? (
+            <>
+              {copyable && <CopyButton code={selectedSnippet.code} />}
+              <Pre
+                className={classes.pre}
+                style={{ height: longestCodeHeight }}
+                handlers={[lineNumbers, tokenTransitions]}
+                code={selectedSnippet}
+              />
+            </>
+          ) : null}
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 }
