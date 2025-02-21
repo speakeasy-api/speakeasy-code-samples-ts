@@ -16,14 +16,13 @@ function App() {
   // samples viewer
   return (
     <SpeakeasyCodeSamplesProvider client={coreSdk}>
-      <h1 className="">Speakeasy Code Samples</h1>
-      <div style={{ width: "50%", marginInline: "auto" }}>
+      <div style={{ width: "700px", marginInline: "auto" }}>
         <CodeSamplesViewer
           copyable
           defaultLang={"typescript"}
           title={CodeSampleFilenameTitle}
           operation={"getPassageText"}
-          // client={coreSdk}
+          // client={coreSdk} 👈 optional, if you want to pass the client directly
         />
       </div>
     </SpeakeasyCodeSamplesProvider>
