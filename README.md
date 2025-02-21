@@ -20,8 +20,8 @@
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./images/code-samples-demo-dark.webm">
-    <img alt="animation of viewing code, switching programming languages, and copying the displayed text" src="./images/code-samples-demo-light.webm">
+    <source media="(prefers-color-scheme: dark)" srcset="./images/codesamples-demo-dark.gif">
+    <img alt="animation of viewing code, switching programming languages, and copying the displayed text" src="./images/codesamples-demo-light.gif">
   </picture>
   <p><em>CodeSamples React Component in Action</em></p>
 </div>
