@@ -3,17 +3,17 @@ id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
   docChecksum: a16089f06495dd5f7de1f5121d72ec45
   docVersion: 0.4.0
-  speakeasyVersion: 1.495.1
-  generationVersion: 2.515.4
-  releaseVersion: 2.2.6
-  configChecksum: a4ff9835698013bb8c7bb828a7e2be76
+  speakeasyVersion: 1.501.0
+  generationVersion: 2.522.1
+  releaseVersion: 2.3.0
+  configChecksum: af4c84e6b75f7ba42bd4d7fad05a022c
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.20.0
+    core: 3.21.1
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
