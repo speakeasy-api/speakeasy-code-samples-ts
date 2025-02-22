@@ -17,7 +17,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.2.6
+  version: 2.3.0
   additionalDependencies:
     dependencies:
       '@emotion/css': ^11.13.5
@@ -31,6 +31,7 @@ typescript:
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
   enableCustomCodeRegions: false
+  enableMCPServer: true
   enableReactQuery: true
   enumFormat: union
   flattenGlobalSecurity: true
