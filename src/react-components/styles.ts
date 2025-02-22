@@ -24,12 +24,13 @@ export const spacing = {
   "1.5": "0.375rem",
   "2": "0.5rem",
   "3": "0.75rem",
+  "4": "1rem",
 } as const;
 
 export const radius = {
   md: "0.375rem",
   lg: "0.5rem",
-};
+} as const;
 
 export const color = {
   blue: "#51a2ff",
@@ -42,7 +43,9 @@ export const shadow = {
 type CssVars = {
   "--bg-primary": string;
   "--bg-muted": string;
+  "--bg-error": string;
   "--foreground-primary": string;
+  "--foreground-error": string;
   "--accent": string;
   "--border": string;
   "--gradient-skeleton": string;
@@ -51,7 +54,9 @@ type CssVars = {
 export const cssVarKey = {
   bgPrimary: "--bg-primary",
   bgMuted: "--bg-muted",
+  bgError: "--bg-error",
   foregroundPrimary: "--foreground-primary",
+  foregroundError: "--foreground-error",
   accent: "--accent",
   border: "--border",
   gradientSkeleton: "--gradient-skeleton",
@@ -59,8 +64,10 @@ export const cssVarKey = {
 
 const darkCssVars: CssVars = {
   "--bg-primary": "#0D1117",
-  "--bg-muted": "#27272A", // same as border, for now
+  "--bg-muted": "#27272A",
+  "--bg-error": "#461B19",
   "--foreground-primary": "#FFFFFF",
+  "--foreground-error": "#F85149",
   "--accent": "#51A2FF",
   "--border": "#27272A",
   "--gradient-skeleton": `linear-gradient(
@@ -73,8 +80,10 @@ const darkCssVars: CssVars = {
 
 const lightCssVars: CssVars = {
   "--bg-primary": "white",
-  "--bg-muted": "#EAEEF2", // same as border, for now
-  "--foreground-primary": "black",
+  "--bg-muted": "#EAEEF2",
+  "--bg-error": "#461B19",
+  "--foreground-error": "#F85149",
+  "--foreground-primary": "#000000",
   "--accent": "#51A2FF",
   "--border": "#E4E4E7",
   "--gradient-skeleton": `linear-gradient(
@@ -118,64 +127,3 @@ export function useSystemColorMode() {
 
   return mode;
 }
-
-export const githubColorVars = {
-  dark: {
-    "--ch-0": "dark",
-    "--ch-1": "#8B949E",
-    "--ch-2": "#79C0FF",
-    "--ch-3": "#FFA657",
-    "--ch-4": "#C9D1D9",
-    "--ch-5": "#D2A8FF",
-    "--ch-6": "#7EE787",
-    "--ch-7": "#FF7B72",
-    "--ch-8": "#A5D6FF",
-    "--ch-9": "#FFA198",
-    "--ch-10": "#F0F6FC",
-    "--ch-11": "#490202",
-    "--ch-12": "#04260F",
-    "--ch-13": "#5A1E02",
-    "--ch-14": "#161B22",
-    "--ch-15": "#8B949E",
-    "--ch-16": "#0D1117",
-    "--ch-17": "#6E76811a",
-    "--ch-18": "#FFFFFF0B",
-    "--ch-19": "#3794FF",
-    "--ch-20": "#264F78",
-    "--ch-21": "#1F6FEB",
-    "--ch-22": "#010409",
-    "--ch-23": "#30363D",
-    "--ch-24": "#6E7681",
-    "--ch-25": "#6E768166",
-    "--ch-26": "#0D1117E6",
-  },
-  light: {
-    "--ch-0": "light",
-    "--ch-1": "#6E7781",
-    "--ch-2": "#0550AE",
-    "--ch-3": "#953800",
-    "--ch-4": "#24292F",
-    "--ch-5": "#8250DF",
-    "--ch-6": "#116329",
-    "--ch-7": "#CF222e",
-    "--ch-8": "#0A3069",
-    "--ch-9": "#82071E",
-    "--ch-10": "#f6F8Fa",
-    "--ch-11": "#FFEBE9",
-    "--ch-12": "#DAFBE1",
-    "--ch-13": "#FFD8B5",
-    "--ch-14": "#EAEEF2",
-    "--ch-15": "#57606A",
-    "--ch-16": "#FFFFFF",
-    "--ch-17": "#EAEEF280",
-    "--ch-18": "#FDFF0033",
-    "--ch-19": "#1A85FF",
-    "--ch-20": "#ADD6FF",
-    "--ch-21": "#0969DA",
-    "--ch-22": "#F6F8FA",
-    "--ch-23": "#D0D7DE",
-    "--ch-24": "#8C959F",
-    "--ch-25": "#AFB8C133",
-    "--ch-26": "#FFFFFFe6",
-  },
-} as const;

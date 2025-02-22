@@ -1,4 +1,5 @@
 import { highlight } from "codehike/code";
+import { CodeHikeTheme } from "./codehike/types.js";
 
 const languageMap = {
   typescript: "TypeScript",
@@ -15,24 +16,17 @@ const languageMap = {
 } as const;
 
 export type SupportedLanguage = keyof typeof languageMap;
-type PrettyLanguage = (typeof languageMap)[SupportedLanguage];
 
 /** Attempt to format the language, return the input if it can't */
-export function prettyLanguageName(
-  language: SupportedLanguage | string,
-): PrettyLanguage | string {
-  if (isSupportedLanguage(language)) {
-    return languageMap[language];
+export function prettyLanguageName(language: SupportedLanguage | string) {
+  if (language in languageMap) {
+    return languageMap[language as SupportedLanguage];
   }
 
   return language;
 }
 
-function isSupportedLanguage(language: string): language is SupportedLanguage {
-  return language in languageMap;
-}
-
-export const makeFilename = ({ language }: { language: string }) => {
+export const makeMockFilename = ({ language }: { language: string }) => {
   switch (language) {
     case "python":
       return "example.py";
@@ -56,8 +50,6 @@ export const makeFilename = ({ language }: { language: string }) => {
       return "example";
   }
 };
-
-export type CodeHikeTheme = Parameters<typeof highlight>[1];
 
 export async function highlightCode(
   code: string,

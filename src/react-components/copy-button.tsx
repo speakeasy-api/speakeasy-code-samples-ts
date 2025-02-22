@@ -1,6 +1,6 @@
 import { css } from "@emotion/css";
 import * as m from "motion/react-m";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { cssVarKey, fontSize, radius, spacing } from "./styles.js";
 
 interface CopyButtonProps {
@@ -28,13 +28,13 @@ const classes = {
 };
 
 export function CopyButton({ code }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(() => false);
 
-  const handleCopy = async () => {
+  const handleCopy = useCallback(async () => {
     await navigator.clipboard.writeText(code);
-    setCopied(true);
+    setCopied(() => true);
     setTimeout(() => setCopied(false), 3000);
-  };
+  }, [code]);
 
   return (
     <m.button

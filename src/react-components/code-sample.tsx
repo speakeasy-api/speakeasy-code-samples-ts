@@ -1,29 +1,20 @@
-import { Pre } from "codehike/code";
-import { useMemo } from "react";
-import { CopyButton } from "./copy-button.js";
+import { LazyMotion, domMax } from "motion/react";
+import React from "react";
+import { SpeakeasyCodeSamplesCore } from "../core.js";
 import {
   GetCodeSamplesRequest,
   MethodPaths,
 } from "../models/operations/getcodesamples.js";
-import classes from "./code-sample.styles.js";
-import {
-  useHighlightedCodeSamples,
-  useSafeSpeakeasyCodeSamplesContext,
-  useSelectedSnippet,
-} from "./hooks.js";
-import { LanguageSelector } from "./language-selector.js";
-import { lineNumbers } from "./codehike/line-numbers.js";
-import {
-  LanguageSelectorSkeleton,
-  LoadingSkeleton,
-  TitleSkeleton,
-} from "./skeleton.js";
-import { getCssVars, githubColorVars, useSystemColorMode } from "./styles.js";
-import { CodeSampleFilenameTitle, CodeSampleTitleComponent } from "./titles.js";
-import { tokenTransitions } from "./codehike/token-transitions.js";
-import { SpeakeasyCodeSamplesCore } from "../core.js";
 import { OperationId } from "../types/custom.js";
-import { LazyMotion, domAnimation } from "motion/react";
+import { useCodeSampleState } from "./code-sample.state.js";
+import classes from "./code-sample.styles.js";
+import { CodeViewer, ErrorDisplay } from "./code-viewer.js";
+import codehikeTheme from "./codehike/theme.js";
+import { CopyButton } from "./copy-button.js";
+import { LanguageSelector } from "./language-selector.js";
+import { LanguageSelectorSkeleton, LoadingSkeleton } from "./skeleton.js";
+import { getCssVars, useSystemColorMode } from "./styles.js";
+import { type CodeSampleTitleComponent, CodeSampleTitle } from "./titles.js";
 
 export type CodeSamplesViewerProps = {
   /** Whether the code snippet should be copyable. */
@@ -46,7 +37,7 @@ export type CodeSamplesViewerProps = {
    * @see CodeSampleFilenameTitle
    * @default CodeSampleMethodTitle
    */
-  title?: CodeSampleTitleComponent;
+  title?: CodeSampleTitleComponent | React.ReactNode | string;
   /** The operation to get a code sample for. Can be queried by either
    * operationId or method+path.
    */
@@ -67,34 +58,27 @@ export function CodeSamplesViewer({
   operation,
   style,
   copyable,
-  defaultLang,
   client: clientProp,
 }: CodeSamplesViewerProps) {
-  const TitleComponent = title;
-
-  const systemColorMode = useSystemColorMode();
-
-  const codeTheme = useMemo(() => {
-    if (theme === "system") return githubColorVars[systemColorMode];
-    return githubColorVars[theme];
-  }, [theme, systemColorMode]);
-
-  const request: GetCodeSamplesRequest = useMemo(() => {
+  const request: GetCodeSamplesRequest = React.useMemo(() => {
     if (typeof operation === "string") return { operationIds: [operation] };
     return { methoPaths: [operation] };
   }, [operation]);
 
-  const client = useSafeSpeakeasyCodeSamplesContext(clientProp);
-  const { status, data, error } = useHighlightedCodeSamples(client, request);
+  const { state, setSelectedLanguage } = useCodeSampleState({
+    client: clientProp,
+    requestParams: request,
+  });
 
-  const { selectedSnippet, selectedLang, setSelectedLang } = useSelectedSnippet(
-    data,
-    defaultLang,
-  );
+  const systemColorMode = useSystemColorMode();
+  const codeTheme = React.useMemo(() => {
+    if (theme === "system") return codehikeTheme[systemColorMode];
+    return codehikeTheme[theme];
+  }, [theme, systemColorMode]);
 
-  const longestCodeHeight = useMemo(() => {
+  const longestCodeHeight = React.useMemo(() => {
     const largestLines = Math.max(
-      ...Object.values(data ?? [])
+      ...Object.values(state.snippets ?? [])
         .filter((snippet) => snippet.code !== undefined)
         .map((code) => code.code!.split("\n").length),
     );
@@ -102,10 +86,10 @@ export function CodeSamplesViewer({
     const lineHeight = 23;
     const padding = 12;
     return largestLines * lineHeight + padding * 2;
-  }, [data]);
+  }, [state.snippets]);
 
   return (
-    <LazyMotion strict features={domAnimation}>
+    <LazyMotion strict features={domMax}>
       <div
         style={{
           ...codeTheme,
@@ -117,38 +101,36 @@ export function CodeSamplesViewer({
         className={`${classes.root} ${className ?? ""}`}
       >
         <div className={classes.heading}>
-          {status === "loading" && error === undefined ? (
-            <TitleSkeleton />
-          ) : TitleComponent && selectedSnippet ? (
-            <TitleComponent {...selectedSnippet!.raw} />
-          ) : (
-            <CodeSampleFilenameTitle {...selectedSnippet!.raw} />
-          )}
-          {status === "loading" && error === undefined ? (
-            <LanguageSelectorSkeleton />
-          ) : (
-            <LanguageSelector
-              value={selectedLang}
-              onChange={setSelectedLang}
-              snippets={data ?? []}
-              className={classes.selector}
-            />
-          )}
+          <CodeSampleTitle
+            component={title}
+            status={state.status}
+            data={state.selectedSnippet?.raw}
+          />
+          <>
+            {state.status === "loading" && <LanguageSelectorSkeleton />}
+            {state.status === "success" && (
+              <LanguageSelector
+                value={state.selectedSnippet?.lang}
+                onChange={setSelectedLanguage}
+                snippets={state.snippets ?? []}
+                className={classes.selector}
+              />
+            )}
+          </>
         </div>
         <div className={classes.codeContainer}>
-          {status === "loading" ? (
-            <LoadingSkeleton />
-          ) : selectedSnippet ? (
-            <>
-              {copyable && <CopyButton code={selectedSnippet.code} />}
-              <Pre
-                className={classes.pre}
-                style={{ height: longestCodeHeight }}
-                handlers={[lineNumbers, tokenTransitions]}
-                code={selectedSnippet}
-              />
-            </>
-          ) : null}
+          {state.status === "success" && copyable && (
+            <CopyButton code={state.selectedSnippet.code} />
+          )}
+          {state.status === "loading" && <LoadingSkeleton />}
+          {state.status === "error" && <ErrorDisplay error={state.error} />}
+          {state.status === "success" && (
+            <CodeViewer
+              status={state.status}
+              code={state.selectedSnippet}
+              longestCodeHeight={longestCodeHeight}
+            />
+          )}
         </div>
       </div>
     </LazyMotion>
