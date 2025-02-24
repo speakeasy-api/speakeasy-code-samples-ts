@@ -1,7 +1,7 @@
-import { css } from "@emotion/css";
+import {css} from "@emotion/css";
 import * as m from "motion/react-m";
 import React from "react";
-import { cssVarKey, radius, spacing } from "./styles.js";
+import {cssVarKey, radius, spacing} from "./styles.js";
 
 interface SkeletonProps {
   className?: string;
@@ -21,10 +21,10 @@ const shimmerStyles = css({
   background: `var(${cssVarKey.gradientSkeleton})`,
 });
 
-const Skeleton = ({ className, style = {} }: SkeletonProps) => {
+const Skeleton = ({className, style = {}}: SkeletonProps) => {
   return (
     <div
-      style={{ ...style, borderRadius: radius.md }}
+      style={{...style, borderRadius: radius.md}}
       className={`${skeletonStyles} ${className || ""}`}
     >
       <m.div
@@ -86,6 +86,14 @@ const skeletonSizes = {
     height: 22,
     width: "clamp(350px, 75%, 400px)",
   }),
+  smallTall: css({
+    height: 37,
+    width: "clamp(40px, 10%, 80px)",
+  }),
+  mediumTall: css({
+    height: 37,
+    width: "clamp(175px, 25%, 250px)",
+  }),
 };
 
 const indentedStyles = css({
@@ -95,28 +103,28 @@ const indentedStyles = css({
 export const LoadingSkeleton = () => {
   return (
     <div className={containerStyles}>
-      <Skeleton className={skeletonSizes.xlarge} />
-      <div className={spacerStyles} />
-      <Skeleton className={skeletonSizes.large} />
-      <Skeleton className={`${skeletonSizes.xxlarge} ${indentedStyles}`} />
-      <Skeleton className={skeletonSizes.small} />
-      <div className={spacerStyles} />
-      <Skeleton className={skeletonSizes.medium} />
+      <Skeleton className={skeletonSizes.xlarge}/>
+      <div className={spacerStyles}/>
+      <Skeleton className={skeletonSizes.large}/>
+      <Skeleton className={`${skeletonSizes.xxlarge} ${indentedStyles}`}/>
+      <Skeleton className={skeletonSizes.small}/>
+      <div className={spacerStyles}/>
+      <Skeleton className={skeletonSizes.medium}/>
       <div className={nestedContainerStyles}>
-        <Skeleton className={skeletonSizes.xxxlarge} />
-        <Skeleton className={`${skeletonSizes.medium} ${indentedStyles}`} />
-        <Skeleton className={skeletonSizes.small} />
+        <Skeleton className={skeletonSizes.xxxlarge}/>
+        <Skeleton className={`${skeletonSizes.medium} ${indentedStyles}`}/>
+        <Skeleton className={skeletonSizes.small}/>
       </div>
-      <div className={spacerStyles} />
-      <Skeleton className={skeletonSizes.small} />
+      <div className={spacerStyles}/>
+      <Skeleton className={skeletonSizes.small}/>
     </div>
   );
 };
 
 export const TitleSkeleton = () => (
-  <Skeleton className={skeletonSizes.medium} />
+  <Skeleton className={skeletonSizes.mediumTall}/>
 );
 
 export const LanguageSelectorSkeleton = () => (
-  <Skeleton className={skeletonSizes.small} />
+  <Skeleton className={skeletonSizes.mediumTall}/>
 );

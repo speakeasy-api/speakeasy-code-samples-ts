@@ -20,3 +20,6 @@
 /__tests__
 /.speakeasy/reports
 /react.*
+.idea
+pnpm-lock.yaml
+*.iml
