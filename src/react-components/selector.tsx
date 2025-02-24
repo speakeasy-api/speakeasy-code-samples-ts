@@ -1,5 +1,5 @@
-import {css} from "@emotion/css";
-import {prettyLanguageName} from "./utils.js";
+import { css } from "@emotion/css";
+import { prettyLanguageName } from "./utils.js";
 
 const selectorStyles = css({});
 
@@ -11,11 +11,11 @@ interface SelectorProps {
 }
 
 export const Selector = ({
-                           value,
-                           onChange,
-                           values,
-                           className,
-                         }: SelectorProps) => {
+  value,
+  onChange,
+  values,
+  className,
+}: SelectorProps) => {
   return (
     <select
       value={value}

@@ -48,11 +48,7 @@ export function codeSamplesGet(
     | ConnectionError
   >
 > {
-  return new APIPromise($do(
-    client,
-    request,
-    options,
-  ));
+  return new APIPromise($do(client, request, options));
 }
 
 async function $do(
@@ -89,15 +85,17 @@ async function $do(
   const path = pathToFunc("/v1/code_sample")();
 
   const query = encodeFormQuery({
-    "languages": payload.languages,
-    "method_paths": payload.method_paths,
-    "operation_ids": payload.operation_ids,
-    "registry_url": payload.registry_url ?? client._options.registryUrl,
+    languages: payload.languages,
+    method_paths: payload.method_paths,
+    operation_ids: payload.operation_ids,
+    registry_url: payload.registry_url ?? client._options.registryUrl,
   });
 
-  const headers = new Headers(compactMap({
-    Accept: "application/json",
-  }));
+  const headers = new Headers(
+    compactMap({
+      Accept: "application/json",
+    }),
+  );
 
   const secConfig = await extractSecurity(client._options.apiKey);
   const securityInput = secConfig == null ? {} : { apiKey: secConfig };
@@ -111,22 +109,25 @@ async function $do(
     resolvedSecurity: requestSecurity,
 
     securitySource: client._options.apiKey,
-    retryConfig: options?.retries
-      || client._options.retryConfig
-      || { strategy: "none" },
+    retryConfig: options?.retries ||
+      client._options.retryConfig || { strategy: "none" },
     retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
 
-  const requestRes = client._createRequest(context, {
-    security: requestSecurity,
-    method: "GET",
-    baseURL: options?.serverURL,
-    path: path,
-    headers: headers,
-    query: query,
-    body: body,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
-  }, options);
+  const requestRes = client._createRequest(
+    context,
+    {
+      security: requestSecurity,
+      method: "GET",
+      baseURL: options?.serverURL,
+      path: path,
+      headers: headers,
+      query: query,
+      body: body,
+      timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+    },
+    options,
+  );
   if (!requestRes.ok) {
     return [requestRes, { status: "invalid" }];
   }

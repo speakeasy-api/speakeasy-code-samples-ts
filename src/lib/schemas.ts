@@ -60,8 +60,7 @@ export function collectExtraKeys<
   optional: boolean,
 ): ZodEffects<
   typeof obj,
-  & output<ZodObject<Shape, "strict">>
-  & {
+  output<ZodObject<Shape, "strict">> & {
     [k in K]: Record<string, output<Catchall>>;
   }
 > {

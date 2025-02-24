@@ -1,16 +1,23 @@
-import {css} from "@emotion/css";
+import { css } from "@emotion/css";
 import React from "react";
-import {UsageSnippet} from "../models/components/usagesnippet.js";
-import {LanguageLogo} from "./language-logo.js";
-import {TitleSkeleton} from "./skeleton.js";
-import {color, cssVarKey, fontFamily, fontSize, fontWeight, spacing,} from "./styles.js";
-import {makeMockFilename} from "./utils.js";
+import { UsageSnippet } from "../models/components/usagesnippet.js";
+import { LanguageLogo } from "./language-logo.js";
+import { TitleSkeleton } from "./skeleton.js";
+import {
+  color,
+  cssVarKey,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  spacing,
+} from "./styles.js";
+import { makeMockFilename } from "./utils.js";
 
 export type CodeSampleTitleComponent = (
   props: UsageSnippet,
 ) => React.ReactNode | React.ReactNode | string;
 
-export const CodeSampleMethodPathTitle = ({method, path}: UsageSnippet) => {
+export const CodeSampleMethodPathTitle = ({ method, path }: UsageSnippet) => {
   const classes = {
     root: css({
       display: "flex",
@@ -55,7 +62,7 @@ export const CodeSampleFilenameTitle = (props: UsageSnippet) => {
 
   return (
     <div className={classes.root}>
-      <LanguageLogo language={props.language}/>
+      <LanguageLogo language={props.language} />
       <span className={classes.fileName}>{makeMockFilename(props)}</span>
     </div>
   );
@@ -69,10 +76,10 @@ type TitleComponentProps = {
 
 export const CodeSampleTitle: React.FC<TitleComponentProps> = (props) => {
   if (props.status === "error") {
-    return <div style={{color: `var(${cssVarKey.foregroundError})`}}></div>;
+    return <div style={{ color: `var(${cssVarKey.foregroundError})` }}></div>;
   }
 
-  if (props.status !== "success") return <TitleSkeleton/>;
+  if (props.status !== "success") return <TitleSkeleton />;
 
   if (React.isValidElement(props.component)) return props.component;
 

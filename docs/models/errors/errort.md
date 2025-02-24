@@ -12,7 +12,7 @@ import { ErrorT } from "@speakeasyapi/code-samples/models/errors";
 
 ## Fields
 
-| Field                             | Type                              | Required                          | Description                       |
-| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `message`                         | *string*                          | :heavy_check_mark:                | A developer-facing error message. |
-| `statusCode`                      | *number*                          | :heavy_check_mark:                | The HTTP status code              |
+| Field        | Type     | Required           | Description                       |
+| ------------ | -------- | ------------------ | --------------------------------- |
+| `message`    | _string_ | :heavy_check_mark: | A developer-facing error message. |
+| `statusCode` | _number_ | :heavy_check_mark: | The HTTP status code              |

@@ -1,4 +1,3 @@
-
 <div align="center">
     <a href="https://codespaces.new/speakeasy-api/speakeasy-code-samples-ts.git/tree/main"><img src="https://github.com/codespaces/badge.svg" /></a>
 </div>

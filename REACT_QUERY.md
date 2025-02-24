@@ -29,12 +29,14 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
 
 // Retries are handled by the underlying SDK.
 queryClient.setQueryDefaults(["@speakeasyapi/code-samples"], { retry: false });
-queryClient.setMutationDefaults(["@speakeasyapi/code-samples"], { retry: false });
+queryClient.setMutationDefaults(["@speakeasyapi/code-samples"], {
+  retry: false,
+});
 
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}> 
+      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}>
         {/* Your app logic starts here */}
       </SpeakeasyCodeSamplesProvider>
     </QueryClientProvider>
@@ -56,24 +58,19 @@ import { useCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSampl
 export function Example() {
   const { data, error, status } = useCodeSamples({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: [
-      "getPets",
-    ],
+    operationIds: ["getPets"],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: [
-      "python",
-      "javascript",
-    ],
+    languages: ["python", "javascript"],
   });
 
   // Render the UI here...
 }
-``` 
+```
 
 ### Query timeouts and retries
 
@@ -89,19 +86,14 @@ export function ExampleWithOptions() {
   const { data, error, status } = useCodeSamples(
     {
       registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-      operationIds: [
-        "getPets",
-      ],
+      operationIds: ["getPets"],
       methodPaths: [
         {
           method: "get",
           path: "/pets",
         },
       ],
-      languages: [
-        "python",
-        "javascript",
-      ],
+      languages: ["python", "javascript"],
     },
     {
       // TanStack Query options:
@@ -121,13 +113,12 @@ export function ExampleWithOptions() {
           maxElapsedTime: 60 * 1000, // 1 minute
         },
       },
-    }
+    },
   );
 
   // Render the UI here...
 }
 ```
-
 
 ## Cache invalidation
 
@@ -137,7 +128,10 @@ query hook there are two functions that help invalidate cached data:
 
 ```tsx
 import { useQueryClient } from "@tanstack/react-query";
-import { invalidateCodeSamples, invalidateAllCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
+import {
+  invalidateCodeSamples,
+  invalidateAllCodeSamples,
+} from "@speakeasyapi/code-samples/react-query/codeSamplesGet.js";
 // Replace this with a real mutation
 import { useExampleMutation } from "@speakeasyapi/code-samples/react-query/example.js";
 
@@ -155,21 +149,22 @@ export function Example() {
         mutate(formData, {
           onSuccess: () => {
             // Invalidate a single cache entry:
-            invalidateCodeSamples(queryClient, /* ... arguments ... */);
+            invalidateCodeSamples(queryClient /* ... arguments ... */);
             // OR, invalidate all cache entries for the query targets:
             invalidateAllCodeSamples(queryClient);
           },
         });
       }}
     >
-      {/* Form fields go here... */} 
+      {/* Form fields go here... */}
 
-      <button type="submit" disabled={status === "pending"}>Submit</button>
+      <button type="submit" disabled={status === "pending"}>
+        Submit
+      </button>
     </form>
   );
 }
 ```
-
 
 ## Integration with React Suspense
 
@@ -196,14 +191,16 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}> 
+      <SpeakeasyCodeSamplesProvider client={speakeasyCodeSamples}>
         <QueryErrorResetBoundary>
           {({ reset }) => (
             <ErrorBoundary
               fallbackRender={({ error, resetErrorBoundary }) => (
                 <div>
-                  There was an error!{' '}
-                  <Button onClick={() => resetErrorBoundary()}>Try again</Button>
+                  There was an error!{" "}
+                  <Button onClick={() => resetErrorBoundary()}>
+                    Try again
+                  </Button>
                   <pre>{error.message}</pre>
                 </div>
               )}
@@ -223,25 +220,19 @@ export function App() {
 function Example() {
   const { data } = useCodeSamplesSuspense({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: [
-      "getPets",
-    ],
+    operationIds: ["getPets"],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: [
-      "python",
-      "javascript",
-    ],
+    languages: ["python", "javascript"],
   });
 
   // Render the UI here...
 }
 ```
-
 
 ## Server-rendering and React Server Components
 
@@ -249,6 +240,7 @@ Query hooks are also side-loaded with prefetch helper functions. These functions
 can be used to fetch data from the API during server-rendering and in React
 Server Components so that it can be available immediately on page load to any
 components that use the corresponding hooks:
+
 ```tsx
 import {
   dehydrate,
@@ -267,19 +259,14 @@ export default async function Page() {
 
   await prefetchCodeSamples(queryClient, speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: [
-      "getPets",
-    ],
+    operationIds: ["getPets"],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: [
-      "python",
-      "javascript",
-    ],
+    languages: ["python", "javascript"],
   });
 
   return (
@@ -290,6 +277,5 @@ export default async function Page() {
   );
 }
 ```
-
 
 [rq]: https://tanstack.com/query/v5/docs/framework/react/overview
