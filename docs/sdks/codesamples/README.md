@@ -1,12 +1,11 @@
 # CodeSamples
-
-(_codeSamples_)
+(*codeSamples*)
 
 ## Overview
 
 ### Available Operations
 
-- [get](#get) - Retrieve usage snippets
+* [get](#get) - Retrieve usage snippets
 
 ## get
 
@@ -25,14 +24,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -60,14 +64,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
 async function run() {
   const res = await codeSamplesGet(speakeasyCodeSamples, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   if (!res.ok) {
@@ -103,7 +112,7 @@ import {
   // Server Components that will be immediately available to client components
   // using the hooks.
   prefetchCodeSamples,
-
+  
   // Utilities to invalidate the query cache for this query in response to
   // mutations and other user actions.
   invalidateCodeSamples,
@@ -113,12 +122,12 @@ import {
 
 ### Parameters
 
-| Parameter              | Type                                                                                    | Required           | Description                                                                                                                                                                    |
-| ---------------------- | --------------------------------------------------------------------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`              | [operations.GetCodeSamplesRequest](../../models/operations/getcodesamplesrequest.md)    | :heavy_check_mark: | The request object to use for the request.                                                                                                                                     |
-| `options`              | RequestOptions                                                                          | :heavy_minus_sign: | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions` | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options) | :heavy_minus_sign: | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`      | [RetryConfig](../../lib/utils/retryconfig.md)                                           | :heavy_minus_sign: | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetCodeSamplesRequest](../../models/operations/getcodesamplesrequest.md)                                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 ### Response
 
@@ -126,7 +135,7 @@ import {
 
 ### Errors
 
-| Error Type      | Status Code | Content Type     |
-| --------------- | ----------- | ---------------- |
-| errors.ErrorT   | 4XX         | application/json |
-| errors.APIError | 5XX         | \*/\*            |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.APIError  | 5XX              | \*/\*            |

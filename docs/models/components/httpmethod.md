@@ -11,5 +11,5 @@ let value: HttpMethod = "delete";
 ## Values
 
 ```typescript
-"get" | "post" | "put" | "patch" | "delete" | "head" | "options" | "trace";
+"get" | "post" | "put" | "patch" | "delete" | "head" | "options" | "trace"
 ```

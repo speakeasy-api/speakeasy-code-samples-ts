@@ -1,5 +1,4 @@
 <!-- Start SDK Example Usage [usage] -->
-
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
@@ -11,14 +10,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -26,6 +30,6 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End SDK Example Usage [usage] -->

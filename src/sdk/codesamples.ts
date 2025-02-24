@@ -19,6 +19,10 @@ export class CodeSamples extends ClientSDK {
     request: operations.GetCodeSamplesRequest,
     options?: RequestOptions,
   ): Promise<components.UsageSnippets> {
-    return unwrapAsync(codeSamplesGet(this, request, options));
+    return unwrapAsync(codeSamplesGet(
+      this,
+      request,
+      options,
+    ));
   }
 }

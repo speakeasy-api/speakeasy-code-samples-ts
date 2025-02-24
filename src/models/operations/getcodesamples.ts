@@ -45,15 +45,13 @@ export const GetCodeSamplesGlobals$inboundSchema: z.ZodType<
   GetCodeSamplesGlobals,
   z.ZodTypeDef,
   unknown
-> = z
-  .object({
-    registry_url: z.string().optional(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      registry_url: "registryUrl",
-    });
+> = z.object({
+  registry_url: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "registry_url": "registryUrl",
   });
+});
 
 /** @internal */
 export type GetCodeSamplesGlobals$Outbound = {
@@ -65,15 +63,13 @@ export const GetCodeSamplesGlobals$outboundSchema: z.ZodType<
   GetCodeSamplesGlobals$Outbound,
   z.ZodTypeDef,
   GetCodeSamplesGlobals
-> = z
-  .object({
-    registryUrl: z.string().optional(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      registryUrl: "registry_url",
-    });
+> = z.object({
+  registryUrl: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    registryUrl: "registry_url",
   });
+});
 
 /**
  * @internal
@@ -164,20 +160,18 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
   GetCodeSamplesRequest,
   z.ZodTypeDef,
   unknown
-> = z
-  .object({
-    registry_url: z.string().optional(),
-    operation_ids: z.array(z.string()).optional(),
-    method_paths: z.array(z.lazy(() => MethodPaths$inboundSchema)).optional(),
-    languages: z.array(z.string()).optional(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      registry_url: "registryUrl",
-      operation_ids: "operationIds",
-      method_paths: "methodPaths",
-    });
+> = z.object({
+  registry_url: z.string().optional(),
+  operation_ids: z.array(z.string()).optional(),
+  method_paths: z.array(z.lazy(() => MethodPaths$inboundSchema)).optional(),
+  languages: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "registry_url": "registryUrl",
+    "operation_ids": "operationIds",
+    "method_paths": "methodPaths",
   });
+});
 
 /** @internal */
 export type GetCodeSamplesRequest$Outbound = {
@@ -192,20 +186,18 @@ export const GetCodeSamplesRequest$outboundSchema: z.ZodType<
   GetCodeSamplesRequest$Outbound,
   z.ZodTypeDef,
   GetCodeSamplesRequest
-> = z
-  .object({
-    registryUrl: z.string().optional(),
-    operationIds: z.array(z.string()).optional(),
-    methodPaths: z.array(z.lazy(() => MethodPaths$outboundSchema)).optional(),
-    languages: z.array(z.string()).optional(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      registryUrl: "registry_url",
-      operationIds: "operation_ids",
-      methodPaths: "method_paths",
-    });
+> = z.object({
+  registryUrl: z.string().optional(),
+  operationIds: z.array(z.string()).optional(),
+  methodPaths: z.array(z.lazy(() => MethodPaths$outboundSchema)).optional(),
+  languages: z.array(z.string()).optional(),
+}).transform((v) => {
+  return remap$(v, {
+    registryUrl: "registry_url",
+    operationIds: "operation_ids",
+    methodPaths: "method_paths",
   });
+});
 
 /**
  * @internal

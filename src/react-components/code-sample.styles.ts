@@ -1,5 +1,5 @@
-import { css } from "@emotion/css";
-import { cssVarKey } from "./styles.js";
+import {css} from "@emotion/css";
+import {cssVarKey} from "./styles.js";
 
 const classes = {
   root: css({
@@ -29,7 +29,7 @@ const classes = {
     },
     "&::-webkit-select-arrow": {
       color: `red`, // For WebKit browsers
-    },
+    }
   }),
   codeContainer: css({
     position: "relative",

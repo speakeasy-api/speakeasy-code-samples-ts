@@ -24,42 +24,37 @@
 </div>
 
 <!-- Start Summary [summary] -->
-
 ## Summary
 
 Speakeasy Code Samples API: REST APIs for retrieving SDK usage snippets from the Speakeasy Code Samples API.
 
-For more information about the API: [The Speakeasy Platform Documentation](/docs)
 
+For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
-
 ## Table of Contents
-
 <!-- $toc-max-depth=2 -->
-
-- [SDK Installation](#sdk-installation)
-- [Requirements](#requirements)
-- [SDK Example Usage](#sdk-example-usage)
-- [Authentication](#authentication)
-- [Available Resources and Operations](#available-resources-and-operations)
-- [Standalone functions](#standalone-functions)
-- [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
-- [Global Parameters](#global-parameters)
-- [Retries](#retries)
-- [Error Handling](#error-handling)
-- [Server Selection](#server-selection)
-- [Custom HTTP Client](#custom-http-client)
-- [Debugging](#debugging)
-- [Development](#development)
-  - [Maturity](#maturity)
-  - [Contributions](#contributions)
+  * [SDK Installation](#sdk-installation)
+  * [Requirements](#requirements)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Authentication](#authentication)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Standalone functions](#standalone-functions)
+  * [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
+  * [Global Parameters](#global-parameters)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Debugging](#debugging)
+* [Development](#development)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
-
 ## SDK Installation
 
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
@@ -102,19 +97,15 @@ yarn add @tanstack/react-query react react-dom
 > [!NOTE]
 > This package is published as an ES Module (ESM) only. For applications using
 > CommonJS, use `await import("@speakeasyapi/code-samples")` to import and use this package.
-
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
-
 ## Requirements
 
 For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
-
 <!-- End Requirements [requirements] -->
 
 <!-- Start SDK Example Usage [usage] -->
-
 ## SDK Example Usage
 
 ### Example
@@ -130,14 +121,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -145,8 +141,8 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End SDK Example Usage [usage] -->
 
 ### React Component
@@ -176,8 +172,8 @@ function App() {
         defaultLang={"typescript"}
         title={CodeSampleFilenameTitle}
         operation={"getPassageText"}
-        // client={speakeasyCodeSamples}
-        // 👆 optional, if you want to pass the client directly
+        // client={speakeasyCodeSamples} 
+        // 👆 optional, if you want to pass the client directly 
         // instead of using the provider
       />
     </SpeakeasyCodeSamplesProvider>
@@ -186,7 +182,6 @@ function App() {
 ```
 
 <!-- Start Authentication [security] -->
-
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -198,7 +193,6 @@ This SDK supports the following security scheme globally:
 | `apiKey` | apiKey | API key |
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
-
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
@@ -210,14 +204,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -225,12 +224,11 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End Authentication [security] -->
 
 <!-- Start Available Resources and Operations [operations] -->
-
 ## Available Resources and Operations
 
 <details open>
@@ -238,13 +236,13 @@ run();
 
 ### [codeSamples](docs/sdks/codesamples/README.md)
 
-- [get](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
+* [get](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
+
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Standalone functions [standalone-funcs] -->
-
 ## Standalone functions
 
 All the methods listed above are available as standalone functions. These
@@ -265,7 +263,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 <!-- End Standalone functions [standalone-funcs] -->
 
 <!-- Start React hooks with TanStack Query [react-query] -->
-
 ## React hooks with TanStack Query
 
 React hooks built on [TanStack Query][tanstack-query] are included in this SDK.
@@ -293,12 +290,12 @@ To learn about this feature and how to get started, check
 <!-- End React hooks with TanStack Query [react-query] -->
 
 <!-- Start Global Parameters [global-parameters] -->
-
 ## Global Parameters
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
 For example, you can set `registry_url` to `"https://spec.speakeasy.com/org/ws/my-source"` at SDK initialization and then you do not have to pass the same value on calls to operations like `get`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
 
 ### Available Globals
 
@@ -321,14 +318,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -336,18 +338,16 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End Global Parameters [global-parameters] -->
 
 <!-- Start Retries [retries] -->
-
 ## Retries
 
-Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
-
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
@@ -357,41 +357,43 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 });
 
 async function run() {
-  const result = await speakeasyCodeSamples.codeSamples.get(
-    {
-      registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-      operationIds: ["getPets"],
-      methodPaths: [
-        {
-          method: "get",
-          path: "/pets",
-        },
-      ],
-      languages: ["python", "javascript"],
-    },
-    {
-      retries: {
-        strategy: "backoff",
-        backoff: {
-          initialInterval: 1,
-          maxInterval: 50,
-          exponent: 1.1,
-          maxElapsedTime: 100,
-        },
-        retryConnectionErrors: false,
+  const result = await speakeasyCodeSamples.codeSamples.get({
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
+    operationIds: [
+      "getPets",
+    ],
+    methodPaths: [
+      {
+        method: "get",
+        path: "/pets",
       },
+    ],
+    languages: [
+      "python",
+      "javascript",
+    ],
+  }, {
+    retries: {
+      strategy: "backoff",
+      backoff: {
+        initialInterval: 1,
+        maxInterval: 50,
+        exponent: 1.1,
+        maxElapsedTime: 100,
+      },
+      retryConnectionErrors: false,
     },
-  );
+  });
 
   // Handle the result
   console.log(result);
 }
 
 run();
+
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
-
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
@@ -413,14 +415,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -428,15 +435,14 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End Retries [retries] -->
 
 <!-- Start Error Handling [errors] -->
-
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the _Errors_ tables in SDK docs. For example, the `get` method may throw the following errors:
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `get` method may throw the following errors:
 
 | Error Type      | Status Code | Content Type     |
 | --------------- | ----------- | ---------------- |
@@ -462,14 +468,19 @@ async function run() {
   try {
     result = await speakeasyCodeSamples.codeSamples.get({
       registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-      operationIds: ["getPets"],
+      operationIds: [
+        "getPets",
+      ],
       methodPaths: [
         {
           method: "get",
           path: "/pets",
         },
       ],
-      languages: ["python", "javascript"],
+      languages: [
+        "python",
+        "javascript",
+      ],
     });
 
     // Handle the result
@@ -477,14 +488,14 @@ async function run() {
   } catch (err) {
     switch (true) {
       // The server response does not match the expected SDK schema
-      case err instanceof SDKValidationError: {
+      case (err instanceof SDKValidationError): {
         // Pretty-print will provide a human-readable multi-line error message
         console.error(err.pretty());
         // Raw value may also be inspected
         console.error(err.rawValue);
         return;
       }
-      case err instanceof ErrorT: {
+      case (err instanceof ErrorT): {
         // Handle err.data$: ErrorTData
         console.error(err);
         return;
@@ -498,24 +509,23 @@ async function run() {
 }
 
 run();
+
 ```
 
 Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
 
 In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `models/errors/httpclienterrors.ts` module:
 
-| HTTP Client Error     | Description                                          |
-| --------------------- | ---------------------------------------------------- |
-| RequestAbortedError   | HTTP request was aborted by the client               |
-| RequestTimeoutError   | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError       | HTTP client was unable to make a request to a server |
-| InvalidRequestError   | Any input used to create a request is invalid        |
-| UnexpectedClientError | Unrecognised or unexpected error                     |
-
+| HTTP Client Error                                    | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| RequestAbortedError                                  | HTTP request was aborted by the client               |
+| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
+| ConnectionError                                      | HTTP client was unable to make a request to a server |
+| InvalidRequestError                                  | Any input used to create a request is invalid        |
+| UnexpectedClientError                                | Unrecognised or unexpected error                     |
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
-
 ## Server Selection
 
 ### Select Server by Name
@@ -540,14 +550,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -555,12 +570,12 @@ async function run() {
 }
 
 run();
+
 ```
 
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
-
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
@@ -573,14 +588,19 @@ const speakeasyCodeSamples = new SpeakeasyCodeSamples({
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
-    operationIds: ["getPets"],
+    operationIds: [
+      "getPets",
+    ],
     methodPaths: [
       {
         method: "get",
         path: "/pets",
       },
     ],
-    languages: ["python", "javascript"],
+    languages: [
+      "python",
+      "javascript",
+    ],
   });
 
   // Handle the result
@@ -588,12 +608,11 @@ async function run() {
 }
 
 run();
-```
 
+```
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
-
 ## Custom HTTP Client
 
 The TypeScript SDK makes API calls using an `HTTPClient` that wraps the native
@@ -618,12 +637,12 @@ const httpClient = new HTTPClient({
   // fetcher takes a function that has the same signature as native `fetch`.
   fetcher: (request) => {
     return fetch(request);
-  },
+  }
 });
 
 httpClient.addHook("beforeRequest", (request) => {
   const nextRequest = new Request(request, {
-    signal: request.signal || AbortSignal.timeout(5000),
+    signal: request.signal || AbortSignal.timeout(5000)
   });
 
   nextRequest.headers.set("x-custom-header", "custom value");
@@ -640,11 +659,9 @@ httpClient.addHook("requestError", (error, request) => {
 
 const sdk = new SpeakeasyCodeSamples({ httpClient });
 ```
-
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Debugging [debug] -->
-
 ## Debugging
 
 You can setup your SDK to emit debug logs for SDK requests and responses.
@@ -659,7 +676,6 @@ import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
 const sdk = new SpeakeasyCodeSamples({ debugLogger: console });
 ```
-
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

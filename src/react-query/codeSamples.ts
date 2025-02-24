@@ -40,7 +40,11 @@ export function useCodeSamples(
 ): UseQueryResult<CodeSamplesQueryData, Error> {
   const client = useSpeakeasyCodeSamplesContext();
   return useQuery({
-    ...buildCodeSamplesQuery(client, request, options),
+    ...buildCodeSamplesQuery(
+      client,
+      request,
+      options,
+    ),
     ...options,
   });
 }
@@ -57,7 +61,11 @@ export function useCodeSamplesSuspense(
 ): UseSuspenseQueryResult<CodeSamplesQueryData, Error> {
   const client = useSpeakeasyCodeSamplesContext();
   return useSuspenseQuery({
-    ...buildCodeSamplesQuery(client, request, options),
+    ...buildCodeSamplesQuery(
+      client,
+      request,
+      options,
+    ),
     ...options,
   });
 }
@@ -68,7 +76,10 @@ export function prefetchCodeSamples(
   request: operations.GetCodeSamplesRequest,
 ): Promise<void> {
   return queryClient.prefetchQuery({
-    ...buildCodeSamplesQuery(client$, request),
+    ...buildCodeSamplesQuery(
+      client$,
+      request,
+    ),
   });
 }
 
@@ -92,14 +103,12 @@ export function setCodeSamplesData(
 export function invalidateCodeSamples(
   client: QueryClient,
   queryKeyBase: TupleToPrefixes<
-    [
-      parameters: {
-        registryUrl?: string | undefined;
-        operationIds?: Array<string> | undefined;
-        methodPaths?: Array<operations.MethodPaths> | undefined;
-        languages?: Array<string> | undefined;
-      },
-    ]
+    [parameters: {
+      registryUrl?: string | undefined;
+      operationIds?: Array<string> | undefined;
+      methodPaths?: Array<operations.MethodPaths> | undefined;
+      languages?: Array<string> | undefined;
+    }]
   >,
   filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
 ): Promise<void> {
@@ -148,16 +157,22 @@ export function buildCodeSamplesQuery(
         fetchOptions: { ...options?.fetchOptions, signal: sig },
       };
 
-      return unwrapAsync(codeSamplesGet(client$, request, mergedOptions));
+      return unwrapAsync(codeSamplesGet(
+        client$,
+        request,
+        mergedOptions,
+      ));
     },
   };
 }
 
-export function queryKeyCodeSamples(parameters: {
-  registryUrl?: string | undefined;
-  operationIds?: Array<string> | undefined;
-  methodPaths?: Array<operations.MethodPaths> | undefined;
-  languages?: Array<string> | undefined;
-}): QueryKey {
+export function queryKeyCodeSamples(
+  parameters: {
+    registryUrl?: string | undefined;
+    operationIds?: Array<string> | undefined;
+    methodPaths?: Array<operations.MethodPaths> | undefined;
+    languages?: Array<string> | undefined;
+  },
+): QueryKey {
   return ["@speakeasyapi/code-samples", "codeSamples", "get", parameters];
 }

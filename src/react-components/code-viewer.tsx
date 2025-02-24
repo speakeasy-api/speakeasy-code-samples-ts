@@ -1,7 +1,7 @@
-import { HighlightedCode, Pre } from "codehike/code";
-import { classes } from "./code-viewer.styles.js";
-import { lineNumbers } from "./codehike/line-numbers.js";
-import { tokenTransitions } from "./codehike/token-transitions.js";
+import {HighlightedCode, Pre} from "codehike/code";
+import {classes} from "./code-viewer.styles.js";
+import {lineNumbers} from "./codehike/line-numbers.js";
+import {tokenTransitions} from "./codehike/token-transitions.js";
 import React from "react";
 
 interface CodeDisplayProps {
@@ -11,18 +11,18 @@ interface CodeDisplayProps {
   style?: React.CSSProperties | undefined;
 }
 
-export function CodeViewer({ code, style }: CodeDisplayProps) {
+export function CodeViewer({code, style}: CodeDisplayProps) {
   return (
     <Pre
       className={classes.pre}
-      style={{ overflow: "auto", ...style }}
+      style={{overflow: 'auto', ...style}}
       handlers={[lineNumbers, tokenTransitions]}
       code={code}
     />
   );
 }
 
-export function ErrorDisplay({ error }: { error: Error }) {
+export function ErrorDisplay({error}: { error: Error }) {
   return (
     <div className={classes.errorContainer}>
       <span className={classes.errorTitle}>

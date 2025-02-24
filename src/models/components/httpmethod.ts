@@ -18,8 +18,8 @@ export const HttpMethod = {
 export type HttpMethod = ClosedEnum<typeof HttpMethod>;
 
 /** @internal */
-export const HttpMethod$inboundSchema: z.ZodNativeEnum<typeof HttpMethod> =
-  z.nativeEnum(HttpMethod);
+export const HttpMethod$inboundSchema: z.ZodNativeEnum<typeof HttpMethod> = z
+  .nativeEnum(HttpMethod);
 
 /** @internal */
 export const HttpMethod$outboundSchema: z.ZodNativeEnum<typeof HttpMethod> =

@@ -89,7 +89,10 @@ type SecurityInputOAuth2ClientCredentials = {
 
 type SecurityInputOAuth2PasswordCredentials = {
   type: "oauth2:password";
-  value: string | null | undefined;
+  value:
+    | string
+    | null
+    | undefined;
   fieldName: string;
 };
 
@@ -129,14 +132,17 @@ export function resolveSecurity(
       } else if (o.type === "http:custom") {
         return null;
       } else if (o.type === "oauth2:password") {
-        return typeof o.value === "string" && !!o.value;
+        return (
+          typeof o.value === "string" && !!o.value
+        );
       } else if (o.type === "oauth2:client_credentials") {
         return o.value.clientID != null || o.value.clientSecret != null;
       } else if (typeof o.value === "string") {
         return !!o.value;
       } else {
         throw new Error(
-          `Unrecognized security type: ${o.type} (value type: ${typeof o.value})`,
+          `Unrecognized security type: ${o.type} (value type: ${typeof o
+            .value})`,
         );
       }
     });
@@ -190,7 +196,10 @@ export function resolveSecurity(
   return state;
 }
 
-function applyBasic(state: SecurityState, spec: SecurityInputBasic) {
+function applyBasic(
+  state: SecurityState,
+  spec: SecurityInputBasic,
+) {
   if (spec.value == null) {
     return;
   }
@@ -221,13 +230,15 @@ function applyBearer(
 export function resolveGlobalSecurity(
   security: Partial<components.Security> | null | undefined,
 ): SecurityState | null {
-  return resolveSecurity([
-    {
-      fieldName: "x-api-key",
-      type: "apiKey:header",
-      value: security?.apiKey,
-    },
-  ]);
+  return resolveSecurity(
+    [
+      {
+        fieldName: "x-api-key",
+        type: "apiKey:header",
+        value: security?.apiKey,
+      },
+    ],
+  );
 }
 
 export async function extractSecurity<

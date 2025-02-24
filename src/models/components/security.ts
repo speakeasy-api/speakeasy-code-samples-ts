@@ -17,15 +17,13 @@ export const Security$inboundSchema: z.ZodType<
   Security,
   z.ZodTypeDef,
   unknown
-> = z
-  .object({
-    APIKey: z.string(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      APIKey: "apiKey",
-    });
+> = z.object({
+  APIKey: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    "APIKey": "apiKey",
   });
+});
 
 /** @internal */
 export type Security$Outbound = {
@@ -37,15 +35,13 @@ export const Security$outboundSchema: z.ZodType<
   Security$Outbound,
   z.ZodTypeDef,
   Security
-> = z
-  .object({
-    apiKey: z.string(),
-  })
-  .transform((v) => {
-    return remap$(v, {
-      apiKey: "APIKey",
-    });
+> = z.object({
+  apiKey: z.string(),
+}).transform((v) => {
+  return remap$(v, {
+    apiKey: "APIKey",
   });
+});
 
 /**
  * @internal

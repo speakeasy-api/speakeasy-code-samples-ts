@@ -13,7 +13,7 @@ let value: MethodPaths = {
 
 ## Fields
 
-| Field    | Type                                                           | Required           | Description |
-| -------- | -------------------------------------------------------------- | ------------------ | ----------- |
-| `method` | [components.HttpMethod](../../models/components/httpmethod.md) | :heavy_check_mark: | N/A         |
-| `path`   | _string_                                                       | :heavy_check_mark: | N/A         |
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `method`                                                       | [components.HttpMethod](../../models/components/httpmethod.md) | :heavy_check_mark:                                             | N/A                                                            |
+| `path`                                                         | *string*                                                       | :heavy_check_mark:                                             | N/A                                                            |

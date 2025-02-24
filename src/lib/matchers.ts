@@ -175,8 +175,9 @@ export function match<T, E>(
     let matcher: Matcher<T, E> | undefined;
     for (const match of matchers) {
       const { codes } = match;
-      const ctpattern =
-        "ctype" in match ? match.ctype : DEFAULT_CONTENT_TYPES[match.enc];
+      const ctpattern = "ctype" in match
+        ? match.ctype
+        : DEFAULT_CONTENT_TYPES[match.enc];
       if (ctpattern && matchResponse(response, codes, ctpattern)) {
         matcher = match;
         break;
@@ -188,17 +189,14 @@ export function match<T, E>(
 
     if (!matcher) {
       const responseBody = await response.text();
-      return [
-        {
-          ok: false,
-          error: new APIError(
-            "Unexpected API response status or content-type",
-            response,
-            responseBody,
-          ),
-        },
-        responseBody,
-      ];
+      return [{
+        ok: false,
+        error: new APIError(
+          "Unexpected API response status or content-type",
+          response,
+          responseBody,
+        ),
+      }, responseBody];
     }
 
     const encoding = matcher.enc;
@@ -230,17 +228,14 @@ export function match<T, E>(
     }
 
     if (matcher.enc === "fail") {
-      return [
-        {
-          ok: false,
-          error: new APIError(
-            "API error occurred",
-            response,
-            typeof raw === "string" ? raw : "",
-          ),
-        },
-        raw,
-      ];
+      return [{
+        ok: false,
+        error: new APIError(
+          "API error occurred",
+          response,
+          typeof raw === "string" ? raw : "",
+        ),
+      }, raw];
     }
 
     const resultKey = matcher.key || options?.resultKey;

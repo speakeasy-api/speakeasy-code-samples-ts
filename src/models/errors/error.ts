@@ -32,10 +32,9 @@ export class ErrorT extends Error {
   data$: ErrorTData;
 
   constructor(err: ErrorTData) {
-    const message =
-      "message" in err && typeof err.message === "string"
-        ? err.message
-        : `API error occurred: ${JSON.stringify(err)}`;
+    const message = "message" in err && typeof err.message === "string"
+      ? err.message
+      : `API error occurred: ${JSON.stringify(err)}`;
     super(message);
     this.data$ = err;
 
@@ -53,7 +52,7 @@ export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
   })
   .transform((v) => {
     const remapped = remap$(v, {
-      status_code: "statusCode",
+      "status_code": "statusCode",
     });
 
     return new ErrorT(remapped);
@@ -70,20 +69,17 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT$Outbound,
   z.ZodTypeDef,
   ErrorT
-> = z
-  .instanceof(ErrorT)
-  .transform((v) => v.data$)
+> = z.instanceof(ErrorT)
+  .transform(v => v.data$)
   .pipe(
-    z
-      .object({
-        message: z.string(),
-        statusCode: z.number().int(),
-      })
-      .transform((v) => {
-        return remap$(v, {
-          statusCode: "status_code",
-        });
-      }),
+    z.object({
+      message: z.string(),
+      statusCode: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        statusCode: "status_code",
+      });
+    }),
   );
 
 /**

@@ -12,6 +12,6 @@ let value: Security = {
 
 ## Fields
 
-| Field    | Type     | Required           | Description |
-| -------- | -------- | ------------------ | ----------- |
-| `apiKey` | _string_ | :heavy_check_mark: | N/A         |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `apiKey`           | *string*           | :heavy_check_mark: | N/A                |

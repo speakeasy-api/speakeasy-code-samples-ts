@@ -66,15 +66,13 @@ type RequestConfig = {
 };
 
 const gt: unknown = typeof globalThis === "undefined" ? null : globalThis;
-const webWorkerLike =
-  typeof gt === "object" &&
-  gt != null &&
-  "importScripts" in gt &&
-  typeof gt["importScripts"] === "function";
-const isBrowserLike =
-  webWorkerLike ||
-  (typeof navigator !== "undefined" && "serviceWorker" in navigator) ||
-  (typeof window === "object" && typeof window.document !== "undefined");
+const webWorkerLike = typeof gt === "object"
+  && gt != null
+  && "importScripts" in gt
+  && typeof gt["importScripts"] === "function";
+const isBrowserLike = webWorkerLike
+  || (typeof navigator !== "undefined" && "serviceWorker" in navigator)
+  || (typeof window === "object" && typeof window.document !== "undefined");
 
 export class ClientSDK {
   readonly #httpClient: HTTPClient;
@@ -86,10 +84,10 @@ export class ClientSDK {
   constructor(options: SDKOptions = {}) {
     const opt = options as unknown;
     if (
-      typeof opt === "object" &&
-      opt != null &&
-      "hooks" in opt &&
-      opt.hooks instanceof SDKHooks
+      typeof opt === "object"
+      && opt != null
+      && "hooks" in opt
+      && opt.hooks instanceof SDKHooks
     ) {
       this.#hooks = opt.hooks;
     } else {
@@ -248,7 +246,7 @@ export class ClientSDK {
       async () => {
         const req = await this.#hooks.beforeRequest(context, request.clone());
         await logRequest(this.#logger, req).catch((e) =>
-          this.#logger?.log("Failed to log request:", e),
+          this.#logger?.log("Failed to log request:", e)
         );
 
         let response = await this.#httpClient.request(req);
@@ -268,9 +266,8 @@ export class ClientSDK {
             response = await this.#hooks.afterSuccess(context, response);
           }
         } finally {
-          await logResponse(this.#logger, response, req).catch((e) =>
-            this.#logger?.log("Failed to log response:", e),
-          );
+          await logResponse(this.#logger, response, req)
+            .catch(e => this.#logger?.log("Failed to log response:", e));
         }
 
         return response;
@@ -371,8 +368,8 @@ async function logResponse(
 
   logger.group("Body:");
   switch (true) {
-    case matchContentType(res, "application/json") ||
-      jsonLikeContentTypeRE.test(ct):
+    case matchContentType(res, "application/json")
+      || jsonLikeContentTypeRE.test(ct):
       logger.log(await res.clone().json());
       break;
     case matchContentType(res, "text/event-stream"):

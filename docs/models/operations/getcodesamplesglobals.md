@@ -12,6 +12,6 @@ let value: GetCodeSamplesGlobals = {
 
 ## Fields
 
-| Field         | Type     | Required           | Description                                           | Example                                     |
-| ------------- | -------- | ------------------ | ----------------------------------------------------- | ------------------------------------------- |
-| `registryUrl` | _string_ | :heavy_minus_sign: | The registry URL from which to retrieve the snippets. | https://spec.speakeasy.com/org/ws/my-source |
+| Field                                                 | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `registryUrl`                                         | *string*                                              | :heavy_minus_sign:                                    | The registry URL from which to retrieve the snippets. | https://spec.speakeasy.com/org/ws/my-source           |
