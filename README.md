@@ -97,6 +97,57 @@ yarn add @tanstack/react-query react react-dom
 > [!NOTE]
 > This package is published as an ES Module (ESM) only. For applications using
 > CommonJS, use `await import("@speakeasyapi/code-samples")` to import and use this package.
+
+### Model Context Protocol (MCP) Server
+
+This SDK is also an installable MCP server where the various SDK methods are
+exposed as tools that can be invoked by AI applications.
+
+> Node.js v20 or greater is required to run the MCP server.
+
+<details>
+<summary>Claude installation steps</summary>
+
+Add the following server definition to your `claude_desktop_config.json` file:
+
+```json
+{
+  "mcpServers": {
+    "SpeakeasyCodeSamples": {
+      "command": "npx",
+      "args": [
+        "-y", "--package", "@speakeasyapi/code-samples",
+        "--",
+        "mcp", "start",
+        "--api-key", "...",
+        "--registry-url", "..."
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Cursor installation steps</summary>
+
+Go to `Cursor Settings > Features > MCP Servers > Add new MCP server` and use the following settings:
+
+- Name: SpeakeasyCodeSamples
+- Type: `command`
+- Command:
+```sh
+npx -y --package @speakeasyapi/code-samples -- mcp start --api-key ... --registry-url ... 
+```
+
+</details>
+
+For a full list of server arguments, run:
+
+```sh
+npx -y --package @speakeasyapi/code-samples -- mcp start --help
+```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start Requirements [requirements] -->
