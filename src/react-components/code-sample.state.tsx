@@ -43,21 +43,31 @@ type Action =
   | { type: "FETCH_INIT" }
   | { type: "FETCH_SUCCESS"; payload: FetchSuccessPayload }
   | { type: "FETCH_FAILURE"; payload: Error }
-  | { type: "SET_LANGUAGE"; payload: string };
+  | { type: "SELECT"; payload: SafeGetSnippetParams };
 
-function safeGetSnippetForLanguage(
+type SafeGetSnippetParams = {
+  methodPath?: string | undefined;
+  language?: string | undefined;
+};
+
+function safeGetSnippet(
   snippets: SpeakeasyHighlightedCode[],
-  language?: string,
+  { methodPath, language }: SafeGetSnippetParams,
 ): SpeakeasyHighlightedCode {
-  if (!language) return snippets[0]!;
+  const maybeEqual = (a: string, b: string | undefined) =>
+    b === undefined || a.toLowerCase() === b.toLowerCase();
 
-  const selectedSnippet = snippets.find((s) => s.lang === language);
+  const selectedSnippet = snippets.find(
+    (s) =>
+      maybeEqual(getMethodPath(s.raw), methodPath) &&
+      maybeEqual(s.lang, language),
+  );
   if (selectedSnippet) {
     return selectedSnippet;
   }
 
   console.warn(
-    `Could not find snippet for language "${language}".`,
+    `Could not find snippet for method and path "${methodPath}".`,
     `Falling back to to first language in snippet array.`,
   );
 
@@ -75,10 +85,9 @@ const reducer: React.Reducer<CodeSampleState, Action> = (
       return {
         status: "success",
         snippets: action.payload.snippets,
-        selectedSnippet: safeGetSnippetForLanguage(
-          action.payload.snippets,
-          action.payload.defaultLanguage,
-        ),
+        selectedSnippet: safeGetSnippet(action.payload.snippets, {
+          language: action.payload.defaultLanguage,
+        }),
       };
     case "FETCH_FAILURE":
       return {
@@ -86,13 +95,10 @@ const reducer: React.Reducer<CodeSampleState, Action> = (
         status: "error",
         error: action.payload,
       };
-    case "SET_LANGUAGE":
+    case "SELECT":
       return {
         ...state,
-        selectedSnippet: safeGetSnippetForLanguage(
-          state.snippets!,
-          action.payload,
-        ),
+        selectedSnippet: safeGetSnippet(state.snippets!, action.payload),
       };
     default:
       return state;
@@ -148,12 +154,22 @@ export const useCodeSampleState = ({
     handleMount();
   }, []);
 
-  function setSelectedLanguage(language: string) {
-    dispatch({ type: "SET_LANGUAGE", payload: language });
+  function selectSnippet(params: SafeGetSnippetParams) {
+    dispatch({
+      type: "SELECT",
+      payload: {
+        language: state.selectedSnippet?.raw.language,
+        methodPath: getMethodPath(state.selectedSnippet?.raw),
+        ...params,
+      },
+    });
   }
 
-  return { state, setSelectedLanguage };
+  return { state, selectSnippet };
 };
+
+export const getMethodPath = (snippet: UsageSnippet | undefined): string =>
+  snippet ? `${snippet.method.toUpperCase()} ${snippet.path}` : "";
 
 /** Intended to give the user the option of providing their own client. */
 export const useSafeSpeakeasyCodeSamplesContext = (

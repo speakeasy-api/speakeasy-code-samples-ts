@@ -2,19 +2,20 @@ import { HighlightedCode, Pre } from "codehike/code";
 import { classes } from "./code-viewer.styles.js";
 import { lineNumbers } from "./codehike/line-numbers.js";
 import { tokenTransitions } from "./codehike/token-transitions.js";
+import React from "react";
 
 interface CodeDisplayProps {
   status: "loading" | "success" | "error";
   error?: Error;
   code: HighlightedCode;
-  longestCodeHeight: number;
+  style?: React.CSSProperties | undefined;
 }
 
-export function CodeViewer({ code, longestCodeHeight }: CodeDisplayProps) {
+export function CodeViewer({ code, style }: CodeDisplayProps) {
   return (
     <Pre
       className={classes.pre}
-      style={{ height: longestCodeHeight }}
+      style={{ overflow: "auto", ...style }}
       handlers={[lineNumbers, tokenTransitions]}
       code={code}
     />

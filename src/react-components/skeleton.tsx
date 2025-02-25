@@ -86,6 +86,14 @@ const skeletonSizes = {
     height: 22,
     width: "clamp(350px, 75%, 400px)",
   }),
+  smallTall: css({
+    height: 37,
+    width: "clamp(40px, 10%, 80px)",
+  }),
+  mediumTall: css({
+    height: 37,
+    width: "clamp(175px, 25%, 250px)",
+  }),
 };
 
 const indentedStyles = css({
@@ -114,9 +122,9 @@ export const LoadingSkeleton = () => {
 };
 
 export const TitleSkeleton = () => (
-  <Skeleton className={skeletonSizes.medium} />
+  <Skeleton className={skeletonSizes.mediumTall} />
 );
 
 export const LanguageSelectorSkeleton = () => (
-  <Skeleton className={skeletonSizes.small} />
+  <Skeleton className={skeletonSizes.mediumTall} />
 );

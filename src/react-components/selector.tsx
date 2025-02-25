@@ -3,28 +3,28 @@ import { prettyLanguageName } from "./utils.js";
 
 const selectorStyles = css({});
 
-interface LanguageSelectorProps {
+interface SelectorProps {
   value?: string | undefined;
+  values: string[];
   onChange: (language: string) => void;
-  snippets: { lang: string }[];
   className?: string;
 }
 
-export const LanguageSelector = ({
+export const Selector = ({
   value,
-  onChange: onLanguageChange,
-  snippets,
+  onChange,
+  values,
   className,
-}: LanguageSelectorProps) => {
+}: SelectorProps) => {
   return (
     <select
       value={value}
-      onChange={(e) => onLanguageChange(e.target.value)}
+      onChange={(e) => onChange(e.target.value)}
       className={`${selectorStyles} ${className || ""}`}
     >
-      {snippets.map(({ lang }, index) => (
-        <option key={index} value={lang}>
-          {prettyLanguageName(lang)}
+      {values.map((v, index) => (
+        <option key={index} value={v}>
+          {prettyLanguageName(v)}
         </option>
       ))}
     </select>

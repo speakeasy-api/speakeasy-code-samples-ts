@@ -81,6 +81,10 @@ export const CodeSampleTitle: React.FC<TitleComponentProps> = (props) => {
 
   if (props.status !== "success") return <TitleSkeleton />;
 
+  if (props.component === false) {
+    return null;
+  }
+
   if (React.isValidElement(props.component)) return props.component;
 
   if (typeof props.component === "string") {
@@ -91,5 +95,5 @@ export const CodeSampleTitle: React.FC<TitleComponentProps> = (props) => {
     return props.component(props.data!);
   }
 
-  return "Inavlid title";
+  return "Invalid title";
 };
