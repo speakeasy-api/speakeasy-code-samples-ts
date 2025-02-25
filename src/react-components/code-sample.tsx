@@ -19,8 +19,8 @@ import {
   type CodeSampleTitleComponent,
 } from "./titles.js";
 import { prettyLanguageName } from "./utils.js";
-import { Selector } from "./selector";
-import { UsageSnippet } from "../models/components";
+import { Selector } from "./selector.js";
+import { UsageSnippet } from "../models/components/usagesnippet.js";
 
 export type CodeSamplesViewerProps = {
   /** Whether the code snippet should be copyable. */
