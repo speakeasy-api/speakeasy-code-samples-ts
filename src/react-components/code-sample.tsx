@@ -1,26 +1,19 @@
-import { domMax, LazyMotion } from "motion/react";
-import React, { useEffect, useMemo } from "react";
-import { SpeakeasyCodeSamplesCore } from "../core.js";
-import {
-  GetCodeSamplesRequest,
-  MethodPaths,
-} from "../models/operations/getcodesamples.js";
-import { OperationId } from "../types/custom.js";
-import { getMethodPath, useCodeSampleState } from "./code-sample.state.js";
+import {domMax, LazyMotion} from "motion/react";
+import React, {useEffect, useMemo} from "react";
+import {SpeakeasyCodeSamplesCore} from "../core.js";
+import {GetCodeSamplesRequest, MethodPaths,} from "../models/operations/getcodesamples.js";
+import {OperationId} from "../types/custom.js";
+import {getMethodPath, useCodeSampleState} from "./code-sample.state.js";
 import classes from "./code-sample.styles.js";
-import { CodeViewer, ErrorDisplay } from "./code-viewer.js";
+import {CodeViewer, ErrorDisplay} from "./code-viewer.js";
 import codehikeTheme from "./codehike/theme.js";
-import { CopyButton } from "./copy-button.js";
-import { LanguageSelectorSkeleton, LoadingSkeleton } from "./skeleton.js";
-import { getCssVars, useSystemColorMode } from "./styles.js";
-import {
-  CodeSampleFilenameTitle,
-  CodeSampleTitle,
-  type CodeSampleTitleComponent,
-} from "./titles.js";
-import { prettyLanguageName } from "./utils.js";
-import { Selector } from "./selector";
-import { UsageSnippet } from "../models/components";
+import {CopyButton} from "./copy-button.js";
+import {LanguageSelectorSkeleton, LoadingSkeleton} from "./skeleton.js";
+import {getCssVars, useSystemColorMode} from "./styles.js";
+import {CodeSampleFilenameTitle, CodeSampleTitle, type CodeSampleTitleComponent,} from "./titles.js";
+import {prettyLanguageName} from "./utils.js";
+import {Selector} from "./selector";
+import {UsageSnippet} from "../models/components";
 
 export type CodeSamplesViewerProps = {
   /** Whether the code snippet should be copyable. */
@@ -47,7 +40,8 @@ export type CodeSamplesViewerProps = {
    * @default CodeSampleMethodTitle
    */
   title?: CodeSampleTitleComponent | React.ReactNode | string | false;
-  /** The operations to get code samples for. If only one is provided, no selector will be shown.
+  /**
+   * The operations to get code samples for. If only one is provided, no selector will be shown.
    * Can be queried by either operationId or method+path.
    */
   operations?: MethodPaths[] | OperationId[];
@@ -60,32 +54,39 @@ export type CodeSamplesViewerProps = {
    * Sets the style of the code window.
    */
   codeWindowStyle?: React.CSSProperties;
+  /**
+   * If true, the code window will be fixed to the height of the longest code snippet.
+   * This can be useful for preventing layout shifts when switching between code snippets.
+   * Overrides any height set in codeWindowStyle.
+   */
+  fixedHeight?: boolean;
 
   className?: string | undefined;
   style?: React.CSSProperties;
 };
 
 export function CodeSamplesViewer({
-  theme = "system",
-  title = CodeSampleFilenameTitle,
-  defaultLanguage,
-  operations,
-  copyable,
-  client: clientProp,
-  style,
-  codeWindowStyle,
-  className,
-}: CodeSamplesViewerProps) {
+                                    theme = "system",
+                                    title = CodeSampleFilenameTitle,
+                                    defaultLanguage,
+                                    operations,
+                                    copyable,
+                                    client: clientProp,
+                                    style,
+                                    codeWindowStyle,
+                                    fixedHeight,
+                                    className,
+                                  }: CodeSamplesViewerProps) {
   const requestParams: GetCodeSamplesRequest = React.useMemo(() => {
     if (typeof operations?.[0] === "string")
-      return { operationIds: operations as OperationId[] };
+      return {operationIds: operations as OperationId[]};
     else if (operations?.[0]?.method && operations[0].path)
-      return { methodPaths: operations as MethodPaths[] };
+      return {methodPaths: operations as MethodPaths[]};
 
     return {};
   }, [operations]);
 
-  const { state, selectSnippet } = useCodeSampleState({
+  const {state, selectSnippet} = useCodeSampleState({
     client: clientProp,
     requestParams,
   });
@@ -93,7 +94,7 @@ export function CodeSamplesViewer({
   // On mount, select the defaults
   useEffect(() => {
     if (!state.snippets || state.status !== "success") return;
-    selectSnippet({ language: defaultLanguage });
+    selectSnippet({language: defaultLanguage});
   }, [state.status]);
 
   const systemColorMode = useSystemColorMode();
@@ -105,13 +106,13 @@ export function CodeSamplesViewer({
   const languages: string[] = useMemo(() => {
     return [
       ...new Set(
-        state.snippets?.map(({ raw }) => prettyLanguageName(raw.language)),
+        state.snippets?.map(({raw}) => prettyLanguageName(raw.language)),
       ),
     ];
   }, [state.snippets]);
 
   const getOperationKey = (snippet: UsageSnippet | undefined): string => {
-    let { operationId } = snippet;
+    let {operationId} = snippet;
     const methodPathDisplay = getMethodPath(snippet);
     if (!operationId) {
       operationId = methodPathDisplay;
@@ -123,7 +124,7 @@ export function CodeSamplesViewer({
   // For the selector, we try to show operation ID but fall back on method+path if it's missing
   const operationIdToMethodAndPath: Record<string, string> = useMemo(() => {
     return Object.fromEntries(
-      state.snippets?.map(({ raw }) => [
+      state.snippets?.map(({raw}) => [
         getOperationKey(raw),
         getMethodPath(raw),
       ]) ?? [],
@@ -131,6 +132,25 @@ export function CodeSamplesViewer({
   }, [state.snippets]);
 
   const operationIds = Object.keys(operationIdToMethodAndPath);
+
+  const longestCodeHeight = React.useMemo(() => {
+    const largestLines = Math.max(
+      ...Object.values(state.snippets ?? [])
+        .filter((snippet) => snippet.code !== undefined)
+        .map((code) => code.code!.split("\n").length),
+    );
+
+    const lineHeight = 23;
+    const padding = 12;
+    return largestLines * lineHeight + padding * 2;
+  }, [state.snippets]);
+
+  if (fixedHeight) {
+    codeWindowStyle = {
+      ...codeWindowStyle,
+      height: longestCodeHeight,
+    };
+  }
 
   return (
     <LazyMotion strict features={domMax}>
@@ -151,10 +171,10 @@ export function CodeSamplesViewer({
               status={state.status}
               data={state.selectedSnippet?.raw}
             />
-            <div style={{ display: "flex", gap: "0.75rem" }}>
+            <div style={{display: "flex", gap: "0.75rem"}}>
               {state.status === "loading" && (
-                <div style={{ width: "180px" }}>
-                  <LanguageSelectorSkeleton />
+                <div style={{width: "180px"}}>
+                  <LanguageSelectorSkeleton/>
                 </div>
               )}
               {state.status === "success" && operationIds.length > 1 && (
@@ -175,7 +195,7 @@ export function CodeSamplesViewer({
                     state.selectedSnippet?.raw.language,
                   )}
                   values={languages}
-                  onChange={(language: string) => selectSnippet({ language })}
+                  onChange={(language: string) => selectSnippet({language})}
                   className={classes.selector}
                 />
               )}
@@ -184,10 +204,10 @@ export function CodeSamplesViewer({
         )}
         <div className={classes.codeContainer}>
           {state.status === "success" && copyable && (
-            <CopyButton code={state.selectedSnippet.code} />
+            <CopyButton code={state.selectedSnippet.code}/>
           )}
-          {state.status === "loading" && <LoadingSkeleton />}
-          {state.status === "error" && <ErrorDisplay error={state.error} />}
+          {state.status === "loading" && <LoadingSkeleton/>}
+          {state.status === "error" && <ErrorDisplay error={state.error}/>}
           {state.status === "success" && (
             <CodeViewer
               status={state.status}
