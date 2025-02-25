@@ -119,6 +119,7 @@ export function CodeSamplesViewer({
   }, [state.snippets]);
 
   const getOperationKey = (snippet: UsageSnippet | undefined): string => {
+    if (!snippet) return "";
     let { operationId } = snippet;
     const methodPathDisplay = getMethodPath(snippet);
     if (!operationId) {
