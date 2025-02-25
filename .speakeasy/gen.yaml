@@ -17,7 +17,7 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
 typescript:
-  version: 2.3.0
+  version: 2.4.0
   additionalDependencies:
     dependencies:
       '@emotion/css': ^11.13.5

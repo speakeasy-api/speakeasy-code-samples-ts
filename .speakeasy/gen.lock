@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: a16089f06495dd5f7de1f5121d72ec45
+  docChecksum: 80bdf0b395520d76da9a1e1e2896dae0
   docVersion: 0.4.0
-  speakeasyVersion: 1.501.0
-  generationVersion: 2.522.1
-  releaseVersion: 2.3.0
-  configChecksum: af4c84e6b75f7ba42bd4d7fad05a022c
+  speakeasyVersion: 1.504.0
+  generationVersion: 2.529.0
+  releaseVersion: 2.4.0
+  configChecksum: cf2dd71ca7f41b785896af8960a03d06
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
@@ -25,6 +25,7 @@ features:
     globalServerURLs: 2.82.4
     globals: 2.82.2
     groups: 2.81.2
+    mcpServer: 0.3.0
     nameOverrides: 2.81.2
     reactQueryHooks: 0.2.2
     responseFormat: 0.2.3
@@ -76,6 +77,18 @@ generatedFiles:
   - src/lib/sdks.ts
   - src/lib/security.ts
   - src/lib/url.ts
+  - src/mcp-server/build.mts
+  - src/mcp-server/cli.ts
+  - src/mcp-server/cli/start/command.ts
+  - src/mcp-server/cli/start/impl.ts
+  - src/mcp-server/console-logger.ts
+  - src/mcp-server/mcp-server.ts
+  - src/mcp-server/resources.ts
+  - src/mcp-server/scopes.ts
+  - src/mcp-server/server.ts
+  - src/mcp-server/shared.ts
+  - src/mcp-server/tools.ts
+  - src/mcp-server/tools/codeSamplesGet.ts
   - src/models/components/httpmethod.ts
   - src/models/components/index.ts
   - src/models/components/security.ts
