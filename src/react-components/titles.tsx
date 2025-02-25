@@ -81,10 +81,13 @@ export const CodeSampleTitle: React.FC<TitleComponentProps> = (props) => {
 
   if (props.status !== "success") return <TitleSkeleton />;
 
+  if (props.component === false) {
+    return null;
+  }
+
   if (React.isValidElement(props.component)) return props.component;
 
   if (typeof props.component === "string") {
-    if (props.component === "none") return null;
     return <span>{props.component}</span>;
   }
 

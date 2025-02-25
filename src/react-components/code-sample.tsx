@@ -6,7 +6,7 @@ import {
   MethodPaths,
 } from "../models/operations/getcodesamples.js";
 import { OperationId } from "../types/custom.js";
-import { useCodeSampleState } from "./code-sample.state.js";
+import { getMethodPath, useCodeSampleState } from "./code-sample.state.js";
 import classes from "./code-sample.styles.js";
 import { CodeViewer, ErrorDisplay } from "./code-viewer.js";
 import codehikeTheme from "./codehike/theme.js";
@@ -20,6 +20,7 @@ import {
 } from "./titles.js";
 import { prettyLanguageName } from "./utils.js";
 import { Selector } from "./selector";
+import { UsageSnippet } from "../models/components";
 
 export type CodeSamplesViewerProps = {
   /** Whether the code snippet should be copyable. */
@@ -27,8 +28,7 @@ export type CodeSamplesViewerProps = {
 
   /** Default language to show in the code playground. If not found in the snippets, the first one will be used. */
   defaultLanguage?: string;
-  /** Default operation to show in the code playground. If not found in the snippets, the first one will be used. */
-  defaultOperation?: string;
+
   /**
    * The color mode for the code playground. If "system", the component will
    * detect the system color scheme automagically.
@@ -40,12 +40,13 @@ export type CodeSamplesViewerProps = {
    * A component to render as the snippet title in the upper-right corner of
    * the component. Receives data about the selected code sample. The library
    * comes pre-packaged with some sensible options.
+   * If set to false, no title bar will be shown.
    *
    * @see CodeSampleTitle
    * @see CodeSampleFilenameTitle
    * @default CodeSampleMethodTitle
    */
-  title?: CodeSampleTitleComponent | React.ReactNode | string | "none";
+  title?: CodeSampleTitleComponent | React.ReactNode | string | false;
   /** The operations to get code samples for. If only one is provided, no selector will be shown.
    * Can be queried by either operationId or method+path.
    */
@@ -68,7 +69,6 @@ export function CodeSamplesViewer({
   theme = "system",
   title = CodeSampleFilenameTitle,
   defaultLanguage,
-  defaultOperation,
   operations,
   copyable,
   client: clientProp,
@@ -93,7 +93,7 @@ export function CodeSamplesViewer({
   // On mount, select the defaults
   useEffect(() => {
     if (!state.snippets || state.status !== "success") return;
-    selectSnippet({ language: defaultLanguage, operationId: defaultOperation });
+    selectSnippet({ language: defaultLanguage });
   }, [state.status]);
 
   const systemColorMode = useSystemColorMode();
@@ -110,11 +110,27 @@ export function CodeSamplesViewer({
     ];
   }, [state.snippets]);
 
-  const operationIds: string[] = useMemo(() => {
-    return [
-      ...new Set(state.snippets?.map(({ raw }) => raw.operationId) ?? []),
-    ];
+  const getOperationKey = (snippet: UsageSnippet | undefined): string => {
+    let { operationId } = snippet;
+    const methodPathDisplay = getMethodPath(snippet);
+    if (!operationId) {
+      operationId = methodPathDisplay;
+    }
+    return operationId;
+  };
+
+  // We need this methodAndPath stuff because not all snippets will have operation ids
+  // For the selector, we try to show operation ID but fall back on method+path if it's missing
+  const operationIdToMethodAndPath: Record<string, string> = useMemo(() => {
+    return Object.fromEntries(
+      state.snippets?.map(({ raw }) => [
+        getOperationKey(raw),
+        getMethodPath(raw),
+      ]) ?? [],
+    );
   }, [state.snippets]);
+
+  const operationIds = Object.keys(operationIdToMethodAndPath);
 
   return (
     <LazyMotion strict features={domMax}>
@@ -128,7 +144,7 @@ export function CodeSamplesViewer({
         }}
         className={`${classes.root} ${className ?? ""}`}
       >
-        {title !== "none" && (
+        {title !== false && (
           <div className={classes.heading}>
             <CodeSampleTitle
               component={title}
@@ -143,9 +159,13 @@ export function CodeSamplesViewer({
               )}
               {state.status === "success" && operationIds.length > 1 && (
                 <Selector
-                  value={state.selectedSnippet?.raw.operationId}
+                  value={getOperationKey(state.selectedSnippet?.raw)}
                   values={operationIds}
-                  onChange={(operationId) => selectSnippet({ operationId })}
+                  onChange={(operationId: string) =>
+                    selectSnippet({
+                      methodPath: operationIdToMethodAndPath[operationId],
+                    })
+                  }
                   className={classes.selector}
                 />
               )}
@@ -155,7 +175,7 @@ export function CodeSamplesViewer({
                     state.selectedSnippet?.raw.language,
                   )}
                   values={languages}
-                  onChange={(language) => selectSnippet({ language })}
+                  onChange={(language: string) => selectSnippet({ language })}
                   className={classes.selector}
                 />
               )}

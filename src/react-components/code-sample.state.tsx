@@ -46,20 +46,20 @@ type Action =
   | { type: "SELECT"; payload: SafeGetSnippetParams };
 
 type SafeGetSnippetParams = {
-  operationId?: string | undefined;
+  methodPath?: string | undefined;
   language?: string | undefined;
 };
 
 function safeGetSnippet(
   snippets: SpeakeasyHighlightedCode[],
-  { operationId, language }: SafeGetSnippetParams,
+  { methodPath, language }: SafeGetSnippetParams,
 ): SpeakeasyHighlightedCode {
   const maybeEqual = (a: string, b: string | undefined) =>
     b === undefined || a.toLowerCase() === b.toLowerCase();
 
   const selectedSnippet = snippets.find(
     (s) =>
-      maybeEqual(s.raw.operationId, operationId) &&
+      maybeEqual(getMethodPath(s.raw), methodPath) &&
       maybeEqual(s.lang, language),
   );
   if (selectedSnippet) {
@@ -67,7 +67,7 @@ function safeGetSnippet(
   }
 
   console.warn(
-    `Could not find snippet for operationId "${operationId}".`,
+    `Could not find snippet for method and path "${methodPath}".`,
     `Falling back to to first language in snippet array.`,
   );
 
@@ -159,7 +159,7 @@ export const useCodeSampleState = ({
       type: "SELECT",
       payload: {
         language: state.selectedSnippet?.raw.language,
-        operationId: state.selectedSnippet?.raw.operationId,
+        methodPath: getMethodPath(state.selectedSnippet?.raw),
         ...params,
       },
     });
@@ -167,6 +167,9 @@ export const useCodeSampleState = ({
 
   return { state, selectSnippet };
 };
+
+export const getMethodPath = (snippet: UsageSnippet | undefined): string =>
+  snippet ? `${snippet.method.toUpperCase()} ${snippet.path}` : "";
 
 /** Intended to give the user the option of providing their own client. */
 export const useSafeSpeakeasyCodeSamplesContext = (
