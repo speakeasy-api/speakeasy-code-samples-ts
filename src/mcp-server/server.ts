@@ -6,12 +6,17 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SpeakeasyCodeSamplesCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import {
+  createRegisterResource,
+  createRegisterResourceTemplate,
+} from "./resources.js";
 import { MCPScope, mcpScopes } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$codeSamplesGet } from "./tools/codeSamplesGet.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
+  allowedTools?: string[] | undefined;
   scopes?: MCPScope[] | undefined;
   serverURL?: string | undefined;
   apiKey?: SDKOptions["apiKey"] | undefined;
@@ -20,7 +25,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SpeakeasyCodeSamples",
-    version: "2.4.0",
+    version: "2.4.0-beta",
   });
 
   const client = new SpeakeasyCodeSamplesCore({
@@ -29,8 +34,26 @@ export function createMCPServer(deps: {
     serverURL: deps.serverURL,
     server: deps.server,
   });
+
   const scopes = new Set(deps.scopes ?? mcpScopes);
-  const tool = createRegisterTool(deps.logger, server, client, scopes);
+
+  const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
+  const tool = createRegisterTool(
+    deps.logger,
+    server,
+    client,
+    scopes,
+    allowedTools,
+  );
+  const resource = createRegisterResource(deps.logger, server, client, scopes);
+  const resourceTemplate = createRegisterResourceTemplate(
+    deps.logger,
+    server,
+    client,
+    scopes,
+  );
+  const register = { tool, resource, resourceTemplate };
+  void register; // suppress unused warnings
 
   tool(tool$codeSamplesGet);
 
