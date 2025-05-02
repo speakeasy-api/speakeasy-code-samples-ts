@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 521af75f-d011-41f9-a5ff-9f8033773118
 management:
-  docChecksum: 80bdf0b395520d76da9a1e1e2896dae0
+  docChecksum: c6d39eab8ec81d4b1959535a4bb31655
   docVersion: 0.4.0
-  speakeasyVersion: 1.514.0
-  generationVersion: 2.546.0
-  releaseVersion: 2.4.0-beta
-  configChecksum: ef5d56dcfd4f4ba9e07e1a535f410421
+  speakeasyVersion: 1.542.0
+  generationVersion: 2.596.2
+  releaseVersion: 2.4.0-beta.1
+  configChecksum: 4302f4ba38521fca04724ec3f8ff9cce
   repoURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts.git
   installationURL: https://github.com/speakeasy-api/speakeasy-code-samples-ts
   published: true
 features:
   typescript:
     additionalDependencies: 0.1.0
-    core: 3.21.3
+    core: 3.21.7
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     devContainers: 2.90.0
@@ -25,9 +25,9 @@ features:
     globalServerURLs: 2.82.4
     globals: 2.82.2
     groups: 2.81.2
-    mcpServer: 0.6.0
+    mcpServer: 0.9.2
     nameOverrides: 2.81.2
-    reactQueryHooks: 0.2.2
+    reactQueryHooks: 0.2.3
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -84,6 +84,7 @@ generatedFiles:
   - src/mcp-server/console-logger.ts
   - src/mcp-server/extensions.ts
   - src/mcp-server/mcp-server.ts
+  - src/mcp-server/prompts.ts
   - src/mcp-server/resources.ts
   - src/mcp-server/scopes.ts
   - src/mcp-server/server.ts
@@ -130,7 +131,7 @@ examples:
           languages: ["python", "javascript"]
       responses:
         2XX:
-          application/json: {"snippets": [{"path": "/sbin", "method": "<value>", "operationId": "<id>", "language": "php,", "code": "<value>"}, {"path": "/root", "method": "<value>", "operationId": "<id>", "language": "unity,", "code": "<value>"}]}
+          application/json: {"snippets": [{"path": "/sbin", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}, {"path": "/root", "method": "<value>", "operationId": "<id>", "language": "<value>", "code": "<value>"}]}
         4XX:
           application/json: {"message": "<value>", "status_code": 521235}
     default:
@@ -143,5 +144,5 @@ examples:
       responses:
         2XX:
           application/json: {"snippets": [{"path": "/pet/{id}", "method": "get", "operationId": "getPetById", "language": "typescript", "code": "import { Petstore } from \"petstore-sdk\";\n\nconst petstore = new Petstore({\n  apiKey: \"<YOUR_API_KEY_HERE>\",\n});\n\nasync function run() {\n  const result = await petstore.pet.getById({\n    id: 137396,\n  });\n\n  // Handle the result\n  console.log(result);\n}\n\nrun();"}]}
-examplesVersion: 1.0.0
+examplesVersion: 1.0.1
 generatedTests: {}
