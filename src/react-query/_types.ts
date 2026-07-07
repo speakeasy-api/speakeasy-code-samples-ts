@@ -6,42 +6,115 @@ import { RequestOptions } from "../lib/sdks.js";
 import { PageIterator } from "../types/operations.js";
 
 import type {
+  DefaultError,
   InfiniteData,
+  InfiniteQueryPageParamsOptions,
+  OmitKeyof,
   QueryKey,
-  UseInfiniteQueryOptions,
+  QueryObserverOptions,
+  SkipToken,
   UseMutationOptions,
   UseQueryOptions,
-  UseSuspenseInfiniteQueryOptions,
   UseSuspenseQueryOptions,
 } from "@tanstack/react-query";
 
+// Reaction to breaking change in 5.80.0 https://github.com/TanStack/query/pull/9224#issuecomment-2934835936
+interface UseInfiniteQueryOptions<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+> extends
+  OmitKeyof<
+    InfiniteQueryObserverOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    >,
+    "suspense"
+  >
+{
+  /**
+   * Set this to `false` to unsubscribe this observer from updates to the query cache.
+   * Defaults to `true`.
+   */
+  subscribed?: boolean;
+}
+
+// Reaction to breaking change in 5.80.0 https://github.com/TanStack/query/pull/9224#issuecomment-2934835936
+interface InfiniteQueryObserverOptions<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+> extends
+  QueryObserverOptions<
+    TQueryFnData,
+    TError,
+    TData,
+    InfiniteData<TQueryFnData, TPageParam>,
+    TQueryKey,
+    TPageParam
+  >,
+  InfiniteQueryPageParamsOptions<TQueryFnData, TPageParam>
+{
+}
+
+// Reaction to breaking change in 5.80.0 https://github.com/TanStack/query/pull/9224#issuecomment-2934835936
+interface UseSuspenseInfiniteQueryOptions<
+  TQueryFnData = unknown,
+  TError = DefaultError,
+  TData = TQueryFnData,
+  TQueryKey extends QueryKey = QueryKey,
+  TPageParam = unknown,
+> extends
+  OmitKeyof<
+    UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey, TPageParam>,
+    "queryFn" | "enabled" | "throwOnError" | "placeholderData"
+  >
+{
+  queryFn?: Exclude<
+    UseInfiniteQueryOptions<
+      TQueryFnData,
+      TError,
+      TData,
+      TQueryKey,
+      TPageParam
+    >["queryFn"],
+    SkipToken
+  >;
+}
 export type TupleToPrefixes<T extends any[]> = T extends [...infer Prefix, any]
   ? TupleToPrefixes<Prefix> | T
   : never;
 
-export type QueryHookOptions<Data> =
+export type QueryHookOptions<Data, Err = Error> =
   & Omit<
-    UseQueryOptions<Data, Error>,
+    UseQueryOptions<Data, Err>,
     "queryKey" | "queryFn" | "select" | keyof RequestOptions
   >
   & RequestOptions;
 
-export type SuspenseQueryHookOptions<Data> =
+export type SuspenseQueryHookOptions<Data, Err = Error> =
   & Omit<
-    UseSuspenseQueryOptions<Data, Error>,
+    UseSuspenseQueryOptions<Data, Err>,
     "queryKey" | "queryFn" | "select" | keyof RequestOptions
   >
   & RequestOptions;
 
 export type InfiniteQueryHookOptions<
   Data extends PageIterator<unknown, unknown>,
+  Err = Error,
 > =
   & Omit<
     UseInfiniteQueryOptions<
       Data,
-      Error,
+      Err,
       InfiniteData<Data, Data["~next"]>,
-      Data,
       QueryKey,
       Data["~next"]
     >,
@@ -58,13 +131,13 @@ export type InfiniteQueryHookOptions<
 
 export type SuspenseInfiniteQueryHookOptions<
   Data extends PageIterator<unknown, unknown>,
+  Err = Error,
 > =
   & Omit<
     UseSuspenseInfiniteQueryOptions<
       Data,
-      Error,
+      Err,
       InfiniteData<Data, Data["~next"]>,
-      Data,
       QueryKey,
       Data["~next"]
     >,
@@ -89,3 +162,16 @@ export type MutationHookOptions<
     "mutationKey" | "mutationFn" | keyof RequestOptions
   >
   & RequestOptions;
+
+/**
+ * Removes non-serializable properties (functions and symbols) from a PageIterator for SSR hydration.
+ * React Server Components cannot serialize functions or Symbol properties across the server/client boundary.
+ */
+export function pageIteratorToJSON<T extends { "~next"?: unknown }>(
+  page: T,
+): T {
+  const { next: _, ...rest } = page as T & { next?: unknown };
+  // Symbol properties are copied by spread but can't be serialized for RSC
+  delete (rest as Record<symbol, unknown>)[Symbol.asyncIterator];
+  return rest as T;
+}
