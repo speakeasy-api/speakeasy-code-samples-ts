@@ -7,17 +7,32 @@ generation:
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionFeb2025: false
     parameterOrderingFeb2024: false
     requestResponseComponentNamesFeb2024: false
     securityFeb2025: false
+    sharedErrorComponentsApr2025: false
+    sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: ""
+  versioningStrategy: automatic
+  persistentEdits: {}
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 typescript:
-  version: 2.4.0-beta
+  version: 2.4.0-beta.1
+  acceptHeaderEnum: true
   additionalDependencies:
     dependencies:
       '@emotion/css': ^11.13.5
@@ -27,15 +42,28 @@ typescript:
       '@types/react': ^18.3.18
     peerDependencies: {}
   additionalPackageJSON: {}
+  additionalScripts: {}
+  alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Speakeasy
+  baseErrorName: SpeakeasyCodeSamplesError
   clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: false
   defaultErrorName: APIError
   enableCustomCodeRegions: false
   enableMCPServer: true
   enableReactQuery: true
   enumFormat: union
+  eventStreamClassName: EventStream
+  exportZodModelNamespace: false
+  fixEnumNameSanitization: false
+  flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: body-first
+  formStringArrayEncodeMode: encoded-string
+  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: "false"
+  generateExamples: true
   imports:
     option: openapi
     paths:
@@ -44,13 +72,28 @@ typescript:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
+  inferUnionDiscriminators: true
   inputModelSuffix: input
   jsonpath: legacy
+  laxMode: strict
+  legacyFileNaming: true
   maxMethodParams: 1
   methodArguments: require-security-and-request
+  modelPropertyCasing: camel
   moduleFormat: esm
+  multipartArrayFormat: legacy
   outputModelSuffix: output
   packageName: '@speakeasyapi/code-samples'
+  preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
+  unionStrategy: left-to-right
+  usageSDKInitImports: []
   useIndexModules: true
+  useOxlint: false
+  useTsgo: false
+  zodVersion: v3
