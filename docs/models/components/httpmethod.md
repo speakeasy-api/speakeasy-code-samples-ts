@@ -5,7 +5,7 @@
 ```typescript
 import { HttpMethod } from "@speakeasyapi/code-samples/models/components";
 
-let value: HttpMethod = "delete";
+let value: HttpMethod = "options";
 ```
 
 ## Values
