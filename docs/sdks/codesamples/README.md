@@ -1,5 +1,4 @@
 # CodeSamples
-(*codeSamples*)
 
 ## Overview
 
@@ -13,17 +12,17 @@ Retrieve usage snippets from an OpenAPI document stored in the registry. Support
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCodeSamples" method="get" path="/v1/code_sample" example="default" -->
 ```typescript
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
   apiKey: "<YOUR_API_KEY_HERE>",
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
       "getPets",
     ],
@@ -39,7 +38,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -57,13 +55,12 @@ import { codeSamplesGet } from "@speakeasyapi/code-samples/funcs/codeSamplesGet.
 // Use `SpeakeasyCodeSamplesCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
   apiKey: "<YOUR_API_KEY_HERE>",
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
   const res = await codeSamplesGet(speakeasyCodeSamples, {
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
       "getPets",
     ],
@@ -78,15 +75,12 @@ async function run() {
       "javascript",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("codeSamplesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
