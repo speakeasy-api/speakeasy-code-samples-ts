@@ -6,11 +6,12 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { SpeakeasyCodeSamplesCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
+import { createRegisterPrompt } from "./prompts.js";
 import {
   createRegisterResource,
   createRegisterResourceTemplate,
 } from "./resources.js";
-import { MCPScope, mcpScopes } from "./scopes.js";
+import { MCPScope } from "./scopes.js";
 import { createRegisterTool } from "./tools.js";
 import { tool$codeSamplesGet } from "./tools/codeSamplesGet.js";
 
@@ -25,7 +26,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SpeakeasyCodeSamples",
-    version: "2.4.0-beta",
+    version: "2.4.0-beta.1",
   });
 
   const client = new SpeakeasyCodeSamplesCore({
@@ -35,7 +36,7 @@ export function createMCPServer(deps: {
     server: deps.server,
   });
 
-  const scopes = new Set(deps.scopes ?? mcpScopes);
+  const scopes = new Set(deps.scopes);
 
   const allowedTools = deps.allowedTools && new Set(deps.allowedTools);
   const tool = createRegisterTool(
@@ -52,7 +53,8 @@ export function createMCPServer(deps: {
     client,
     scopes,
   );
-  const register = { tool, resource, resourceTemplate };
+  const prompt = createRegisterPrompt(deps.logger, server, client, scopes);
+  const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
   tool(tool$codeSamplesGet);
