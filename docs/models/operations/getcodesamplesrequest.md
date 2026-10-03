@@ -6,7 +6,6 @@
 import { GetCodeSamplesRequest } from "@speakeasyapi/code-samples/models/operations";
 
 let value: GetCodeSamplesRequest = {
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   operationIds: [
     "getPets",
   ],
