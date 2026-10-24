@@ -11,7 +11,7 @@ const args = {
 };
 
 export const tool$codeSamplesGet: ToolDefinition<typeof args> = {
-  name: "code-samples_get",
+  name: "code-samples-get",
   description: `Retrieve usage snippets
 
 Retrieve usage snippets from an OpenAPI document stored in the registry. Supports filtering by language and operation ID.`,
@@ -20,7 +20,7 @@ Retrieve usage snippets from an OpenAPI document stored in the registry. Support
     const [result, apiCall] = await codeSamplesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
