@@ -3,15 +3,20 @@
 import { SpeakeasyCodeSamples } from "@speakeasyapi/code-samples";
 
 const speakeasyCodeSamples = new SpeakeasyCodeSamples({
+  registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
   apiKey: "<YOUR_API_KEY_HERE>",
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 async function run() {
   const result = await speakeasyCodeSamples.codeSamples.get({
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
@@ -25,7 +30,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
