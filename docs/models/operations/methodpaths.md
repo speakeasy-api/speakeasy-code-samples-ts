@@ -6,8 +6,8 @@
 import { MethodPaths } from "@speakeasyapi/code-samples/models/operations";
 
 let value: MethodPaths = {
-  method: "delete",
-  path: "/opt/sbin",
+  method: "put",
+  path: "/rescue",
 };
 ```
 

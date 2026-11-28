@@ -23,8 +23,8 @@ import { SpeakeasyCodeSamplesProvider } from "@speakeasyapi/code-samples/react-q
 
 const queryClient = new QueryClient();
 const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
   apiKey: "<YOUR_API_KEY_HERE>",
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 // Retries are handled by the underlying SDK.
@@ -55,9 +55,14 @@ import { useCodeSamples } from "@speakeasyapi/code-samples/react-query/codeSampl
 
 export function Example() {
   const { data, error, status } = useCodeSamples({
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
@@ -88,9 +93,14 @@ export function ExampleWithOptions() {
   const [enabled, setEnabled] = useState(true);
   const { data, error, status } = useCodeSamples(
     {
-      registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
       operationIds: [
-        "getPets",
+        "g",
+        "e",
+        "t",
+        "P",
+        "e",
+        "t",
+        "s",
       ],
       methodPaths: [
         {
@@ -189,8 +199,8 @@ import { useCodeSamplesSuspense } from "@speakeasyapi/code-samples/react-query/c
 
 const queryClient = new QueryClient();
 const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+  registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
   apiKey: "<YOUR_API_KEY_HERE>",
-  registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
 });
 
 export function App() {
@@ -222,9 +232,14 @@ export function App() {
 
 function Example() {
   const { data } = useCodeSamplesSuspense({
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
@@ -261,14 +276,19 @@ import { prefetchCodeSamples } from "@speakeasyapi/code-samples/react-query/code
 export default async function Page() {
   const queryClient = new QueryClient();
   const speakeasyCodeSamples = new SpeakeasyCodeSamplesCore({
+    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     apiKey: "<YOUR_API_KEY_HERE>",
-    registryUrl: "https://spec.speakeasy.com/org/ws/my-source",
   });
 
   await prefetchCodeSamples(queryClient, speakeasyCodeSamples, {
-    registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
