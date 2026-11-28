@@ -6,7 +6,7 @@
 import { UsageSnippet } from "@speakeasyapi/code-samples/models/components";
 
 let value: UsageSnippet = {
-  path: "/usr/bin",
+  path: "/private/tmp",
   method: "<value>",
   operationId: "<id>",
   language: "<value>",
